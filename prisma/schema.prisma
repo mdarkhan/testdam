@@ -1,0 +1,303 @@
+// TestDam — Prisma schema (Phase 0 proposal; becomes the first migration in Phase 1)
+//
+// Conventions
+// - All DateTime values are stored in UTC. Display in Asia/Dhaka happens in src/lib/format.ts.
+// - Money is whole BDT (taka) as Int. Labs in Dhaka do not price tests in poisha.
+// - "Effective price" and "fresh" are NOT stored: both depend on the current time,
+//   so they are computed in src/lib/pricing.ts (one place, unit-tested).
+// - The first migration is hand-edited to start with `CREATE EXTENSION IF NOT EXISTS pg_trgm;`
+//   (needed by the GIN trigram index on TestAlias.searchKey).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Connection URL comes from DATABASE_URL via prisma.config.ts (Prisma 7 style).
+}
+
+// ───────────────────────────── Enums ─────────────────────────────
+
+enum Role {
+  ADMIN
+  DATA_ENTRY
+}
+
+enum TestCategory {
+  BLOOD
+  URINE
+  STOOL
+  IMAGING      // X-ray, ultrasound, CT, MRI
+  CARDIAC      // ECG, echo, ETT
+  HORMONE
+  BIOCHEMISTRY // lipid, liver, kidney panels, sugar
+  SEROLOGY     // HBsAg, dengue NS1, Widal …
+  MICROBIOLOGY // cultures
+  OTHER
+}
+
+enum ContentStatus {
+  DRAFT_NEEDS_REVIEW
+  REVIEWED
+}
+
+enum PriceSource {
+  PHONE_CALL
+  PRICE_LIST
+  WEBSITE
+  LAB_SUBMITTED
+  VISIT
+}
+
+enum PriceChange {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+enum BookingStatus {
+  NEW
+  FORWARDED_TO_LAB
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+// ───────────────────────────── Catalogue ─────────────────────────────
+
+model Test {
+  id         Int          @id @default(autoincrement())
+  slug       String       @unique // ascii, e.g. "cbc", "lipid-profile"
+  nameEn     String       // canonical: "Complete Blood Count (CBC)"
+  nameBn     String       // "সিবিসি (কমপ্লিট ব্লাড কাউন্ট)"
+  shortName  String?      // "CBC" — used in titles/cards when present
+  category   TestCategory
+  sampleType String?      // "Blood", "Urine" … factual, not medical advice
+
+  // Medical-ish text. Public pages render these ONLY when contentStatus = REVIEWED.
+  description     String?
+  preparationNote String?
+  contentStatus   ContentStatus @default(DRAFT_NEEDS_REVIEW)
+  reviewedAt      DateTime?
+  reviewedById    String?
+  reviewedBy      User?         @relation("TestReviewedBy", fields: [reviewedById], references: [id])
+
+  popularRank Int? // non-null → shown in "popular tests", ascending order
+
+  // nameEn, nameBn and shortName are also written as TestAlias rows on save,
+  // so search only ever queries TestAlias.
+  aliases   TestAlias[]
+  prices    LabTestPrice[]
+  bookings  BookingRequest[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TestAlias {
+  id        Int    @id @default(autoincrement())
+  testId    Int
+  test      Test   @relation(fields: [testId], references: [id], onDelete: Cascade)
+  alias     String // as typed by admin: "সিবিসি", "complete blood count", "cbc test", "C.B.C"
+  searchKey String // normalize(alias) → ASCII key (Bangla romanised) — see docs/PLAN.md §5
+
+  @@unique([testId, searchKey])
+  @@index([searchKey(ops: raw("gin_trgm_ops"))], type: Gin)
+}
+
+model Area {
+  id     Int    @id @default(autoincrement())
+  slug   String @unique // "mirpur", "dhanmondi"
+  nameEn String
+  nameBn String
+  // Extra spellings for query parsing ("mirpur-10", "মীরপুর"). Small, so a String[] is enough.
+  aliases String[]
+
+  // "Same test in nearby areas" — explicit, hand-curated (Dhaka geography beats lat/lng maths).
+  neighbors  Area[] @relation("AreaNeighbors")
+  neighborOf Area[] @relation("AreaNeighbors")
+
+  labs      Lab[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lab {
+  id         Int     @id @default(autoincrement())
+  slug       String  @unique // "demo-lab-1-mirpur-10"
+  name       String  // brand: "Demo Lab 1"
+  nameBn     String?
+  branchName String? // "Mirpur 10 branch"
+  areaId     Int
+  area       Area    @relation(fields: [areaId], references: [id])
+  address    String
+  phone      String  // stored normalised 01XXXXXXXXX (or landline as entered)
+  whatsapp   String? // normalised 01XXXXXXXXX; null → no WhatsApp button
+  openingHours String? // free text, e.g. "প্রতিদিন সকাল ৮টা – রাত ১০টা"
+  mapUrl     String?
+
+  homeCollection    Boolean @default(false)
+  homeCollectionFee Int?    // BDT; null = unknown, 0 = free
+
+  isFeatured Boolean @default(false) // badge only — NEVER affects sort order
+  isActive   Boolean @default(true)  // inactive labs are hidden everywhere public
+
+  prices    LabTestPrice[]
+  bookings  BookingRequest[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([areaId])
+}
+
+// ───────────────────────────── Prices ─────────────────────────────
+
+model LabTestPrice {
+  id     Int  @id @default(autoincrement())
+  labId  Int
+  lab    Lab  @relation(fields: [labId], references: [id], onDelete: Cascade)
+  testId Int
+  test   Test @relation(fields: [testId], references: [id], onDelete: Cascade)
+
+  regularPrice      Int       // BDT
+  discountPrice     Int?      // BDT, must be < regularPrice
+  discountExpiresAt DateTime? // UTC instant = end of that day in Asia/Dhaka; null + discountPrice → no expiry
+
+  reportHours    Int?    // report delivery time in hours (structured, so we can filter "same day")
+  homeCollection Boolean @default(false)
+
+  source         PriceSource
+  sourceNote     String?
+  sourcePhotoUrl String?
+
+  verifiedAt   DateTime // drives freshness (config FRESH_DAYS, default 90)
+  verifiedById String?
+  verifiedBy   User?    @relation("PriceVerifiedBy", fields: [verifiedById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([labId, testId])
+  @@index([testId, verifiedAt])
+  @@index([verifiedAt])
+}
+
+// Append-only. Written in the same transaction as any change to price fields.
+// Keyed by lab+test (not the price row id) so history survives a deleted price row.
+model PriceHistory {
+  id                Int         @id @default(autoincrement())
+  labId             Int
+  testId            Int
+  change            PriceChange
+  regularPrice      Int?
+  discountPrice     Int?
+  discountExpiresAt DateTime?
+  source            PriceSource?
+  changedAt         DateTime    @default(now())
+  changedById       String?
+  changedBy         User?       @relation(fields: [changedById], references: [id], onDelete: SetNull)
+
+  @@index([labId, testId, changedAt])
+}
+
+// ───────────────────────────── Bookings ─────────────────────────────
+
+model BookingRequest {
+  id     Int  @id @default(autoincrement())
+  testId Int
+  test   Test @relation(fields: [testId], references: [id])
+  labId  Int
+  lab    Lab  @relation(fields: [labId], references: [id])
+
+  areaSlug       String? // page context (test × area page), else the lab's area
+  priceAtRequest Int     // effective price shown when the form was opened (snapshot)
+
+  patientName    String
+  phone          String   // normalised 01XXXXXXXXX
+  preferredDate  DateTime @db.Date
+  homeCollection Boolean  @default(false)
+
+  status BookingStatus @default(NEW)
+  notes  String?       // admin notes
+
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmTerm     String?
+  utmContent  String?
+  referrer    String?
+  landingPath String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, createdAt])
+}
+
+// ───────────────────────────── Auth (Better Auth) ─────────────────────────────
+// Shape follows Better Auth's core Prisma schema. In Phase 1 we run its CLI generator
+// and reconcile with this block before the first migration is created.
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  role          Role      @default(DATA_ENTRY)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  verifiedPrices LabTestPrice[] @relation("PriceVerifiedBy")
+  priceChanges   PriceHistory[]
+  reviewedTests  Test[]         @relation("TestReviewedBy")
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?   // hashed by Better Auth
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verification")
+}
