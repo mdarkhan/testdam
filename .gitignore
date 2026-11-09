@@ -10,3 +10,7 @@ src/generated/
 !.env.example
 *.log
 .DS_Store
+.pgdata/
+.playwright-mcp/
+next-env.d.ts
+*.tsbuildinfo

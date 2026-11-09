@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* Semantic colour tokens (WCAG AA on white). Components use these names, not raw hex. */
+@theme {
+  --color-primary: #0f766e;        /* teal-700, 5.5:1 on white */
+  --color-primary-hover: #115e59;
+  --color-primary-soft: #f0fdfa;
+  --color-cheapest: #15803d;       /* green-700, 5.0:1 */
+  --color-cheapest-soft: #f0fdf4;
+  --color-stale: #6b7280;          /* gray-500, 4.8:1 */
+  --color-danger: #b91c1c;
+  --color-danger-soft: #fef2f2;
+  --color-warn-soft: #fffbeb;
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-line: #e2e8f0;
+  --font-sans: var(--font-bangla), ui-sans-serif, system-ui, sans-serif;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body { background: #fff; color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.tabular { font-variant-numeric: tabular-nums; }
