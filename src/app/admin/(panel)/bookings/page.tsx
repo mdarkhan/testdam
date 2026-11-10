@@ -32,6 +32,7 @@ export default async function BookingsPage({ searchParams }: { searchParams: Pro
       include: {
         test: { select: { nameEn: true, nameBn: true, shortName: true } },
         lab: { select: { id: true, name: true, branchName: true, phone: true, whatsapp: true } },
+        items: { orderBy: { id: "asc" }, select: { priceAtRequest: true, test: { select: { nameEn: true, nameBn: true, shortName: true } } } },
       },
     }),
     db.bookingRequest.groupBy({ by: ["status"], _count: true }),
@@ -57,7 +58,12 @@ export default async function BookingsPage({ searchParams }: { searchParams: Pro
           const test = b.test.shortName ?? b.test.nameEn;
           const lab = `${b.lab.name}${b.lab.branchName ? ` · ${b.lab.branchName}` : ""}`;
           const date = d.format(b.preferredDate);
-          const forward = `Test Mate booking #${b.id}\nTest: ${b.test.nameEn} (${b.test.nameBn})\nPatient: ${b.patientName}\nPhone: ${b.phone}\nPreferred date: ${date}\nHome collection: ${b.homeCollection ? "Yes" : "No"}\nPrice shown: ৳${b.priceAtRequest}`;
+          // Basket booking: several tests (items), priceAtRequest is their total.
+          const multi = b.items.length > 0;
+          const testLines = multi
+            ? b.items.map((i) => `${i.test.nameEn} (${i.test.nameBn}) ৳${i.priceAtRequest}`).join("\n")
+            : `${b.test.nameEn} (${b.test.nameBn})`;
+          const forward = `Test Mate booking #${b.id}\n${multi ? `Tests (${b.items.length}):\n` : "Test: "}${testLines}\nPatient: ${b.patientName}\nPhone: ${b.phone}\nPreferred date: ${date}\nHome collection: ${b.homeCollection ? "Yes" : "No"}\n${multi ? "Total shown" : "Price shown"}: ৳${b.priceAtRequest}`;
           return (
             <li key={b.id} className="rounded-lg border border-line bg-white p-4">
               <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -72,8 +78,20 @@ export default async function BookingsPage({ searchParams }: { searchParams: Pro
                   <p className="mt-1">Wants: <strong>{date}</strong>{b.homeCollection && " · home collection"}</p>
                 </div>
                 <div>
-                  <p><strong>{test}</strong> at {lab}</p>
-                  <p className="tabular">Price shown: ৳{b.priceAtRequest} · area: {b.areaSlug ?? "—"}</p>
+                  {multi ? (
+                    <>
+                      <p><strong>{b.items.length} tests</strong> at {lab}</p>
+                      <ul className="tabular my-1 list-disc pl-5">
+                        {b.items.map((i, n) => <li key={n}>{i.test.shortName ?? i.test.nameEn}: ৳{i.priceAtRequest}</li>)}
+                      </ul>
+                      <p className="tabular">Total shown: ৳{b.priceAtRequest} · area: {b.areaSlug ?? "—"}</p>
+                    </>
+                  ) : (
+                    <>
+                      <p><strong>{test}</strong> at {lab}</p>
+                      <p className="tabular">Price shown: ৳{b.priceAtRequest} · area: {b.areaSlug ?? "—"}</p>
+                    </>
+                  )}
                   <p className="mt-1 flex flex-wrap gap-3">
                     <a href={`tel:${b.lab.phone.replace(/[^\d+]/g, "")}`} className="text-primary underline">Call lab</a>
                     {b.lab.whatsapp && (

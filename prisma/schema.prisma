@@ -29,11 +29,11 @@ enum TestCategory {
   BLOOD
   URINE
   STOOL
-  IMAGING      // X-ray, ultrasound, CT, MRI
-  CARDIAC      // ECG, echo, ETT
+  IMAGING // X-ray, ultrasound, CT, MRI
+  CARDIAC // ECG, echo, ETT
   HORMONE
   BIOCHEMISTRY // lipid, liver, kidney panels, sugar
-  SEROLOGY     // HBsAg, dengue NS1, Widal …
+  SEROLOGY // HBsAg, dengue NS1, Widal …
   MICROBIOLOGY // cultures
   OTHER
 }
@@ -70,11 +70,11 @@ enum BookingStatus {
 model Test {
   id         Int          @id @default(autoincrement())
   slug       String       @unique // ascii, e.g. "cbc", "lipid-profile"
-  nameEn     String       // canonical: "Complete Blood Count (CBC)"
-  nameBn     String       // "সিবিসি (কমপ্লিট ব্লাড কাউন্ট)"
-  shortName  String?      // "CBC" — used in titles/cards when present
+  nameEn     String // canonical: "Complete Blood Count (CBC)"
+  nameBn     String // "সিবিসি (কমপ্লিট ব্লাড কাউন্ট)"
+  shortName  String? // "CBC" — used in titles/cards when present
   category   TestCategory
-  sampleType String?      // "Blood", "Urine" … factual, not medical advice
+  sampleType String? // "Blood", "Urine" … factual, not medical advice
 
   // Medical-ish text. Public pages render these ONLY when contentStatus = REVIEWED.
   description     String?
@@ -88,11 +88,12 @@ model Test {
 
   // nameEn, nameBn and shortName are also written as TestAlias rows on save,
   // so search only ever queries TestAlias.
-  aliases   TestAlias[]
-  prices    LabTestPrice[]
-  bookings  BookingRequest[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  aliases      TestAlias[]
+  prices       LabTestPrice[]
+  bookings     BookingRequest[]
+  bookingItems BookingItem[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
 }
 
 model TestAlias {
@@ -107,10 +108,10 @@ model TestAlias {
 }
 
 model Area {
-  id     Int    @id @default(autoincrement())
-  slug   String @unique // "mirpur", "dhanmondi"
-  nameEn String
-  nameBn String
+  id      Int      @id @default(autoincrement())
+  slug    String   @unique // "mirpur", "dhanmondi"
+  nameEn  String
+  nameBn  String
   // Extra spellings for query parsing ("mirpur-10", "মীরপুর"). Small, so a String[] is enough.
   aliases String[]
 
@@ -124,24 +125,24 @@ model Area {
 }
 
 model Lab {
-  id         Int     @id @default(autoincrement())
-  slug       String  @unique // "demo-lab-1-mirpur-10"
-  name       String  // brand: "Demo Lab 1"
-  nameBn     String?
-  branchName String? // "Mirpur 10 branch"
-  areaId     Int
-  area       Area    @relation(fields: [areaId], references: [id])
-  address    String
-  phone      String  // stored normalised 01XXXXXXXXX (or landline as entered)
-  whatsapp   String? // normalised 01XXXXXXXXX; null → no WhatsApp button
+  id           Int     @id @default(autoincrement())
+  slug         String  @unique // "demo-lab-1-mirpur-10"
+  name         String // brand: "Demo Lab 1"
+  nameBn       String?
+  branchName   String? // "Mirpur 10 branch"
+  areaId       Int
+  area         Area    @relation(fields: [areaId], references: [id])
+  address      String
+  phone        String // stored normalised 01XXXXXXXXX (or landline as entered)
+  whatsapp     String? // normalised 01XXXXXXXXX; null → no WhatsApp button
   openingHours String? // free text, e.g. "প্রতিদিন সকাল ৮টা – রাত ১০টা"
-  mapUrl     String?
+  mapUrl       String?
 
   homeCollection    Boolean @default(false)
-  homeCollectionFee Int?    // BDT; null = unknown, 0 = free
+  homeCollectionFee Int? // BDT; null = unknown, 0 = free
 
   isFeatured Boolean @default(false) // badge only — NEVER affects sort order
-  isActive   Boolean @default(true)  // inactive labs are hidden everywhere public
+  isActive   Boolean @default(true) // inactive labs are hidden everywhere public
 
   // Set when the lab came from a bulk web import (e.g. "web-2026-11"); "Remove imported data" deletes it
   // only if no hand-entered price or booking is left on it.
@@ -149,8 +150,8 @@ model Lab {
 
   prices    LabTestPrice[]
   bookings  BookingRequest[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
 
   @@index([areaId])
 }
@@ -164,11 +165,11 @@ model LabTestPrice {
   testId Int
   test   Test @relation(fields: [testId], references: [id], onDelete: Cascade)
 
-  regularPrice      Int       // BDT
-  discountPrice     Int?      // BDT, must be < regularPrice
+  regularPrice      Int // BDT
+  discountPrice     Int? // BDT, must be < regularPrice
   discountExpiresAt DateTime? // UTC instant = end of that day in Asia/Dhaka; null + discountPrice → no expiry
 
-  reportHours    Int?    // report delivery time in hours (structured, so we can filter "same day")
+  reportHours    Int? // report delivery time in hours (structured, so we can filter "same day")
   homeCollection Boolean @default(false)
 
   source         PriceSource
@@ -194,7 +195,7 @@ model LabTestPrice {
 // Append-only. Written in the same transaction as any change to price fields.
 // Keyed by lab+test (not the price row id) so history survives a deleted price row.
 model PriceHistory {
-  id                Int         @id @default(autoincrement())
+  id                Int          @id @default(autoincrement())
   labId             Int
   testId            Int
   change            PriceChange
@@ -202,9 +203,9 @@ model PriceHistory {
   discountPrice     Int?
   discountExpiresAt DateTime?
   source            PriceSource?
-  changedAt         DateTime    @default(now())
+  changedAt         DateTime     @default(now())
   changedById       String?
-  changedBy         User?       @relation(fields: [changedById], references: [id], onDelete: SetNull)
+  changedBy         User?        @relation(fields: [changedById], references: [id], onDelete: SetNull)
   importBatch       String? // rows written by a bulk web import; removed together with that import
 
   @@index([labId, testId, changedAt])
@@ -220,15 +221,18 @@ model BookingRequest {
   lab    Lab  @relation(fields: [labId], references: [id])
 
   areaSlug       String? // page context (test × area page), else the lab's area
-  priceAtRequest Int     // effective price shown when the form was opened (snapshot)
+  priceAtRequest Int // effective price shown when the form was opened (snapshot)
+  // Several tests at once (from the test basket): `items` holds every test with its price,
+  // `testId` is the first of them and `priceAtRequest` the total. Single-test bookings have no items.
+  items          BookingItem[]
 
   patientName    String
-  phone          String   // normalised 01XXXXXXXXX
+  phone          String // normalised 01XXXXXXXXX
   preferredDate  DateTime @db.Date
   homeCollection Boolean  @default(false)
 
   status BookingStatus @default(NEW)
-  notes  String?       // admin notes
+  notes  String? // admin notes
 
   utmSource   String?
   utmMedium   String?
@@ -242,6 +246,19 @@ model BookingRequest {
   updatedAt DateTime @updatedAt
 
   @@index([status, createdAt])
+}
+
+/// One test of a multi-test (basket) booking, with the price shown for it at request time.
+model BookingItem {
+  id             Int            @id @default(autoincrement())
+  bookingId      Int
+  booking        BookingRequest @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  testId         Int
+  test           Test           @relation(fields: [testId], references: [id])
+  priceAtRequest Int
+
+  @@index([bookingId])
+  @@index([testId])
 }
 
 // ───────────────────────────── Auth (Better Auth) ─────────────────────────────
@@ -293,7 +310,7 @@ model Account {
   accessTokenExpiresAt  DateTime?
   refreshTokenExpiresAt DateTime?
   scope                 String?
-  password              String?   // hashed by Better Auth
+  password              String? // hashed by Better Auth
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
 

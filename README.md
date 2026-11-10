@@ -82,6 +82,8 @@ The site pushes these events to `dataLayer` (no personal data):
 | `generate_lead` | `test_slug`, `lab_slug`, `area_slug`, `price`, `booking_id` (fires only after the server saved the booking) |
 | `whatsapp_click` / `call_click` | `test_slug`, `lab_slug`, `area_slug` |
 
+Bookings from the test basket (`/basket`) send the same events with `test_slug` as a comma-separated list (`cbc,lipid-profile`) and `price` as the total.
+
 In GTM create Data Layer Variables for the parameters, a Custom Event trigger per event, and GA4 Event tags. Check them in GTM Preview mode.
 
 ## Operations

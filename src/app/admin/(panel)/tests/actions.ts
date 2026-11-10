@@ -64,7 +64,10 @@ export async function saveTest(id: number | null, _: FormState, data: FormData):
 
 export async function deleteTest(id: number): Promise<FormState> {
   await requireUser("ADMIN");
-  const [prices, bookings] = await Promise.all([db.labTestPrice.count({ where: { testId: id } }), db.bookingRequest.count({ where: { testId: id } })]);
+  const [prices, bookings] = await Promise.all([
+    db.labTestPrice.count({ where: { testId: id } }),
+    db.bookingRequest.count({ where: { OR: [{ testId: id }, { items: { some: { testId: id } } }] } }), // incl. basket bookings
+  ]);
   if (prices || bookings) return { message: `This test has ${prices} price(s) and ${bookings} booking(s), so it cannot be deleted.` };
   const t = await db.test.delete({ where: { id } });
   revalidateTest(t.slug);

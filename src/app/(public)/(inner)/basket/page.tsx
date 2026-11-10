@@ -8,7 +8,7 @@ import { searchKey } from "@/lib/normalize";
 import { BASKET_MAX, basketTotals, type BasketLab } from "@/lib/pricing";
 import { Breadcrumbs } from "@/components/public/price-section";
 import { BasketPicker } from "@/components/public/basket-picker";
-import { PriceInteractions } from "@/components/public/price-interactions";
+import { BasketInteractions } from "@/components/public/basket-interactions";
 
 // The list comes from ?t=…, so every visit is rendered fresh. Not for search engines: the
 // content is the visitor's own selection (the test pages are the indexable ones).
@@ -32,7 +32,7 @@ export default async function BasketPage({ searchParams }: Props) {
   const rows = ids.length
     ? await db.labTestPrice.findMany({
         where: { testId: { in: ids }, lab: { isActive: true } },
-        select: { labId: true, testId: true, regularPrice: true, discountPrice: true, discountExpiresAt: true, verifiedAt: true },
+        select: { labId: true, testId: true, regularPrice: true, discountPrice: true, discountExpiresAt: true, verifiedAt: true, homeCollection: true },
       })
     : [];
   const { complete, partial } = basketTotals(rows, ids);
@@ -44,6 +44,8 @@ export default async function BasketPage({ searchParams }: Props) {
     })).map((l) => [l.id, l]),
   );
   const testName = new Map(selected.map((t) => [t.id, t.shortName ?? t.nameBn]));
+  // Home collection is offered for a basket booking only if the lab collects every one of the tests.
+  const homeFor = (l: BasketLab) => l.items.every((i) => rows.some((r) => r.labId === l.labId && r.testId === i.testId && r.homeCollection));
   const maxTotal = complete.length > 1 ? complete[complete.length - 1]!.total : null;
 
   const pickerTests = tests.map((t) => ({
@@ -58,7 +60,7 @@ export default async function BasketPage({ searchParams }: Props) {
     const cheapest = rank === 0;
     const saves = maxTotal != null && rank != null ? maxTotal - l.total : 0;
     return (
-      <article data-price-row data-lab={lab.slug} data-area={lab.area.slug} className={`rounded-xl border p-4 ${cheapest ? "border-2 border-cheapest" : "border-line"}`}>
+      <article data-price-row data-lab={lab.slug} data-area={lab.area.slug} data-lab-name={lab.nameBn ?? lab.name} data-price={l.total} data-home={homeFor(l) ? "1" : "0"} className={`rounded-xl border p-4 ${cheapest ? "border-2 border-cheapest" : "border-line"}`}>
         {cheapest && <p className="mb-2 inline-block rounded-full bg-cheapest px-3 py-0.5 text-sm font-semibold text-white">{bn.basketCheapest}</p>}
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
@@ -91,10 +93,19 @@ export default async function BasketPage({ searchParams }: Props) {
           </ul>
         </details>
         <p className="mt-1 text-sm text-muted">{bn.basketVerified(bnDate(l.oldest))}</p>
-        {lab.phone && (
-          <a href={`tel:${lab.phone.replace(/[^\d+]/g, "")}`} data-action="call" className="mt-3 flex min-h-12 items-center justify-center rounded-lg border-2 border-primary font-semibold text-primary hover:bg-primary-soft">
-            {bn.call}
-          </a>
+        {(l.missing.length === 0 || lab.phone) && (
+          <div className={`mt-3 grid gap-2 ${l.missing.length === 0 && lab.phone ? "grid-cols-2" : ""}`}>
+            {l.missing.length === 0 && (
+              <button type="button" data-action="book-basket" className="flex min-h-12 cursor-pointer items-center justify-center rounded-lg bg-primary font-semibold text-white hover:bg-primary-hover">
+                {bn.book}
+              </button>
+            )}
+            {lab.phone && (
+              <a href={`tel:${lab.phone.replace(/[^\d+]/g, "")}`} data-action="call" className="flex min-h-12 items-center justify-center rounded-lg border-2 border-primary font-semibold text-primary hover:bg-primary-soft">
+                {bn.call}
+              </a>
+            )}
+          </div>
         )}
       </article>
     );
@@ -102,7 +113,7 @@ export default async function BasketPage({ searchParams }: Props) {
 
   return (
     <>
-      <PriceInteractions />
+      <BasketInteractions testSlugs={selected.map((t) => t.slug)} testNames={selected.map((t) => t.shortName ?? t.nameBn)} />
       <Breadcrumbs path="/basket" items={[{ name: bn.home, href: "/" }, { name: bn.basketTitle }]} />
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{bn.basketTitle}</h1>
       <p className="mt-1 text-muted">{bn.basketIntro}</p>

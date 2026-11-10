@@ -106,6 +106,23 @@ test("test basket: add from test pages, totals per lab on /basket", async ({ pag
   expect(nums).toEqual([...nums].sort((a, b) => a - b));
   await expect(page.locator("main ol article").first()).toContainText("সবচেয়ে কম মোট খরচ");
 
+  // Book both tests at the cheapest lab in one request: one booking, one item per test, total = sum.
+  const phone = `018${String(Date.now()).slice(-8)}`;
+  await page.locator("main ol article").first().getByRole("button", { name: "বুক করুন" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toContainText("২টি টেস্ট");
+  await dialog.getByLabel("আপনার নাম").fill("E2E Basket Patient");
+  await dialog.getByLabel("মোবাইল নম্বর").fill(phone);
+  await dialog.getByRole("button", { name: "অনুরোধ পাঠান" }).click();
+  await expect(dialog.getByText("অনুরোধ পাঠানো হয়েছে")).toBeVisible();
+  const lead = (await events(page)).find((e) => e.event === "generate_lead")!;
+  expect(lead).toMatchObject({ test_slug: "cbc,lipid-profile", price: nums[0] });
+  const saved = await db.bookingRequest.findUnique({ where: { id: lead.booking_id as number }, include: { items: { include: { test: true }, orderBy: { id: "asc" } } } });
+  expect(saved!.items.map((i) => i.test.slug)).toEqual(["cbc", "lipid-profile"]);
+  expect(saved!.priceAtRequest).toBe(saved!.items.reduce((s, i) => s + i.priceAtRequest, 0));
+  expect(saved!.priceAtRequest).toBe(nums[0]);
+  await dialog.getByRole("button", { name: "বন্ধ করুন" }).click();
+
   // Removing a test updates the URL and the stored list.
   await page.getByRole("button", { name: /লিপিড প্রোফাইল.*লিস্ট থেকে সরান/ }).click();
   await expect(page).toHaveURL(/\/basket\?t=cbc$/);
