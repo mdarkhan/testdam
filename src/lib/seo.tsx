@@ -83,7 +83,11 @@ export function buildSitemap(
   now = new Date(),
 ): SitemapEntry[] {
   const at = (ms: number | undefined) => new Date(ms ?? now.getTime());
-  const out: SitemapEntry[] = [{ url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 }];
+  const out: SitemapEntry[] = [
+    { url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
+    { url: absoluteUrl("/tests"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: absoluteUrl("/labs"), lastModified: now, changeFrequency: "daily", priority: 0.7 },
+  ];
   for (const [id, r] of index.tests) {
     const s = slugs.tests.get(id);
     if (s) out.push({ url: absoluteUrl(`/test/${s}`), lastModified: at(r.updated), changeFrequency: "weekly", priority: 0.9 });

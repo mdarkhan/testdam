@@ -7,6 +7,7 @@ import type { TestPriceRow } from "@/lib/catalog";
 import { PriceCard } from "./price-card";
 import { PriceFilters } from "./price-filters";
 import { PriceInteractions } from "./price-interactions";
+import { PriceSpread } from "./price-spread";
 
 /** Ranks prices (fresh by price, stale apart) and renders summary, filters, cards and the stale group. */
 export function PriceSection({ rows, testName, index, areaFilter, path, testSlug, pageAreaSlug }: {
@@ -28,6 +29,12 @@ export function PriceSection({ rows, testName, index, areaFilter, path, testSlug
           <p className="text-sm font-semibold text-primary">{bn.priceRange}</p>
           <p className="tabular text-3xl font-semibold">{priceRangeText(range.min, range.max)}</p>
           <p className="text-sm text-muted">{bn.labsWithFreshPrice(bnDigits(range.labs))}</p>
+          {range.max > range.min && (
+            <div className="mt-3">
+              <PriceSpread prices={fresh.map((r) => r.effective).sort((a, b) => a - b)} labels={false} />
+              <p className="mt-2 text-sm font-semibold text-cheapest">{bn.spreadSave(taka(range.max - range.min))}</p>
+            </div>
+          )}
         </div>
       )}
 

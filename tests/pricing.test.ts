@@ -84,6 +84,13 @@ describe("buildIndex (thin-content rule)", () => {
     expect(idx.tests.has(2)).toBe(false);
   });
 
+  it("keeps every fresh price of eligible tests for the spread bars, and the totals", () => {
+    const idx = buildIndex([p(1, 1, 10, 500), p(2, 1, 10, 300), p(3, 1, 20, 400), p(1, 2, 10, 100), p(2, 2, 10, 200), p(3, 1, 20, 900, 120)], now, 90);
+    expect(idx.spreads.get(1)).toEqual([300, 400, 500]); // sorted, stale 900 left out
+    expect(idx.spreads.has(2)).toBe(false); // no test page → no spread
+    expect(idx.totals).toEqual({ labs: 3, prices: 5 });
+  });
+
   it("does not count stale prices", () => {
     const idx = buildIndex([p(1, 1, 10, 300), p(2, 1, 10, 400), p(3, 1, 20, 500, 120)], now, 90);
     expect(idx.tests.has(1)).toBe(false);

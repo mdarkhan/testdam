@@ -54,10 +54,14 @@ export type TestPriceRow = Awaited<ReturnType<typeof getTestPrices>>[number];
 export function getTestsByIds(ids: number[]) {
   return db.test.findMany({
     where: { id: { in: ids } },
-    select: { id: true, slug: true, nameEn: true, nameBn: true, shortName: true, popularRank: true },
+    select: { id: true, slug: true, nameEn: true, nameBn: true, shortName: true, popularRank: true, category: true },
     orderBy: [{ popularRank: { sort: "asc", nulls: "last" } }, { nameEn: "asc" }],
   });
 }
+
+/** Display order of test categories (most searched first) on the home and /tests pages. */
+export const CATEGORY_ORDER = ["BLOOD", "BIOCHEMISTRY", "HORMONE", "SEROLOGY", "URINE", "STOOL", "MICROBIOLOGY", "IMAGING", "CARDIAC", "OTHER"] as const;
+export const categoryAnchor = (c: string) => `cat-${c.toLowerCase()}`;
 
 /** "কমপ্লিট ব্লাড কাউন্ট (CBC)" — Bangla name first, English short name as people search for it. */
 export function testDisplayName(t: { nameBn: string; nameEn: string; shortName: string | null }) {

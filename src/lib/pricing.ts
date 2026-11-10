@@ -89,6 +89,8 @@ export type CatalogIndex = {
   labs: Map<number, number>; // eligible labs → fresh price count
   areas: Map<number, number>; // eligible areas → labs with fresh prices
   updated: Map<string, number>; // `lab:${id}` / `area:${id}` → newest fresh verifiedAt (ms)
+  spreads: Map<number, number[]>; // eligible tests → every fresh effective price, ascending (home page spread bars)
+  totals: { labs: number; prices: number }; // labs with at least one fresh price, fresh prices
 };
 
 export const testAreaKey = (testId: number, areaId: number) => `${testId}:${areaId}`;
@@ -109,12 +111,16 @@ export function buildIndex(rows: IndexRow[], now = new Date(), freshDays = confi
   const testAreas = new Map<string, Range>();
   const labCounts = new Map<number, number>();
   const areaLabs = new Map<number, Set<number>>();
+  const spreads = new Map<number, number[]>();
+  let freshPrices = 0;
 
   for (const r of rows) {
     if (!isFresh(r, now, freshDays)) continue;
     const e = effectivePrice(r, now);
     const t = r.verifiedAt.getTime();
     add(tests as Map<string | number, Range>, r.testId, e, t);
+    spreads.set(r.testId, [...(spreads.get(r.testId) ?? []), e]);
+    freshPrices++;
     add(testAreas as Map<string | number, Range>, testAreaKey(r.testId, r.areaId), e, t);
     touch(`lab:${r.labId}`, t);
     touch(`area:${r.areaId}`, t);
@@ -123,11 +129,12 @@ export function buildIndex(rows: IndexRow[], now = new Date(), freshDays = confi
   }
 
   for (const [k, v] of tests) if (v.labs < THRESHOLDS.test) tests.delete(k);
+  for (const k of spreads.keys()) if (!tests.has(k)) spreads.delete(k); else spreads.get(k)!.sort((a, b) => a - b);
   for (const [k, v] of testAreas) if (v.labs < THRESHOLDS.testArea) testAreas.delete(k);
   const labs = new Map([...labCounts].filter(([, n]) => n >= THRESHOLDS.lab));
   const areasWithPage = new Set([...testAreas.keys()].map((k) => Number(k.split(":")[1])));
   const areas = new Map(
     [...areaLabs].filter(([id, s]) => s.size >= THRESHOLDS.areaLabs && areasWithPage.has(id)).map(([id, s]) => [id, s.size] as [number, number]),
   );
-  return { tests, testAreas, labs, areas, updated };
+  return { tests, testAreas, labs, areas, updated, spreads, totals: { labs: labCounts.size, prices: freshPrices } };
 }

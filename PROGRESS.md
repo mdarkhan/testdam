@@ -207,6 +207,8 @@ Phase 4 additions:
 - Search suggestions and the search form navigate client-side, so the `search` event isn't lost to a full page load (found by the e2e test).
 - e2e runs against a production build in `.next-e2e` (dev-mode recompiles reloaded the page mid-test).
 - e2e uses a placeholder central WhatsApp number (01300000000) only inside its own build so WhatsApp buttons exist; the test blocks the link.
+- **Bangla digits (2026-11-11, owner):** Hind Siliguri's ১ was hard to read, so ০–৯ come from a 4 KB digits-only subset of Noto Sans Bengali (`src/app/fonts`, OFL), loaded with `unicode-range` ahead of Hind Siliguri.
+- **Home redesign (2026-11-11, owner chose it from the improvement list):** the signature element is the price-spread bar (`price-spread.tsx`): one line from the cheapest to the dearest fresh price, a dot per lab, cheapest in green. It shows in the home hero (the popular test compared at the most labs), on every popular test, and in the range box on test pages. New shared header (৳ logo tile, Tests/Labs menu with the current page marked) and footer pinned to the bottom. New index pages `/tests` (by category) and `/labs` (by area), both following the thin-content rule and listed in the sitemap. The home facts (labs, tests, prices) and the "save up to ৳…" line are computed from fresh prices in the index (`spreads`, `totals` in `buildIndex`), never typed in.
 
 ## Open questions (waiting on owner)
 
