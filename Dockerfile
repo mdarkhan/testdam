@@ -11,7 +11,9 @@ WORKDIR /app
 FROM base AS deps
 COPY package.json package-lock.json prisma.config.ts ./
 COPY prisma ./prisma
-RUN npm ci --no-audit --no-fund
+# --include=dev: FlyNode injects app variables (e.g. NODE_ENV=production) into build steps, which would
+# otherwise skip the devDependencies the build needs (Tailwind, TypeScript, Prisma CLI).
+RUN npm ci --include=dev --no-audit --no-fund
 
 # 2. Build. Public pages are ISR and render on first request; nothing touches the database here.
 FROM deps AS build
