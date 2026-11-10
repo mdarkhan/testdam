@@ -93,6 +93,7 @@ export async function importWebData() {
       if (before && before.importBatch == null) { keptHandEntered++; continue; } // a person's price wins
       const row = {
         regularPrice: p.price, discountPrice: null, discountExpiresAt: null, source: "WEBSITE" as const,
+        reportHours: "hours" in p && typeof p.hours === "number" ? p.hours : null,
         sourceNote: `Lab website ${sourceUrl.get(p.lab)} ("${p.sourceName}"), read on ${data.collectedOn}. Not confirmed by phone.`,
         verifiedAt: collectedAt, verifiedById: null, importBatch: WEB_BATCH,
       };

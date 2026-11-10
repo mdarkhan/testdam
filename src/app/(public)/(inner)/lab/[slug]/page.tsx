@@ -80,15 +80,18 @@ export default async function LabPage({ params }: Props) {
 
       <dl className="mt-4 grid gap-3 rounded-xl border border-line p-4 text-sm sm:grid-cols-2">
         <div><dt className="font-semibold">{bn.address}</dt><dd>{lab.address}</dd></div>
-        <div><dt className="font-semibold">{bn.phone}</dt><dd className="tabular">{lab.phone}</dd></div>
+        {lab.phone && <div><dt className="font-semibold">{bn.phone}</dt><dd className="tabular">{lab.phone}</dd></div>}
         {lab.openingHours && <div><dt className="font-semibold">{bn.openingHours}</dt><dd>{lab.openingHours}</dd></div>}
-        <div>
-          <dt className="font-semibold">{bn.homeCollection}</dt>
-          <dd>{lab.homeCollection ? bn.homeCollectionYes : bn.homeCollectionNo}{lab.homeCollection && lab.homeCollectionFee != null && ` (${lab.homeCollectionFee === 0 ? bn.homeCollectionFree : bn.homeCollectionFee(taka(lab.homeCollectionFee))})`}</dd>
-        </div>
+        {/* Web-imported labs: home collection is unknown, so say nothing rather than "no". */}
+        {(lab.homeCollection || !lab.importBatch) && (
+          <div>
+            <dt className="font-semibold">{bn.homeCollection}</dt>
+            <dd>{lab.homeCollection ? bn.homeCollectionYes : bn.homeCollectionNo}{lab.homeCollection && lab.homeCollectionFee != null && ` (${lab.homeCollectionFee === 0 ? bn.homeCollectionFree : bn.homeCollectionFee(taka(lab.homeCollectionFee))})`}</dd>
+          </div>
+        )}
       </dl>
       <div className="mt-3 grid grid-cols-2 gap-2">
-        <a href={`tel:${lab.phone.replace(/[^\d+]/g, "")}`} className={`${lab.mapUrl ? "" : "col-span-2 "}flex min-h-12 items-center justify-center rounded-lg bg-primary font-semibold text-white hover:bg-primary-hover`} data-action="call" data-lab={lab.slug} data-area={lab.area.slug}>{bn.call}</a>
+        {lab.phone && <a href={`tel:${lab.phone.replace(/[^\d+]/g, "")}`} className={`${lab.mapUrl ? "" : "col-span-2 "}flex min-h-12 items-center justify-center rounded-lg bg-primary font-semibold text-white hover:bg-primary-hover`} data-action="call" data-lab={lab.slug} data-area={lab.area.slug}>{bn.call}</a>}
         {lab.mapUrl && <a href={lab.mapUrl} target="_blank" rel="noopener" className="flex min-h-12 items-center justify-center rounded-lg border-2 border-primary font-semibold text-primary">{bn.directions}</a>}
       </div>
       <p className="mt-3 rounded-lg border-l-4 border-amber-500 bg-warn-soft px-3 py-2 text-sm">{bn.disclaimer}</p>

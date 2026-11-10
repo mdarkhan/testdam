@@ -90,7 +90,7 @@
    "area": "shyamoli",
    "address": "Shyamoli, Dhaka-1207",
    "phone": "10662",
-   "sourceUrl": "https://hdclbd.com/Home/SubDepartment/5"
+   "sourceUrl": "https://hdclbd.com/Home/SubDepartment/8"
   },
   {
    "slug": "monowara-hospital-kamalapur",
@@ -101,6 +101,36 @@
    "address": "35/7, 1 Kamalapur Road, Dhaka-1203",
    "phone": "09649143152",
    "sourceUrl": "https://www.mogh.com.bd/available_tests"
+  },
+  {
+   "slug": "aalok-healthcare-mirpur-10",
+   "name": "Aalok Healthcare",
+   "nameBn": "আলোক হেলথকেয়ার",
+   "branchName": "Mirpur 10",
+   "area": "mirpur",
+   "address": "House 1 & 3, Road 2, Block B, Mirpur-10, Dhaka-1216",
+   "phone": "09610100999",
+   "sourceUrl": "https://www.aalokhealthcare.com/test-rate"
+  },
+  {
+   "slug": "bmu-super-specialized-hospital",
+   "name": "BMU Super Specialized Hospital",
+   "nameBn": "বিএমইউ সুপার স্পেশালাইজড হাসপাতাল",
+   "branchName": null,
+   "area": "shahbag",
+   "address": "Bangladesh Medical University (BMU), Shahbag, Dhaka-1000",
+   "phone": "",
+   "sourceUrl": "https://ssh.bmu.ac.bd/investigation-all-list"
+  },
+  {
+   "slug": "nilmrc-sher-e-bangla-nagar",
+   "name": "National Institute of Laboratory Medicine & Referral Centre (NILMRC)",
+   "nameBn": "ন্যাশনাল ইনস্টিটিউট অব ল্যাবরেটরি মেডিসিন এন্ড রেফারেল সেন্টার",
+   "branchName": null,
+   "area": "sher-e-bangla-nagar",
+   "address": "Plot F/17-A, Sher-e-Bangla Nagar, Dhaka-1207",
+   "phone": "01911909141",
+   "sourceUrl": "https://drive.google.com/file/d/1mL1DMfHLoivZFqYmGKWsAbCSEHgdU28U/view"
   }
  ],
  "prices": [
@@ -165,6 +195,25 @@
    "sourceName": "CBC (Govt Rate)"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "cbc",
+   "price": 400,
+   "hours": 6,
+   "sourceName": "CBC"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "cbc",
+   "price": 150,
+   "sourceName": "CBC"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "esr",
    "price": 200,
@@ -222,6 +271,25 @@
    "lab": "monowara-hospital-kamalapur",
    "test": "esr",
    "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "esr",
+   "price": 200,
+   "hours": 6,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "esr",
+   "price": 140,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "esr",
+   "price": 30,
    "sourceName": "ESR"
   },
   {
@@ -285,6 +353,25 @@
    "sourceName": "Hb%"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "hemoglobin",
+   "price": 200,
+   "hours": 6,
+   "sourceName": "Hemoglobin(HB%)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "hemoglobin",
+   "price": 400,
+   "sourceName": "Haemoglobin Estimation"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "hemoglobin",
+   "price": 30,
+   "sourceName": "Hb%"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "blood-grouping",
    "price": 300,
@@ -343,6 +430,18 @@
    "test": "blood-grouping",
    "price": 200,
    "sourceName": "Blood Group"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "blood-grouping",
+   "price": 210,
+   "sourceName": "ABO grouping & Rh.D typing"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "blood-grouping",
+   "price": 350,
+   "sourceName": "Automated Blood Grouping and Rh factor  (Forward       &  Reverse)"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -405,6 +504,25 @@
    "sourceName": "Prothrombin Time"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "pt-inr",
+   "price": 800,
+   "hours": 6,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "pt-inr",
+   "price": 490,
+   "sourceName": "Prothrombin Time"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "pt-inr",
+   "price": 100,
+   "sourceName": "PT (Prothrombin Time)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "fbs",
    "price": 200,
@@ -463,6 +581,19 @@
    "test": "fbs",
    "price": 200,
    "sourceName": "Blood Sugar Fasting"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "fbs",
+   "price": 250,
+   "hours": 6,
+   "sourceName": "Fasting Glucose"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "fbs",
+   "price": 80,
+   "sourceName": "Glucose Fasting"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -525,6 +656,19 @@
    "sourceName": "Blood Sugar Random"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "rbs",
+   "price": 250,
+   "hours": 6,
+   "sourceName": "Random Glucose"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "rbs",
+   "price": 80,
+   "sourceName": "Glucose Random"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "hba1c",
    "price": 1500,
@@ -582,6 +726,25 @@
    "lab": "monowara-hospital-kamalapur",
    "test": "hba1c",
    "price": 1200,
+   "sourceName": "HbA1c"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "hba1c",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "HbA1c"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "hba1c",
+   "price": 640,
+   "sourceName": "HbA1C"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "hba1c",
+   "price": 300,
    "sourceName": "HbA1c"
   },
   {
@@ -645,6 +808,25 @@
    "sourceName": "Lipid Profile"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "lipid-profile",
+   "price": 1400,
+   "hours": 6,
+   "sourceName": "Lipid Profile Serum (Fasting)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "lipid-profile",
+   "price": 950,
+   "sourceName": "Lipid profile"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "lipid-profile",
+   "price": 300,
+   "sourceName": "Lipid Profile Serum (F)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "serum-creatinine",
    "price": 400,
@@ -697,6 +879,18 @@
    "test": "serum-creatinine",
    "price": 500,
    "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "serum-creatinine",
+   "price": 110,
+   "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "serum-creatinine",
+   "price": 50,
+   "sourceName": "S. Creatinine"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -759,6 +953,25 @@
    "sourceName": "SGPT (ALT)"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "sgpt",
+   "price": 500,
+   "hours": 6,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "sgpt",
+   "price": 160,
+   "sourceName": "S. ALT (SGPT)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "sgpt",
+   "price": 70,
+   "sourceName": "SGPT (Serum ALT)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "sgot",
    "price": 500,
@@ -817,6 +1030,25 @@
    "test": "sgot",
    "price": 500,
    "sourceName": "SGOT (AST)"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "sgot",
+   "price": 500,
+   "hours": 6,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "sgot",
+   "price": 160,
+   "sourceName": "S. AST (SGOT)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "sgot",
+   "price": 70,
+   "sourceName": "SGOT (Serum AST)"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -879,6 +1111,13 @@
    "sourceName": "LFT (Liver Function Test) (Govt Rate)"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "liver-function-test",
+   "price": 1200,
+   "hours": 6,
+   "sourceName": "LFT (T.Bilirubin,ALT,AST,ALP)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "uric-acid",
    "price": 600,
@@ -937,6 +1176,25 @@
    "test": "uric-acid",
    "price": 600,
    "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "uric-acid",
+   "price": 600,
+   "hours": 6,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "uric-acid",
+   "price": 140,
+   "sourceName": "S. Uric acid"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "uric-acid",
+   "price": 100,
+   "sourceName": "S. Uric Acid"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -999,6 +1257,25 @@
    "sourceName": "Serum Electrolytes"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "hours": 6,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "serum-electrolytes",
+   "price": 490,
+   "sourceName": "Electrolytes"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "serum-electrolytes",
+   "price": 250,
+   "sourceName": "Electrolytes Profile"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "ferritin",
    "price": 1200,
@@ -1057,6 +1334,25 @@
    "test": "ferritin",
    "price": 1200,
    "sourceName": "S. Ferritin (Govt Rate)"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "ferritin",
+   "price": 1200,
+   "hours": 6,
+   "sourceName": "Ferritin"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "ferritin",
+   "price": 670,
+   "sourceName": "S. Ferritin"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "ferritin",
+   "price": 400,
+   "sourceName": "S. Ferritin"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -1119,6 +1415,25 @@
    "sourceName": "CRP (Govt Rate)"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "crp",
+   "price": 600,
+   "hours": 6,
+   "sourceName": "CRP (C-Reactive Protein)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "crp",
+   "price": 490,
+   "sourceName": "CRP"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "crp",
+   "price": 150,
+   "sourceName": "CRP (C-Reactive Protein)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "tsh",
    "price": 1000,
@@ -1177,6 +1492,25 @@
    "test": "tsh",
    "price": 800,
    "sourceName": "TSH"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "tsh",
+   "price": 800,
+   "hours": 6,
+   "sourceName": "TSH"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "tsh",
+   "price": 560,
+   "sourceName": "S. TSH"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "tsh",
+   "price": 200,
+   "sourceName": "S. TSH"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -1239,6 +1573,18 @@
    "sourceName": "FT4 (Free T4)"
   },
   {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "ft4",
+   "price": 650,
+   "sourceName": "S. Free T4 (FT4)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "ft4",
+   "price": 250,
+   "sourceName": "S.FT4"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "prolactin",
    "price": 1500,
@@ -1299,6 +1645,25 @@
    "sourceName": "Prolactin"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "prolactin",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "prolactin",
+   "price": 720,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "prolactin",
+   "price": 250,
+   "sourceName": "S. Prolactin"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "beta-hcg",
    "price": 1500,
@@ -1351,6 +1716,25 @@
    "test": "beta-hcg",
    "price": 1200,
    "sourceName": "Beta HCG"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "beta-hcg",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "Beta HCG"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "beta-hcg",
+   "price": 720,
+   "sourceName": "Total B-hcG"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "beta-hcg",
+   "price": 450,
+   "sourceName": "S. BETA hCG"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -1407,6 +1791,25 @@
    "sourceName": "25-OH Vitamin D/Vit-D3"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "vitamin-d",
+   "price": 4000,
+   "hours": 12,
+   "sourceName": "Vitamin D Total (25 OH)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "vitamin-d",
+   "price": 4200,
+   "sourceName": "Vitamin-D"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "vitamin-d",
+   "price": 1000,
+   "sourceName": "Vitamin D"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "psa",
    "price": 1500,
@@ -1459,6 +1862,25 @@
    "test": "psa",
    "price": 1200,
    "sourceName": "Total PSA"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "psa",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "PSA"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "psa",
+   "price": 720,
+   "sourceName": "Total PSA"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "psa",
+   "price": 350,
+   "sourceName": "S. PSA (Total)"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -1521,6 +1943,19 @@
    "sourceName": "HbsAg (Latex)"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "hbsag",
+   "price": 700,
+   "hours": 6,
+   "sourceName": "HBsAg (Screening)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "hbsag",
+   "price": 550,
+   "sourceName": "HBsAg"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "dengue-ns1",
    "price": 300,
@@ -1573,6 +2008,19 @@
    "test": "dengue-ns1",
    "price": 300,
    "sourceName": "Dengue NS1 (Antigen) (Govt Rate)"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "dengue-ns1",
+   "price": 300,
+   "hours": 6,
+   "sourceName": "Dengue Ag NS1 (ICT)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Anti-Dengue NS1"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -1635,6 +2083,19 @@
    "sourceName": "Dengue (IgG+IgM) Antibody (Govt Rate)"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "hours": 6,
+   "sourceName": "Dengue Antibody IgM IgG (ICT)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "dengue-igg-igm",
+   "price": 200,
+   "sourceName": "Dengue ICT (IgG & IgM)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "widal",
    "price": 500,
@@ -1692,6 +2153,25 @@
    "lab": "monowara-hospital-kamalapur",
    "test": "widal",
    "price": 500,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "widal",
+   "price": 600,
+   "hours": 6,
+   "sourceName": "Widal test"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "widal",
+   "price": 280,
+   "sourceName": "Widal test"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "widal",
+   "price": 80,
    "sourceName": "Widal Test"
   },
   {
@@ -1753,6 +2233,25 @@
    "test": "urine-re",
    "price": 300,
    "sourceName": "Urine R/M/E"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "urine-re",
+   "price": 400,
+   "hours": 6,
+   "sourceName": "Urine R/M/E"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "urine-re",
+   "price": 350,
+   "sourceName": "Urine R/E with full chemical"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "urine-re",
+   "price": 100,
+   "sourceName": "Urine R/E"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -1815,6 +2314,25 @@
    "sourceName": "Urine C/S"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "urine-culture",
+   "price": 1500,
+   "hours": 48,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "urine-culture",
+   "price": 560,
+   "sourceName": "Urine Culture"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "urine-culture",
+   "price": 200,
+   "sourceName": "Urine for C/S"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "stool-re",
    "price": 300,
@@ -1875,6 +2393,25 @@
    "sourceName": "Stool R/E"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "stool-re",
+   "price": 300,
+   "hours": 6,
+   "sourceName": "STOOL R/M/E"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "stool-re",
+   "price": 350,
+   "sourceName": "Stool R/E"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "stool-re",
+   "price": 150,
+   "sourceName": "Stool R/E"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "ecg",
    "price": 400,
@@ -1923,6 +2460,31 @@
    "sourceName": "ECG"
   },
   {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "ecg",
+   "price": 450,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "ecg",
+   "price": 450,
+   "hours": 6,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "ecg",
+   "price": 150,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "ecg",
+   "price": 80,
+   "sourceName": "ECG"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "echocardiogram",
    "price": 3000,
@@ -1971,6 +2533,25 @@
    "sourceName": "Echo Colour Doppler"
   },
   {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "echocardiogram",
+   "price": 2500,
+   "sourceName": "ECHO- Colour Doppler"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "echocardiogram",
+   "price": 3500,
+   "hours": 6,
+   "sourceName": "ECHO- Colour Doppler"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "echocardiogram",
+   "price": 2800,
+   "sourceName": "Echo-Color Doppler"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "ett",
    "price": 3000,
@@ -2019,6 +2600,25 @@
    "sourceName": "ETT"
   },
   {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "ett",
+   "price": 2500,
+   "sourceName": "ETT (BRUCE PROTOCOL)"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "ett",
+   "price": 3000,
+   "hours": 6,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "ett",
+   "price": 3000,
+   "sourceName": "ETT"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "chest-xray",
    "price": 600,
@@ -2065,12 +2665,37 @@
    "test": "chest-xray",
    "price": 600,
    "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "X-RAY Chest P/A View (100%)"
   },
   {
    "lab": "monowara-hospital-kamalapur",
    "test": "chest-xray",
    "price": 600,
    "sourceName": "Chest P/A View"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "chest-xray",
+   "price": 600,
+   "hours": 6,
+   "sourceName": "X-RAY Chest P/A View (100%)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "chest-xray",
+   "price": 400,
+   "sourceName": "X-ray Chest PA View (100%)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "chest-xray",
+   "price": 200,
+   "sourceName": "X-Ray Chest P/A View"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -2121,10 +2746,35 @@
    "sourceName": "Ultrasonogram of Whole Abdomen"
   },
   {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "usg-whole-abdomen",
+   "price": 1500,
+   "sourceName": "USG OF WHOLE ABDOMEN"
+  },
+  {
    "lab": "monowara-hospital-kamalapur",
    "test": "usg-whole-abdomen",
    "price": 1800,
    "sourceName": "Whole Abdomen"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "usg-whole-abdomen",
+   "price": 2000,
+   "hours": 6,
+   "sourceName": "USG OF WHOLE ABDOMEN"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "usg-whole-abdomen",
+   "price": 700,
+   "sourceName": "Ultrasonogram (Whole abdomen)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "usg-whole-abdomen",
+   "price": 220,
+   "sourceName": "USG   of Whole Abdomen"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -2175,6 +2825,31 @@
    "sourceName": "Ultrasonogram of Pregnancy Profile"
   },
   {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "usg-pregnancy",
+   "price": 1200,
+   "sourceName": "USG OF PREGNANCY PROFILE"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "usg-pregnancy",
+   "price": 1800,
+   "hours": 6,
+   "sourceName": "USG OF PREGNANCY PROFILE"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "usg-pregnancy",
+   "price": 700,
+   "sourceName": "Ultrasonogram Of Pregnancy Profile"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "usg-pregnancy",
+   "price": 110,
+   "sourceName": "USG   of Pregnancy Profile"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "ct-scan-brain",
    "price": 5000,
@@ -2223,6 +2898,31 @@
    "sourceName": "Spiral CT Scan of Brain"
   },
   {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "sourceName": "CT SCAN OF BRAIN"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "hours": 6,
+   "sourceName": "CT SCAN OF BRAIN"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "ct-scan-brain",
+   "price": 3500,
+   "sourceName": "CT Scan of Brain / Head."
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "ct-scan-brain",
+   "price": 2000,
+   "sourceName": "CT Scan of Brain (without medicine)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "mri-brain",
    "price": 8000,
@@ -2266,6 +2966,25 @@
   },
   {
    "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI OF BRAIN"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "mri-brain",
+   "price": 7000,
+   "hours": 24,
+   "sourceName": "MRI OF BRAIN"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
    "test": "mri-brain",
    "price": 7000,
    "sourceName": "MRI of Brain"
@@ -2331,6 +3050,25 @@
    "sourceName": "Serum Bilirubin (Total)"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "serum-bilirubin",
+   "price": 400,
+   "hours": 6,
+   "sourceName": "Bilirubin Total"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "serum-bilirubin",
+   "price": 160,
+   "sourceName": "S. Bilirubin (T)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "serum-bilirubin",
+   "price": 60,
+   "sourceName": "S. Bilirubin (Total)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "blood-urea",
    "price": 500,
@@ -2391,6 +3129,25 @@
    "sourceName": "Urea"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "blood-urea",
+   "price": 500,
+   "hours": 6,
+   "sourceName": "Serum Urea"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "blood-urea",
+   "price": 110,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "blood-urea",
+   "price": 50,
+   "sourceName": "S. Urea"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "t3",
    "price": 1000,
@@ -2451,6 +3208,19 @@
    "sourceName": "T3"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "t3",
+   "price": 800,
+   "hours": 6,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "t3",
+   "price": 300,
+   "sourceName": "T3"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "t4",
    "price": 1000,
@@ -2508,6 +3278,19 @@
    "lab": "monowara-hospital-kamalapur",
    "test": "t4",
    "price": 800,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "t4",
+   "price": 800,
+   "hours": 6,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "t4",
+   "price": 300,
    "sourceName": "T4"
   },
   {
@@ -2571,6 +3354,18 @@
    "sourceName": "FT3 (Free T3)"
   },
   {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "ft3",
+   "price": 650,
+   "sourceName": "S. Free T3 (FT3)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "ft3",
+   "price": 250,
+   "sourceName": "S.FT3"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "fsh",
    "price": 1500,
@@ -2623,6 +3418,25 @@
    "test": "fsh",
    "price": 1200,
    "sourceName": "FSH"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "fsh",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "fsh",
+   "price": 720,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "fsh",
+   "price": 250,
+   "sourceName": "S. FSH"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -2683,6 +3497,25 @@
    "test": "lh",
    "price": 1200,
    "sourceName": "LH"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "lh",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "lh",
+   "price": 720,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "lh",
+   "price": 250,
+   "sourceName": "S. LH"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -2745,6 +3578,25 @@
    "sourceName": "Testosterone"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "testosterone",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "testosterone",
+   "price": 700,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "testosterone",
+   "price": 400,
+   "sourceName": "Testosterone (Elisa)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "anti-hcv",
    "price": 1500,
@@ -2797,6 +3649,25 @@
    "test": "anti-hcv",
    "price": 1200,
    "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "anti-hcv",
+   "price": 1500,
+   "hours": 12,
+   "sourceName": "Anti HCV (ICT)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "anti-hcv",
+   "price": 980,
+   "sourceName": "Anti-HCV"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "anti-hcv",
+   "price": 250,
+   "sourceName": "Anti HCV (ICT)"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -2851,6 +3722,25 @@
    "test": "hiv",
    "price": 1000,
    "sourceName": "HIV Ab 1/2 (ICT)"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "hiv",
+   "price": 1200,
+   "hours": 6,
+   "sourceName": "HIV Ab I & II (Screening)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "hiv",
+   "price": 840,
+   "sourceName": "Anti-HIV (1+2)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "hiv",
+   "price": 250,
+   "sourceName": "Anti HIV (ICT)"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -2913,6 +3803,25 @@
    "sourceName": "ASO Titea"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "aso-titre",
+   "price": 600,
+   "hours": 6,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "aso-titre",
+   "price": 580,
+   "sourceName": "ASO"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "aso-titre",
+   "price": 250,
+   "sourceName": "ASO"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "troponin-i",
    "price": 1400,
@@ -2965,6 +3874,25 @@
    "test": "troponin-i",
    "price": 1200,
    "sourceName": "Troponin-I"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "troponin-i",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "Troponin-I"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "troponin-i",
+   "price": 980,
+   "sourceName": "Troponin-1"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "troponin-i",
+   "price": 500,
+   "sourceName": "Troponin I"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -3027,6 +3955,19 @@
    "sourceName": "Malaria Parasitic (MP)"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "malaria-parasite",
+   "price": 300,
+   "hours": 6,
+   "sourceName": "Malaria Parasite ( MP )"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "malaria-parasite",
+   "price": 240,
+   "sourceName": "MP"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "total-ige",
    "price": 1500,
@@ -3079,6 +4020,25 @@
    "test": "total-ige",
    "price": 1200,
    "sourceName": "Total IgE"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "total-ige",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "IgE"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "total-ige",
+   "price": 840,
+   "sourceName": "IgE"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "total-ige",
+   "price": 250,
+   "sourceName": "S.IgE"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -3141,6 +4101,25 @@
    "sourceName": "Semen Analysis"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "semen-analysis",
+   "price": 1500,
+   "hours": 24,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "semen-analysis",
+   "price": 560,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "semen-analysis",
+   "price": 600,
+   "sourceName": "Semen Analysis"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "ca-125",
    "price": 1500,
@@ -3195,6 +4174,25 @@
    "sourceName": "CA-125"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "ca-125",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "ca-125",
+   "price": 720,
+   "sourceName": "CA-125"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "ca-125",
+   "price": 500,
+   "sourceName": "Blood CA-125"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "cea",
    "price": 1500,
@@ -3246,6 +4244,19 @@
    "lab": "healthcare-diagnostics-center-shyamoli",
    "test": "cea",
    "price": 1300,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "cea",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "cea",
+   "price": 720,
    "sourceName": "CEA"
   },
   {
@@ -3301,6 +4312,25 @@
    "test": "afp",
    "price": 1300,
    "sourceName": "AFP (Alpha Feto Protein)"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "afp",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "AFP (Alpha-fetoprotein)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "afp",
+   "price": 720,
+   "sourceName": "AFP"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "afp",
+   "price": 300,
+   "sourceName": "AFP (Alpha-Feto-Protein)"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -3363,6 +4393,25 @@
    "sourceName": "Serum Calcium"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "serum-calcium",
+   "price": 600,
+   "hours": 6,
+   "sourceName": "Calcium"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "serum-calcium",
+   "price": 160,
+   "sourceName": "Calcium"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "serum-calcium",
+   "price": 80,
+   "sourceName": "S. Calcium (Total)"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "serum-albumin",
    "price": 600,
@@ -3415,6 +4464,25 @@
    "test": "serum-albumin",
    "price": 600,
    "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "serum-albumin",
+   "price": 600,
+   "hours": 6,
+   "sourceName": "Albumin Serum"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "serum-albumin",
+   "price": 160,
+   "sourceName": "Albumin"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "serum-albumin",
+   "price": 75,
+   "sourceName": "S. Albumin"
   },
   {
    "lab": "popular-diagnostic-dhanmondi",
@@ -3477,6 +4545,25 @@
    "sourceName": "Urine Pregnancy Test"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "hours": 6,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "urine-pregnancy-test",
+   "price": 160,
+   "sourceName": "Pregnancy Test"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "urine-pregnancy-test",
+   "price": 50,
+   "sourceName": "Urine For Pregnancy"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "blood-sugar-2h-abf",
    "price": 200,
@@ -3537,6 +4624,25 @@
    "sourceName": "Blood Sugar 2 Hour ABF"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "blood-sugar-2h-abf",
+   "price": 250,
+   "hours": 6,
+   "sourceName": "Glucose 2 hours ABF Blood"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "blood-sugar-2h-abf",
+   "price": 80,
+   "sourceName": "Glucose - 2 hr (ABF)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "blood-sugar-2h-abf",
+   "price": 60,
+   "sourceName": "2hrs ABF"
+  },
+  {
    "lab": "popular-diagnostic-dhanmondi",
    "test": "usg-lower-abdomen",
    "price": 2000,
@@ -3585,10 +4691,35 @@
    "sourceName": "Ultrasonogram of Lower Abdomen"
   },
   {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "usg-lower-abdomen",
+   "price": 1200,
+   "sourceName": "USG OF LOWER ABDOMEN"
+  },
+  {
    "lab": "monowara-hospital-kamalapur",
    "test": "usg-lower-abdomen",
    "price": 1500,
    "sourceName": "Lower Abdomen"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "usg-lower-abdomen",
+   "price": 1500,
+   "hours": 6,
+   "sourceName": "USG OF LOWER ABDOMEN"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "usg-lower-abdomen",
+   "price": 500,
+   "sourceName": "Ultrasonogram (Lower abdomen)"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "usg-lower-abdomen",
+   "price": 110,
+   "sourceName": "USG   of Lower Abdomen"
   },
   {
    "lab": "healthcare-diagnostics-center-shyamoli",
@@ -3609,6 +4740,19 @@
    "sourceName": "T3, T4, TSH"
   },
   {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "thyroid-profile",
+   "price": 2400,
+   "hours": 6,
+   "sourceName": "T3, T4, TSH"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "thyroid-profile",
+   "price": 1300,
+   "sourceName": "T3, T4, TSH"
+  },
+  {
    "lab": "healthcare-diagnostics-center-shyamoli",
    "test": "platelet-count",
    "price": 300,
@@ -3619,6 +4763,44 @@
    "test": "platelet-count",
    "price": 300,
    "sourceName": "Platelet Count (PC)"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "platelet-count",
+   "price": 300,
+   "hours": 6,
+   "sourceName": "PC (Platelet Count)"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "platelet-count",
+   "price": 240,
+   "sourceName": "PC"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "platelet-count",
+   "price": 50,
+   "sourceName": "Platelet Count"
+  },
+  {
+   "lab": "aalok-healthcare-mirpur-10",
+   "test": "vitamin-b12",
+   "price": 2500,
+   "hours": 24,
+   "sourceName": "Vitamin B12"
+  },
+  {
+   "lab": "bmu-super-specialized-hospital",
+   "test": "vitamin-b12",
+   "price": 840,
+   "sourceName": "Vitamin B12"
+  },
+  {
+   "lab": "nilmrc-sher-e-bangla-nagar",
+   "test": "vitamin-b12",
+   "price": 500,
+   "sourceName": "S. Vitamin B12"
   }
  ]
 }

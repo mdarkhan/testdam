@@ -28,6 +28,8 @@ export const AREAS: Array<[slug: string, en: string, bn: string, aliases: string
   ["wari", "Wari", "ওয়ারী", []],
   ["lalbagh", "Lalbagh", "লালবাগ", []],
   ["puran-dhaka", "Puran Dhaka", "পুরান ঢাকা", ["old dhaka", "english road", "nawabpur", "ইংলিশ রোড"]],
+  ["shahbag", "Shahbag", "শাহবাগ", ["shahbagh", "pg hospital", "bsmmu", "bmu"]],
+  ["sher-e-bangla-nagar", "Sher-e-Bangla Nagar", "শেরেবাংলা নগর", ["agargaon", "sher e bangla nagar", "আগারগাঁও"]],
 ];
 
 export const NEIGHBORS: Array<[string, string]> = [
@@ -38,6 +40,8 @@ export const NEIGHBORS: Array<[string, string]> = [
   ["malibagh", "khilgaon"], ["shantinagar", "motijheel"], ["motijheel", "wari"], ["wari", "jatrabari"],
   ["wari", "lalbagh"], ["khilgaon", "jatrabari"], ["farmgate", "shantinagar"],
   ["puran-dhaka", "wari"], ["puran-dhaka", "lalbagh"], ["puran-dhaka", "motijheel"],
+  ["shahbag", "dhanmondi"], ["shahbag", "farmgate"], ["shahbag", "shantinagar"],
+  ["sher-e-bangla-nagar", "shyamoli"], ["sher-e-bangla-nagar", "farmgate"], ["sher-e-bangla-nagar", "mirpur"],
 ];
 
 export type TestSeed = { slug: string; en: string; bn: string; short?: string; cat: TestCategory; sample?: string; aliases: string[]; popular?: number };

@@ -59,7 +59,7 @@ export function labLd(lab: { name: string; nameBn: string | null; branchName: st
     ...(lab.nameBn && { alternateName: lab.name }),
     ...(lab.branchName && { department: { "@type": "MedicalClinic", name: lab.branchName } }),
     url: absoluteUrl(lab.path),
-    telephone: lab.phone,
+    ...(lab.phone && { telephone: lab.phone }),
     address: { "@type": "PostalAddress", streetAddress: lab.address, addressLocality: "Dhaka", addressRegion: lab.areaNameEn, addressCountry: "BD" },
     ...(lab.mapUrl && { hasMap: lab.mapUrl }),
   };
