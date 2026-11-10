@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { bn } from "@/i18n/bn";
-import { bnDigits, taka } from "@/lib/format";
+import { bnDigits, priceRangeText, taka } from "@/lib/format";
+import { breadcrumbLd, JsonLd, priceListLd } from "@/lib/seo";
 import { priceRange, rankPrices, type CatalogIndex } from "@/lib/pricing";
 import type { TestPriceRow } from "@/lib/catalog";
 import { PriceCard } from "./price-card";
 import { PriceFilters } from "./price-filters";
 
 /** Ranks prices (fresh by price, stale apart) and renders summary, filters, cards and the stale group. */
-export function PriceSection({ rows, testName, index, areaFilter }: { rows: TestPriceRow[]; testName: string; index: CatalogIndex; areaFilter: boolean }) {
+export function PriceSection({ rows, testName, index, areaFilter, path }: { rows: TestPriceRow[]; testName: string; index: CatalogIndex; areaFilter: boolean; path: string }) {
   const { fresh, stale } = rankPrices(rows.map((r) => ({ ...r, labName: r.lab.name })));
   const range = priceRange(fresh);
   const labHref = (r: TestPriceRow) => (index.labs.has(r.lab.id) ? `/lab/${r.lab.slug}` : null);
@@ -17,15 +18,17 @@ export function PriceSection({ rows, testName, index, areaFilter }: { rows: Test
 
   return (
     <>
+      <JsonLd data={priceListLd(bn.testPriceTitle(testName), path, fresh.map((r) => ({ name: r.lab.nameBn ?? r.lab.name, price: taka(r.effective), path: labHref(r) })))} />
       {range && (
         <div className="rounded-xl bg-primary-soft px-4 py-3">
           <p className="text-sm font-semibold text-primary">{bn.priceRange}</p>
-          <p className="tabular text-3xl font-semibold">{range.min === range.max ? taka(range.min) : `${taka(range.min)} – ${taka(range.max)}`}</p>
+          <p className="tabular text-3xl font-semibold">{priceRangeText(range.min, range.max)}</p>
           <p className="text-sm text-muted">{bn.labsWithFreshPrice(bnDigits(range.labs))}</p>
         </div>
       )}
 
-      <div className="mt-3"><PriceFilters areas={areas} total={fresh.length} /></div>
+      <h2 className="mt-4 text-lg font-semibold">{bn.labPricesHeading}</h2>
+      <div className="mt-2"><PriceFilters areas={areas} total={fresh.length} /></div>
       <div id="price-list" className="mt-3 space-y-3">
         {fresh.map((r) => <PriceCard key={r.id} row={r} testName={testName} labHref={labHref(r)} showArea={areaFilter} />)}
       </div>
@@ -44,8 +47,10 @@ export function PriceSection({ rows, testName, index, areaFilter }: { rows: Test
   );
 }
 
-export function Breadcrumbs({ items }: { items: Array<{ name: string; href?: string }> }) {
+export function Breadcrumbs({ items, path }: { items: Array<{ name: string; href?: string }>; path: string }) {
   return (
+    <>
+    <JsonLd data={breadcrumbLd(items.map((it) => ({ name: it.name, path: it.href })), path)} />
     <nav aria-label="breadcrumb" className="text-sm text-muted">
       <ol className="flex flex-wrap items-center gap-1">
         {items.map((it, i) => (
@@ -56,6 +61,7 @@ export function Breadcrumbs({ items }: { items: Array<{ name: string; href?: str
         ))}
       </ol>
     </nav>
+    </>
   );
 }
 

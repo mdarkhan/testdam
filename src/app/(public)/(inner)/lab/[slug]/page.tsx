@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cache } from "react";
 import { bn } from "@/i18n/bn";
-import { bnDate, bnDigits, reportTime, taka } from "@/lib/format";
+import { bnDate, bnDigits, priceRangeText, reportTime, taka } from "@/lib/format";
+import { JsonLd, labLd, pageMetadata } from "@/lib/seo";
 import { db } from "@/lib/db";
 import { getCatalogIndex, testDisplayName } from "@/lib/catalog";
 import { effectivePrice, isFresh, testAreaKey } from "@/lib/pricing";
@@ -36,10 +37,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!data) return {};
   const { lab } = data;
   const name = `${lab.nameBn ?? lab.name}${lab.branchName ? ` (${lab.branchName})` : ""}`;
-  return {
-    title: `${name}, ${lab.area.nameBn} — টেস্টের দাম | ${bn.siteName}`,
-    description: `${name}-এ ${bnDigits(data.index.labs.get(lab.id)!)}টি টেস্টের যাচাই করা দাম, ঠিকানা, ফোন ও হোম কালেকশন তথ্য।`,
-  };
+  const now = new Date();
+  const prices = lab.prices.filter((p) => isFresh(p, now)).map((p) => effectivePrice(p, now));
+  const range = priceRangeText(Math.min(...prices), Math.max(...prices));
+  return pageMetadata({
+    title: `${name}, ${lab.area.nameBn} — ${bnDigits(prices.length)}টি টেস্টের দাম | ${bn.siteName}`,
+    description: `${name}-এ ${bnDigits(prices.length)}টি টেস্টের যাচাই করা দাম (${range}), ঠিকানা, ফোন ও হোম কালেকশনের তথ্য।`,
+    path: `/lab/${lab.slug}`,
+  });
 }
 
 export default async function LabPage({ params }: Props) {
@@ -65,7 +70,8 @@ export default async function LabPage({ params }: Props) {
 
   return (
     <>
-      <Breadcrumbs items={[{ name: bn.home, href: "/" }, { name: lab.area.nameBn, href: index.areas.has(lab.areaId) ? `/area/${lab.area.slug}` : undefined }, { name }]} />
+      <JsonLd data={labLd({ ...lab, areaNameEn: lab.area.nameEn, path: `/lab/${lab.slug}` })} />
+      <Breadcrumbs path={`/lab/${lab.slug}`} items={[{ name: bn.home, href: "/" }, { name: lab.area.nameBn, href: index.areas.has(lab.areaId) ? `/area/${lab.area.slug}` : undefined }, { name }]} />
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{name}</h1>
       <p className="text-muted">{[lab.nameBn ? lab.name : null, lab.branchName].filter(Boolean).join(" · ")}</p>
       {lastUpdated && <p className="mt-1 text-sm text-muted">{bn.lastUpdated(bnDate(lastUpdated))}</p>}

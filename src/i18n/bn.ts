@@ -63,6 +63,7 @@ export const bn = {
 
   // Filters
   filters: "ফিল্টার",
+  labPricesHeading: "ল্যাব অনুযায়ী দাম (কম থেকে বেশি)",
   filterArea: "এলাকা",
   filterAllAreas: "সব এলাকা",
   filterHome: "শুধু হোম কালেকশন",

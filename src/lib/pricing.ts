@@ -52,13 +52,14 @@ export function rankPrices<T extends RankInput>(rows: T[], now = new Date(), fre
   return { fresh, stale };
 }
 
-export type Range = { min: number; max: number; labs: number };
+/** `updated` = newest verifiedAt (ms) among the fresh prices — used as the sitemap lastmod. */
+export type Range = { min: number; max: number; labs: number; updated: number };
 
 /** Price range over FRESH prices only (stale prices never appear in ranges, titles or "cheapest"). */
 export function priceRange(fresh: Array<{ effective: number }>): Range | null {
   if (!fresh.length) return null;
   const values = fresh.map((r) => r.effective);
-  return { min: Math.min(...values), max: Math.max(...values), labs: fresh.length };
+  return { min: Math.min(...values), max: Math.max(...values), labs: fresh.length, updated: 0 };
 }
 
 // ───────────────────────────── Thin-content rule ─────────────────────────────
@@ -78,6 +79,7 @@ export type CatalogIndex = {
   testAreas: Map<string, Range>; // key `${testId}:${areaId}`, eligible only
   labs: Map<number, number>; // eligible labs → fresh price count
   areas: Map<number, number>; // eligible areas → labs with fresh prices
+  updated: Map<string, number>; // `lab:${id}` / `area:${id}` → newest fresh verifiedAt (ms)
 };
 
 export const testAreaKey = (testId: number, areaId: number) => `${testId}:${areaId}`;
@@ -87,11 +89,13 @@ export const testAreaKey = (testId: number, areaId: number) => `${testId}:${area
  * Used by pages (404 or not), internal links, search suggestions and the sitemap — one rule everywhere.
  */
 export function buildIndex(rows: IndexRow[], now = new Date(), freshDays = config.freshDays): CatalogIndex {
-  const add = (m: Map<string | number, { min: number; max: number; labs: number }>, k: string | number, v: number) => {
+  const add = (m: Map<string | number, Range>, k: string | number, v: number, t: number) => {
     const r = m.get(k);
-    if (r) { r.min = Math.min(r.min, v); r.max = Math.max(r.max, v); r.labs++; }
-    else m.set(k, { min: v, max: v, labs: 1 });
+    if (r) { r.min = Math.min(r.min, v); r.max = Math.max(r.max, v); r.labs++; r.updated = Math.max(r.updated, t); }
+    else m.set(k, { min: v, max: v, labs: 1, updated: t });
   };
+  const updated = new Map<string, number>();
+  const touch = (k: string, t: number) => updated.set(k, Math.max(updated.get(k) ?? 0, t));
   const tests = new Map<number, Range>();
   const testAreas = new Map<string, Range>();
   const labCounts = new Map<number, number>();
@@ -100,8 +104,11 @@ export function buildIndex(rows: IndexRow[], now = new Date(), freshDays = confi
   for (const r of rows) {
     if (!isFresh(r, now, freshDays)) continue;
     const e = effectivePrice(r, now);
-    add(tests as Map<string | number, Range>, r.testId, e);
-    add(testAreas as Map<string | number, Range>, testAreaKey(r.testId, r.areaId), e);
+    const t = r.verifiedAt.getTime();
+    add(tests as Map<string | number, Range>, r.testId, e, t);
+    add(testAreas as Map<string | number, Range>, testAreaKey(r.testId, r.areaId), e, t);
+    touch(`lab:${r.labId}`, t);
+    touch(`area:${r.areaId}`, t);
     labCounts.set(r.labId, (labCounts.get(r.labId) ?? 0) + 1);
     areaLabs.set(r.areaId, (areaLabs.get(r.areaId) ?? new Set()).add(r.labId));
   }
@@ -113,5 +120,5 @@ export function buildIndex(rows: IndexRow[], now = new Date(), freshDays = confi
   const areas = new Map(
     [...areaLabs].filter(([id, s]) => s.size >= THRESHOLDS.areaLabs && areasWithPage.has(id)).map(([id, s]) => [id, s.size] as [number, number]),
   );
-  return { tests, testAreas, labs, areas };
+  return { tests, testAreas, labs, areas, updated };
 }

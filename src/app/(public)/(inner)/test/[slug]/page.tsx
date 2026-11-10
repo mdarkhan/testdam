@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { bn } from "@/i18n/bn";
-import { bnDigits, taka } from "@/lib/format";
+import { bnDigits, priceRangeText } from "@/lib/format";
+import { pageMetadata } from "@/lib/seo";
 import { getAreas, getCatalogIndex, getTestBySlug, getTestPrices, getTestsByIds, testDisplayName } from "@/lib/catalog";
 import { testAreaKey } from "@/lib/pricing";
 import { Breadcrumbs, PriceLinks, PriceSection } from "@/components/public/price-section";
@@ -25,10 +26,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await load((await params).slug);
   if (!data) return {};
   const name = testDisplayName(data.test);
-  return {
-    title: `${bn.testPriceTitle(name)} ঢাকায় — ${taka(data.range.min)} থেকে | ${bn.siteName}`,
-    description: `ঢাকার ${bnDigits(data.range.labs)}টি ল্যাবে ${name} টেস্টের দাম ${taka(data.range.min)} – ${taka(data.range.max)}। যাচাইয়ের তারিখ, রিপোর্টের সময় ও হোম কালেকশন সহ তুলনা করুন।`,
-  };
+  const range = priceRangeText(data.range.min, data.range.max);
+  return pageMetadata({
+    title: `${bn.testPriceTitle(name)} ঢাকায় ${range} | ${bn.siteName}`,
+    description: `ঢাকার ${bnDigits(data.range.labs)}টি ল্যাবে ${name} টেস্টের দাম ${range}। যাচাইয়ের তারিখ, রিপোর্টের সময় ও হোম কালেকশন মিলিয়ে সবচেয়ে কম দামের ল্যাব খুঁজুন।`,
+    path: `/test/${data.test.slug}`,
+  });
 }
 
 export default async function TestPage({ params }: Props) {
@@ -49,11 +52,11 @@ export default async function TestPage({ params }: Props) {
 
   return (
     <>
-      <Breadcrumbs items={[{ name: bn.home, href: "/" }, { name: test.shortName ?? test.nameEn }]} />
+      <Breadcrumbs path={`/test/${test.slug}`} items={[{ name: bn.home, href: "/" }, { name: test.shortName ?? test.nameEn }]} />
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{bn.testPriceTitle(name)}</h1>
       <p className="text-muted" lang="en">{test.nameEn}</p>
       <TestFacts test={test} />
-      <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter /></div>
+      <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter path={`/test/${test.slug}`} /></div>
       <PriceLinks title={bn.byArea} links={areaLinks} />
       <PriceLinks
         title={bn.otherTests}

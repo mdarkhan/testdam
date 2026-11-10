@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { bn } from "@/i18n/bn";
-import { bnDigits, taka } from "@/lib/format";
+import { bnDigits, priceRangeText } from "@/lib/format";
+import { pageMetadata } from "@/lib/seo";
 import { getAreaBySlug, getCatalogIndex, getTestBySlug, getTestPrices, testDisplayName } from "@/lib/catalog";
 import { testAreaKey } from "@/lib/pricing";
 import { Breadcrumbs, PriceLinks, PriceSection } from "@/components/public/price-section";
@@ -27,10 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await load(p.slug, p.area);
   if (!data) return {};
   const name = testDisplayName(data.test);
-  return {
-    title: `${bn.testPriceInArea(name, data.area.nameBn)} — ${taka(data.range.min)} থেকে | ${bn.siteName}`,
-    description: `${data.area.nameBn} এলাকার ${bnDigits(data.range.labs)}টি ল্যাবে ${name} টেস্টের দাম ${taka(data.range.min)} – ${taka(data.range.max)}। যাচাইয়ের তারিখ ও হোম কালেকশন সহ তুলনা করুন।`,
-  };
+  const range = priceRangeText(data.range.min, data.range.max);
+  return pageMetadata({
+    title: `${bn.testPriceInArea(name, data.area.nameBn)} ${range} | ${bn.siteName}`,
+    description: `${data.area.nameBn} (${data.area.nameEn}) এলাকার ${bnDigits(data.range.labs)}টি ল্যাবে ${name} টেস্টের দাম ${range}। যাচাইয়ের তারিখ ও হোম কালেকশন মিলিয়ে কাছের ল্যাব বেছে নিন।`,
+    path: `/test/${data.test.slug}/${data.area.slug}`,
+  });
 }
 
 export default async function TestAreaPage({ params }: Props) {
@@ -50,6 +53,7 @@ export default async function TestAreaPage({ params }: Props) {
   return (
     <>
       <Breadcrumbs
+        path={`/test/${test.slug}/${area.slug}`}
         items={[
           { name: bn.home, href: "/" },
           { name: test.shortName ?? test.nameEn, href: testPublished ? `/test/${test.slug}` : undefined },
@@ -59,7 +63,7 @@ export default async function TestAreaPage({ params }: Props) {
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{bn.testPriceInArea(name, area.nameBn)}</h1>
       <p className="text-muted" lang="en">{test.nameEn} · {area.nameEn}</p>
       <TestFacts test={test} />
-      <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter={false} /></div>
+      <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter={false} path={`/test/${test.slug}/${area.slug}`} /></div>
       <PriceLinks title={bn.nearbyAreas} links={nearby} />
       <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
         {testPublished && (

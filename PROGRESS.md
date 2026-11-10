@@ -8,8 +8,8 @@ Read this first in a new session, then [docs/BRIEF.md](docs/BRIEF.md) (requireme
 |---|---|---|
 | 0 — Plan | Done (2026-11-10) | Plan, schema, open questions |
 | 1 — Data and admin | Done (2026-11-10) | See "Phase 1 report" below |
-| 2 — Public pages | **Done, waiting for owner review** (2026-11-10) | See "Phase 2 report" below |
-| 3 — Technical SEO | Not started | |
+| 2 — Public pages | Done (2026-11-10) | See "Phase 2 report" below |
+| 3 — Technical SEO | **Done, waiting for owner review** (2026-11-10) | See "Phase 3 report" below |
 | 4 — Booking and tracking | Not started | |
 | 5 — Ops and deploy | Not started | |
 
@@ -24,6 +24,39 @@ npm run db:seed
 npm run dev               # http://localhost:3000/admin — sign in with SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD
 ```
 Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run test:db` (search against the separate `testdam_test` database — migrates and seeds it first; needs `npm run db:start`), `npx next build`.
+
+## Phase 3 report
+
+**Built**
+- `src/lib/seo.tsx`: `pageMetadata` (title, Bangla description, canonical, Open Graph `bn_BD`, Twitter card), JSON-LD builders (`breadcrumbLd`, `priceListLd`, `labLd`), `JsonLd` renderer (escapes `<`), `buildSitemap`.
+- Titles/descriptions carry test name, area and the current fresh price range, e.g. `বাড্ডা এলাকায় কমপ্লিট ব্লাড কাউন্ট (CBC) টেস্টের দাম ৳১৩০ – ৳২৪০ | টেস্টদাম`. Lab and area descriptions include their price range too.
+- Structured data, only for visible content: BreadcrumbList on test, test × area, lab and area pages (rendered by the visible breadcrumb component); ItemList (labs in shown order with price) on test and test × area pages; MedicalClinic on lab pages (name, address, phone, map link). No review/rating markup (tested).
+- `sitemap.xml` from the same index that decides 404s; `lastModified` = newest fresh verification behind each page; hourly + on-demand regeneration.
+- `robots.txt`: disallows `/admin`, `/api/`, `/search`; points to the sitemap. Admin has `noindex` metadata plus an `X-Robots-Tag: noindex, nofollow` header on `/admin/**` and `/api/**`.
+- `metadataBase` from `SITE_URL`; SVG app icon (৳ on teal).
+
+**Verified (2026-11-10)**
+- `tsc` clean, ESLint clean, Vitest 57/57 (new: sitemap = published pages only, lastmod, JSON-LD escaping, no rating markup, canonical/OG), `npm run test:db` 19/19, `next build` OK.
+- Production server: robots and sitemap (301 URLs) correct; admin returns `X-Robots-Tag`; every JSON-LD block parses.
+- On-demand revalidation, end to end in production: changed Demo Lab 13's CBC discount 130 → 110 in the price grid → `/test/cbc`, `/test/cbc/badda`, `/lab/demo-lab-13-badda`, `/` and `/sitemap.xml` re-rendered immediately (cache MISS) with ৳১১০ in the title and page.
+- **Lighthouse 13.6 (mobile, simulated throttling), production build on localhost:**
+
+  | Page | Performance | Accessibility | Best practices | SEO | LCP | TBT | CLS |
+  |---|---|---|---|---|---|---|---|
+  | `/` | 100 | 100 | 100 | 100 | 0.8 s | 30 ms | 0 |
+  | `/test/cbc` | 100 | 100 | 100 | 100 | 0.8 s | — | 0 |
+  | `/test/cbc/badda` | 100 | 100 | 100 | 100 | 0.8 s | — | 0 |
+  | `/lab/demo-lab-1-mirpur` | 100 | 100 | 100 | 100 | 0.8 s | 30 ms | 0 |
+  | `/area/badda` | 100 | 100 | 100 | 100 | 0.8 s | 80 ms | 0 |
+
+  First run had test pages at 99 accessibility (`heading-order`: cards were `h3` without an `h2`); fixed with a "ল্যাব অনুযায়ী দাম" heading and re-run → 100. Test pages before the fix: TBT 110 ms / 50 ms.
+
+**Not done / not verified**
+- Scores are from localhost: real Dhaka mobile networks add latency the simulation only approximates. Re-run against the deployed site in Phase 5.
+- No Open Graph image (no brand artwork yet). Home has no BreadcrumbList (it shows no breadcrumb; the brief's "visible only" rule wins).
+- Not checked in Google's Rich Results Test (that needs a public URL — Phase 5).
+- Lighthouse "unused/legacy JavaScript" hints remain (framework code); scores are unaffected.
+- My local `.next` build was made with `SITE_URL=http://localhost:3100` for the Lighthouse run; any new build uses `.env`.
 
 ## Phase 2 report
 
@@ -96,6 +129,13 @@ Phase 2 additions:
 - Filters work on the page without reloading (no URL parameters), so test pages stay fully cacheable; area filtering for SEO is covered by the test × area pages.
 - Disclaimer sits under the price list (and in the footer) so the first price card is visible on a 360 × 780 screen.
 - Seed now gives demo prices only to labs named exactly "Demo Lab N" — never to labs entered by an admin (fixed after it priced a QA lab).
+
+Phase 3 additions:
+- Breadcrumb JSON-LD is emitted by the same component that draws the visible breadcrumb, so markup and page cannot drift apart.
+- ItemList lists fresh prices only (the stale group is collapsed and not "the list").
+- `/search` is disallowed in robots and `noindex` — search result pages are thin by nature.
+- Sitemap `lastModified` = newest fresh verification behind the page (honest dates, not "now").
+- Canonical/OG URLs depend on `SITE_URL`; until the domain is set they point at localhost.
 
 ## Open questions (waiting on owner)
 

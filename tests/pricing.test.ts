@@ -66,7 +66,7 @@ describe("rankPrices", () => {
 
   it("price range uses fresh prices only", () => {
     const { fresh } = rankPrices([row("A", 300), row("B", 650), row("Old", 50, { verifiedAt: daysAgo(200) })], now, 90);
-    expect(priceRange(fresh)).toEqual({ min: 300, max: 650, labs: 2 });
+    expect(priceRange(fresh)).toMatchObject({ min: 300, max: 650, labs: 2 });
     expect(priceRange([])).toBeNull();
   });
 });
@@ -80,7 +80,7 @@ describe("buildIndex (thin-content rule)", () => {
   it("publishes a test page only with ≥3 labs holding a fresh price", () => {
     const idx = buildIndex([p(1, 1, 10, 300), p(2, 1, 10, 400), p(3, 1, 20, 500), p(1, 2, 10, 100), p(2, 2, 10, 200)], now, 90);
     expect(THRESHOLDS.test).toBe(3);
-    expect(idx.tests.get(1)).toEqual({ min: 300, max: 500, labs: 3 });
+    expect(idx.tests.get(1)).toMatchObject({ min: 300, max: 500, labs: 3, updated: daysAgo(1).getTime() });
     expect(idx.tests.has(2)).toBe(false);
   });
 
@@ -91,7 +91,7 @@ describe("buildIndex (thin-content rule)", () => {
 
   it("publishes a test × area page only with ≥2 labs in that area", () => {
     const idx = buildIndex([p(1, 1, 10, 300), p(2, 1, 10, 400), p(3, 1, 20, 500)], now, 90);
-    expect(idx.testAreas.get(testAreaKey(1, 10))).toEqual({ min: 300, max: 400, labs: 2 });
+    expect(idx.testAreas.get(testAreaKey(1, 10))).toMatchObject({ min: 300, max: 400, labs: 2 });
     expect(idx.testAreas.has(testAreaKey(1, 20))).toBe(false);
   });
 

@@ -17,3 +17,6 @@ export function reportTime(hours: number | null): string | null {
   if (hours >= 24 && hours % 24 === 0) return `${bnDigits(hours / 24)} দিন`;
   return `${bnDigits(hours)} ঘণ্টা`;
 }
+
+/** "৳৩০০ – ৳৬৫০", or a single price when min = max. */
+export const priceRangeText = (min: number, max: number) => (min === max ? taka(min) : `${taka(min)} – ${taka(max)}`);

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { bn } from "@/i18n/bn";
-import { bnDigits } from "@/lib/format";
+import { bnDigits, priceRangeText } from "@/lib/format";
+import { pageMetadata } from "@/lib/seo";
 import { db } from "@/lib/db";
 import { getAreaBySlug, getCatalogIndex, getTestsByIds, testDisplayName } from "@/lib/catalog";
 import { testAreaKey } from "@/lib/pricing";
@@ -23,10 +24,13 @@ async function load(slug: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await load((await params).slug);
   if (!data) return {};
-  return {
+  const ranges = [...data.index.testAreas].filter(([k]) => k.endsWith(`:${data.area.id}`)).map(([, r]) => r);
+  const range = priceRangeText(Math.min(...ranges.map((r) => r.min)), Math.max(...ranges.map((r) => r.max)));
+  return pageMetadata({
     title: `${bn.areaTitle(data.area.nameBn)} | ${bn.siteName}`,
-    description: `${data.area.nameBn} (${data.area.nameEn}) এলাকার ${bnDigits(data.index.areas.get(data.area.id)!)}টি ল্যাবে টেস্টের যাচাই করা দাম তুলনা করুন।`,
-  };
+    description: `${data.area.nameBn} (${data.area.nameEn}) এলাকার ${bnDigits(data.index.areas.get(data.area.id)!)}টি ল্যাবে ${bnDigits(ranges.length)}টি টেস্টের যাচাই করা দাম (${range}) তুলনা করুন।`,
+    path: `/area/${data.area.slug}`,
+  });
 }
 
 export default async function AreaPage({ params }: Props) {
@@ -43,7 +47,7 @@ export default async function AreaPage({ params }: Props) {
 
   return (
     <>
-      <Breadcrumbs items={[{ name: bn.home, href: "/" }, { name: area.nameBn }]} />
+      <Breadcrumbs path={`/area/${area.slug}`} items={[{ name: bn.home, href: "/" }, { name: area.nameBn }]} />
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{bn.areaTitle(area.nameBn)}</h1>
       <p className="text-muted" lang="en">{area.nameEn}</p>
       <p className="mt-3 rounded-lg border-l-4 border-amber-500 bg-warn-soft px-3 py-2 text-sm">{bn.disclaimer}</p>

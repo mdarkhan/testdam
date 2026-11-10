@@ -5,13 +5,11 @@ import { bnDigits, taka } from "@/lib/format";
 import { db } from "@/lib/db";
 import { getCatalogIndex, getTestsByIds, testDisplayName } from "@/lib/catalog";
 import { SearchBox } from "@/components/public/search-box";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 86400; // plus on-demand revalidation on every admin price change
 
-export const metadata: Metadata = {
-  title: `${bn.siteName} — ${bn.tagline}`,
-  description: bn.homeIntro,
-};
+export const metadata: Metadata = pageMetadata({ title: `${bn.siteName} — ${bn.tagline}`, description: bn.homeIntro, path: "/" });
 
 export default async function Home() {
   const index = await getCatalogIndex();
