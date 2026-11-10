@@ -1,0 +1,3624 @@
+{
+ "batch": "web-2026-11",
+ "collectedOn": "2026-11-10",
+ "labs": [
+  {
+   "slug": "popular-diagnostic-dhanmondi",
+   "name": "Popular Diagnostic Centre",
+   "nameBn": "পপুলার ডায়াগনস্টিক সেন্টার",
+   "branchName": "Dhanmondi",
+   "area": "dhanmondi",
+   "address": "House 16, Road 2, Dhanmondi, Dhaka-1205",
+   "phone": "09666787801",
+   "sourceUrl": "https://old.populardiagnostic.com/our-price-list/1/0"
+  },
+  {
+   "slug": "popular-diagnostic-english-road",
+   "name": "Popular Diagnostic Centre",
+   "nameBn": "পপুলার ডায়াগনস্টিক সেন্টার",
+   "branchName": "English Road",
+   "area": "puran-dhaka",
+   "address": "House 2, English Road, Dhaka",
+   "phone": "09666787802",
+   "sourceUrl": "https://old.populardiagnostic.com/our-price-list/2/0"
+  },
+  {
+   "slug": "popular-diagnostic-shantinagar",
+   "name": "Popular Diagnostic Centre",
+   "nameBn": "পপুলার ডায়াগনস্টিক সেন্টার",
+   "branchName": "Shantinagar",
+   "area": "shantinagar",
+   "address": "House 11, Shantinagar, Motijheel, Dhaka",
+   "phone": "09666787803",
+   "sourceUrl": "https://old.populardiagnostic.com/our-price-list/3/0"
+  },
+  {
+   "slug": "popular-diagnostic-uttara-sector-4",
+   "name": "Popular Diagnostic Centre",
+   "nameBn": "পপুলার ডায়াগনস্টিক সেন্টার",
+   "branchName": "Uttara Sector 4",
+   "area": "uttara",
+   "address": "House 23, Road 7, Sector 4, Jashim Uddin More, Uttara, Dhaka-1230",
+   "phone": "09666787805",
+   "sourceUrl": "https://old.populardiagnostic.com/our-price-list/7/0"
+  },
+  {
+   "slug": "popular-diagnostic-shyamoli",
+   "name": "Popular Diagnostic Centre",
+   "nameBn": "পপুলার ডায়াগনস্টিক সেন্টার",
+   "branchName": "Shyamoli",
+   "area": "shyamoli",
+   "address": "22/7 A S M Nuruzzaman Road, Block-B, Babor Road, Mohammadpur, Dhaka-1207",
+   "phone": "09666787806",
+   "sourceUrl": "https://old.populardiagnostic.com/our-price-list/9/0"
+  },
+  {
+   "slug": "popular-diagnostic-mirpur",
+   "name": "Popular Diagnostic Centre",
+   "nameBn": "পপুলার ডায়াগনস্টিক সেন্টার",
+   "branchName": "Mirpur",
+   "area": "mirpur",
+   "address": "House 67, Avenue 5, Block C, Section 6, Mirpur (Original-10), Pallabi, Dhaka",
+   "phone": "09666787807",
+   "sourceUrl": "https://old.populardiagnostic.com/our-price-list/10/0"
+  },
+  {
+   "slug": "popular-diagnostic-badda",
+   "name": "Popular Diagnostic Centre",
+   "nameBn": "পপুলার ডায়াগনস্টিক সেন্টার",
+   "branchName": "Badda",
+   "area": "badda",
+   "address": "Cha-90/2, North Badda (Pragoti Sharoni), Dhaka-1212",
+   "phone": "09666787809",
+   "sourceUrl": "https://old.populardiagnostic.com/our-price-list/18/0"
+  },
+  {
+   "slug": "popular-diagnostic-uttara-sector-13",
+   "name": "Popular Diagnostic Centre",
+   "nameBn": "পপুলার ডায়াগনস্টিক সেন্টার",
+   "branchName": "Uttara Sector 13",
+   "area": "uttara",
+   "address": "House 41, Garib-E-Newaz Avenue, Sector 13, Uttara, Dhaka",
+   "phone": "09666787823",
+   "sourceUrl": "https://old.populardiagnostic.com/our-price-list/39/0"
+  },
+  {
+   "slug": "healthcare-diagnostics-center-shyamoli",
+   "name": "Healthcare Diagnostics Center",
+   "nameBn": "হেলথকেয়ার ডায়াগনস্টিক সেন্টার",
+   "branchName": "Shyamoli",
+   "area": "shyamoli",
+   "address": "Shyamoli, Dhaka-1207",
+   "phone": "10662",
+   "sourceUrl": "https://hdclbd.com/Home/SubDepartment/5"
+  },
+  {
+   "slug": "monowara-hospital-kamalapur",
+   "name": "Monowara Orthopedic and General Hospital",
+   "nameBn": null,
+   "branchName": "Kamalapur",
+   "area": "motijheel",
+   "address": "35/7, 1 Kamalapur Road, Dhaka-1203",
+   "phone": "09649143152",
+   "sourceUrl": "https://www.mogh.com.bd/available_tests"
+  }
+ ],
+ "prices": [
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC (NEW)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "cbc",
+   "price": 400,
+   "sourceName": "CBC (Govt Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "esr",
+   "price": 200,
+   "sourceName": "ESR"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Haemoglobin"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Haemoglobin"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Haemoglobin"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Haemoglobin"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Haemoglobin"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Haemoglobin"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Haemoglobin"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Haemoglobin"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Hemoglobin (HB%)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "hemoglobin",
+   "price": 200,
+   "sourceName": "Hb%"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "blood-grouping",
+   "price": 300,
+   "sourceName": "Blood Group & RH Factor"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "blood-grouping",
+   "price": 200,
+   "sourceName": "Blood Group & RH Factor"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "blood-grouping",
+   "price": 200,
+   "sourceName": "Blood Group & RH Factor"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "blood-grouping",
+   "price": 300,
+   "sourceName": "Blood Group & RH Factor"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "blood-grouping",
+   "price": 200,
+   "sourceName": "Blood Group & RH Factor"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "blood-grouping",
+   "price": 200,
+   "sourceName": "Blood Group & RH Factor"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "blood-grouping",
+   "price": 200,
+   "sourceName": "Blood Group & RH Factor"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "blood-grouping",
+   "price": 200,
+   "sourceName": "Blood Group & RH Factor"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "blood-grouping",
+   "price": 250,
+   "sourceName": "Blood Grouping and Rh Typing"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "blood-grouping",
+   "price": 200,
+   "sourceName": "Blood Group"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "pt-inr",
+   "price": 800,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "pt-inr",
+   "price": 800,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "pt-inr",
+   "price": 800,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "pt-inr",
+   "price": 800,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "pt-inr",
+   "price": 800,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "pt-inr",
+   "price": 800,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "pt-inr",
+   "price": 800,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "pt-inr",
+   "price": 800,
+   "sourceName": "Prothrombin Time (INR)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "pt-inr",
+   "price": 700,
+   "sourceName": "Prothrombin Time/PT (INR)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "pt-inr",
+   "price": 1000,
+   "sourceName": "Prothrombin Time"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Fasting Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Fasting Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Fasting Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Fasting Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Fasting Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Fasting Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Fasting Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Fasting Plasma glucose"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "fbs",
+   "price": 300,
+   "sourceName": "Fasting Blood Glucose"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "fbs",
+   "price": 200,
+   "sourceName": "Blood Sugar Fasting"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Random Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Random Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Random Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Random Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Random Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Random Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Random Plasma glucose"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Random Plasma glucose"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "rbs",
+   "price": 300,
+   "sourceName": "Random Blood Glucose"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "rbs",
+   "price": 200,
+   "sourceName": "Blood Sugar Random"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "hba1c",
+   "price": 1500,
+   "sourceName": "Hb A1c"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "hba1c",
+   "price": 1500,
+   "sourceName": "Hb A1c"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "hba1c",
+   "price": 1500,
+   "sourceName": "Hb A1c"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "hba1c",
+   "price": 1500,
+   "sourceName": "Hb A1c"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "hba1c",
+   "price": 1500,
+   "sourceName": "Hb A1c"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "hba1c",
+   "price": 1500,
+   "sourceName": "Hb A1c"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "hba1c",
+   "price": 1500,
+   "sourceName": "Hb A1c"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "hba1c",
+   "price": 1400,
+   "sourceName": "Hb A1c"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "hba1c",
+   "price": 1200,
+   "sourceName": "HbA1c"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "hba1c",
+   "price": 1200,
+   "sourceName": "HbA1c"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "lipid-profile",
+   "price": 1400,
+   "sourceName": "Lipid Profile (F)"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "lipid-profile",
+   "price": 1400,
+   "sourceName": "Lipid Profile (F)"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "lipid-profile",
+   "price": 1400,
+   "sourceName": "Lipid Profile (F)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "lipid-profile",
+   "price": 1400,
+   "sourceName": "Lipid Profile"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "lipid-profile",
+   "price": 1400,
+   "sourceName": "Lipid Profile"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "lipid-profile",
+   "price": 1400,
+   "sourceName": "Lipid Profile (F)"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "lipid-profile",
+   "price": 1400,
+   "sourceName": "Lipid Profile (F)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "lipid-profile",
+   "price": 1400,
+   "sourceName": "Lipid Profile"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "lipid-profile",
+   "price": 1200,
+   "sourceName": "Lipid Profile (Fasting)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "lipid-profile",
+   "price": 800,
+   "sourceName": "Lipid Profile"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "serum-creatinine",
+   "price": 400,
+   "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "serum-creatinine",
+   "price": 400,
+   "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "serum-creatinine",
+   "price": 400,
+   "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "serum-creatinine",
+   "price": 400,
+   "sourceName": "Serum Creatinine (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "serum-creatinine",
+   "price": 400,
+   "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "serum-creatinine",
+   "price": 400,
+   "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "serum-creatinine",
+   "price": 400,
+   "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "serum-creatinine",
+   "price": 400,
+   "sourceName": "Serum Creatinine (Govt. Rate)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "serum-creatinine",
+   "price": 500,
+   "sourceName": "Serum Creatinine"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "sgpt",
+   "price": 500,
+   "sourceName": "ALT (SGPT)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "sgpt",
+   "price": 700,
+   "sourceName": "SGPT (ALT)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "AST (SGOT)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "sgot",
+   "price": 500,
+   "sourceName": "SGOT (AST)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "Liver Function Test"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "Liver Function Test"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "Liver Function Test"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "Liver Function Test (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "Liver Function Test"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "Liver Function Test"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "Liver Function Test"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "Liver Function Test (Govt. Rate)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "liver-function-test",
+   "price": 1400,
+   "sourceName": "Liver Function Test (LFT)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "liver-function-test",
+   "price": 1000,
+   "sourceName": "LFT (Liver Function Test) (Govt Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "uric-acid",
+   "price": 500,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "uric-acid",
+   "price": 600,
+   "sourceName": "Serum Uric Acid"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "sourceName": "Serum Electrolytes (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "serum-electrolytes",
+   "price": 1000,
+   "sourceName": "Serum Electrolytes (Govt. Rate)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "serum-electrolytes",
+   "price": 1200,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "serum-electrolytes",
+   "price": 850,
+   "sourceName": "Serum Electrolytes"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "Ferritin"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "Ferritin"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "Ferritin"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "Ferritin (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "ferritin",
+   "price": 1400,
+   "sourceName": "Ferritin"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "Ferritin"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "Ferritin"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "Ferritin (Govt. Rate)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "Ferritin"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "ferritin",
+   "price": 1200,
+   "sourceName": "S. Ferritin (Govt Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "C-Reactive Protein"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "C-Reactive Protein"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "C-Reactive Protein"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "C-Reactive Protein (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "C-Reactive Protein"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "C-Reactive Protein"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "C-Reactive Protein"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "C-Reactive Protein (Govt. Rate)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "crp",
+   "price": 1000,
+   "sourceName": "C-Reactive Protein (CRP)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "crp",
+   "price": 600,
+   "sourceName": "CRP (Govt Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "tsh",
+   "price": 1000,
+   "sourceName": "hTSH"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "tsh",
+   "price": 800,
+   "sourceName": "hTSH"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "tsh",
+   "price": 800,
+   "sourceName": "hTSH"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "tsh",
+   "price": 1000,
+   "sourceName": "hTSH"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "tsh",
+   "price": 800,
+   "sourceName": "hTSH"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "tsh",
+   "price": 800,
+   "sourceName": "hTSH"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "tsh",
+   "price": 800,
+   "sourceName": "hTSH"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "tsh",
+   "price": 900,
+   "sourceName": "hTSH"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "tsh",
+   "price": 1000,
+   "sourceName": "TSH"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "tsh",
+   "price": 800,
+   "sourceName": "TSH"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "ft4",
+   "price": 1500,
+   "sourceName": "Free T4"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "ft4",
+   "price": 1500,
+   "sourceName": "Free T4"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "ft4",
+   "price": 1500,
+   "sourceName": "Free T4"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "ft4",
+   "price": 1500,
+   "sourceName": "Free T4"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "ft4",
+   "price": 1500,
+   "sourceName": "Free T4"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "ft4",
+   "price": 1500,
+   "sourceName": "Free T4"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "ft4",
+   "price": 1500,
+   "sourceName": "Free T4"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "ft4",
+   "price": 1400,
+   "sourceName": "Free T4"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "ft4",
+   "price": 1200,
+   "sourceName": "FT4"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "ft4",
+   "price": 1200,
+   "sourceName": "FT4 (Free T4)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "prolactin",
+   "price": 1500,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "prolactin",
+   "price": 1500,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "prolactin",
+   "price": 1500,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "prolactin",
+   "price": 1500,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "prolactin",
+   "price": 1500,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "prolactin",
+   "price": 1500,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "prolactin",
+   "price": 1500,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "prolactin",
+   "price": 1400,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "prolactin",
+   "price": 1200,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "prolactin",
+   "price": 1200,
+   "sourceName": "Prolactin"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "beta-hcg",
+   "price": 1500,
+   "sourceName": "B - hCG"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "beta-hcg",
+   "price": 1500,
+   "sourceName": "B - hCG"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "beta-hcg",
+   "price": 1500,
+   "sourceName": "B - hCG"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "beta-hcg",
+   "price": 1500,
+   "sourceName": "B - hCG"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "beta-hcg",
+   "price": 1500,
+   "sourceName": "B - hCG"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "beta-hcg",
+   "price": 1500,
+   "sourceName": "B - hCG"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "beta-hcg",
+   "price": 1500,
+   "sourceName": "B - hCG"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "beta-hcg",
+   "price": 1400,
+   "sourceName": "B - hCG"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "beta-hcg",
+   "price": 1200,
+   "sourceName": "Beta HCG"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "vitamin-d",
+   "price": 4000,
+   "sourceName": "Vitamin D ( 25 - OH )"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "vitamin-d",
+   "price": 4000,
+   "sourceName": "Vitamin D ( 25 - OH )"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "vitamin-d",
+   "price": 4000,
+   "sourceName": "Vitamin D ( 25 - OH )"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "vitamin-d",
+   "price": 4000,
+   "sourceName": "Vitamin D ( 25 - OH )"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "vitamin-d",
+   "price": 4000,
+   "sourceName": "Vitamin D ( 25 - OH )"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "vitamin-d",
+   "price": 4000,
+   "sourceName": "Vitamin D ( 25 - OH )"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "vitamin-d",
+   "price": 4000,
+   "sourceName": "Vitamin D ( 25 - OH )"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "vitamin-d",
+   "price": 4000,
+   "sourceName": "Vitamin D ( 25 - OH )"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "vitamin-d",
+   "price": 3000,
+   "sourceName": "25-OH Vitamin D/Vit-D3"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "psa",
+   "price": 1500,
+   "sourceName": "Total PSA"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "psa",
+   "price": 1500,
+   "sourceName": "Total PSA"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "psa",
+   "price": 1500,
+   "sourceName": "Total PSA"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "psa",
+   "price": 1500,
+   "sourceName": "PSA"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "psa",
+   "price": 1400,
+   "sourceName": "PSA"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "psa",
+   "price": 1500,
+   "sourceName": "Total PSA"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "psa",
+   "price": 1500,
+   "sourceName": "Total PSA"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "psa",
+   "price": 1400,
+   "sourceName": "PSA"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "psa",
+   "price": 1200,
+   "sourceName": "Total PSA"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "hbsag",
+   "price": 500,
+   "sourceName": "ICT for HBsAg"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "hbsag",
+   "price": 500,
+   "sourceName": "ICT for HBsAg"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "hbsag",
+   "price": 500,
+   "sourceName": "ICT for HBsAg"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "hbsag",
+   "price": 500,
+   "sourceName": "ICT for HBsAg"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "hbsag",
+   "price": 500,
+   "sourceName": "ICT for HBsAg"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "hbsag",
+   "price": 500,
+   "sourceName": "ICT for HBsAg"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "hbsag",
+   "price": 500,
+   "sourceName": "ICT for HBsAg"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "hbsag",
+   "price": 500,
+   "sourceName": "ICT for HBsAg"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "hbsag",
+   "price": 600,
+   "sourceName": "HBsAg (SCREENING)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "hbsag",
+   "price": 600,
+   "sourceName": "HbsAg (Latex)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1 Ag (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1 Ag (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1 Ag (Govt. Rate)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1 Ag"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "dengue-ns1",
+   "price": 300,
+   "sourceName": "Dengue NS1 (Antigen) (Govt Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "ICT for Dengue Antibodies: (IgG & IgM)"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "ICT for Dengue Antibodies: (IgG & IgM)"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "ICT for Dengue Antibodies: (IgG & IgM)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "ICT for Dengue Antibodies: (IgG & IgM) (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "ICT for Dengue Antibodies: (IgG & IgM) (Govt. Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "ICT for Dengue Antibodies: (IgG & IgM)"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "ICT for Dengue Antibodies: (IgG & IgM)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "ICT for Dengue Antibodies: (IgG & IgM) (Govt. Rate)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "Dengue Antibody IgM IgG"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "dengue-igg-igm",
+   "price": 300,
+   "sourceName": "Dengue (IgG+IgM) Antibody (Govt Rate)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "widal",
+   "price": 500,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "widal",
+   "price": 600,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "widal",
+   "price": 600,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "widal",
+   "price": 600,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "widal",
+   "price": 600,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "widal",
+   "price": 600,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "widal",
+   "price": 600,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "widal",
+   "price": 600,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "widal",
+   "price": 800,
+   "sourceName": "Widal test"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "widal",
+   "price": 500,
+   "sourceName": "Widal Test"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine Routine Examination"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "urine-re",
+   "price": 400,
+   "sourceName": "Urine R/M/E"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "urine-re",
+   "price": 300,
+   "sourceName": "Urine R/M/E"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "urine-culture",
+   "price": 1500,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "urine-culture",
+   "price": 1500,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "urine-culture",
+   "price": 1500,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "urine-culture",
+   "price": 1500,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "urine-culture",
+   "price": 1500,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "urine-culture",
+   "price": 1200,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "urine-culture",
+   "price": 1200,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "urine-culture",
+   "price": 1200,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "urine-culture",
+   "price": 1200,
+   "sourceName": "Urine for C/S"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "urine-culture",
+   "price": 600,
+   "sourceName": "Urine C/S"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool Routine Examination"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool Routine Examination"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "stool-re",
+   "price": 400,
+   "sourceName": "STOOL R/M/E"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "stool-re",
+   "price": 300,
+   "sourceName": "Stool R/E"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "ecg",
+   "price": 400,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "ecg",
+   "price": 400,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "ecg",
+   "price": 400,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "ecg",
+   "price": 400,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "ecg",
+   "price": 400,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "ecg",
+   "price": 400,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "ecg",
+   "price": 400,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "ecg",
+   "price": 400,
+   "sourceName": "ECG"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "echocardiogram",
+   "price": 3000,
+   "sourceName": "Echo Colour Doppler"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "echocardiogram",
+   "price": 3000,
+   "sourceName": "Echo Colour Doppler"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "echocardiogram",
+   "price": 3000,
+   "sourceName": "Echo Colour Doppler"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "echocardiogram",
+   "price": 3000,
+   "sourceName": "Echo Colour Doppler"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "echocardiogram",
+   "price": 3000,
+   "sourceName": "Echo Colour Doppler"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "echocardiogram",
+   "price": 3000,
+   "sourceName": "Echo Colour Doppler"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "echocardiogram",
+   "price": 3000,
+   "sourceName": "Echo Colour Doppler"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "echocardiogram",
+   "price": 3000,
+   "sourceName": "Echo Colour Doppler"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "ett",
+   "price": 3000,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "ett",
+   "price": 2800,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "ett",
+   "price": 2800,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "ett",
+   "price": 2800,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "ett",
+   "price": 3000,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "ett",
+   "price": 2800,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "ett",
+   "price": 2800,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "ett",
+   "price": 2800,
+   "sourceName": "ETT"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Digital X-Ray of Chest P/A View (100% Equal Size)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "chest-xray",
+   "price": 600,
+   "sourceName": "Chest P/A View"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "usg-whole-abdomen",
+   "price": 2500,
+   "sourceName": "Ultrasonogram of Whole Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "usg-whole-abdomen",
+   "price": 2000,
+   "sourceName": "Ultrasonogram of Whole Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "usg-whole-abdomen",
+   "price": 2000,
+   "sourceName": "Ultrasonogram of Whole Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "usg-whole-abdomen",
+   "price": 2000,
+   "sourceName": "Ultrasonogram of Whole Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "usg-whole-abdomen",
+   "price": 2000,
+   "sourceName": "Ultrasonogram of Whole Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "usg-whole-abdomen",
+   "price": 2000,
+   "sourceName": "Ultrasonogram of Whole Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "usg-whole-abdomen",
+   "price": 2000,
+   "sourceName": "Ultrasonogram of Whole Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "usg-whole-abdomen",
+   "price": 1800,
+   "sourceName": "Ultrasonogram of Whole Abdomen"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "usg-whole-abdomen",
+   "price": 1800,
+   "sourceName": "Whole Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "usg-pregnancy",
+   "price": 2000,
+   "sourceName": "Ultrasonogram of Pregnancy Profile"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "usg-pregnancy",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Pregnancy Profile"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "usg-pregnancy",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Pregnancy Profile"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "usg-pregnancy",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Pregnancy Profile"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "usg-pregnancy",
+   "price": 1500,
+   "sourceName": "Ultrasonogram of Pregnancy Profile"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "usg-pregnancy",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Pregnancy Profile"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "usg-pregnancy",
+   "price": 1800,
+   "sourceName": "Ultrasonogram of Pregnancy Profile"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "usg-pregnancy",
+   "price": 1500,
+   "sourceName": "Ultrasonogram of Pregnancy Profile"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "ct-scan-brain",
+   "price": 5000,
+   "sourceName": "Spiral CT Scan of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "sourceName": "Spiral CT Scan of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "sourceName": "Spiral CT Scan of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "sourceName": "Spiral CT Scan of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "sourceName": "Spiral CT Scan of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "sourceName": "Spiral CT Scan of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "sourceName": "Spiral CT Scan of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "ct-scan-brain",
+   "price": 4000,
+   "sourceName": "Spiral CT Scan of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "mri-brain",
+   "price": 8000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "mri-brain",
+   "price": 7000,
+   "sourceName": "MRI of Brain"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "serum-bilirubin",
+   "price": 400,
+   "sourceName": "Bilirubin (Total)"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "serum-bilirubin",
+   "price": 300,
+   "sourceName": "Bilirubin (Total)"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "serum-bilirubin",
+   "price": 300,
+   "sourceName": "Bilirubin (Total)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "serum-bilirubin",
+   "price": 300,
+   "sourceName": "Bilirubin (Total)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "serum-bilirubin",
+   "price": 300,
+   "sourceName": "Bilirubin (Total)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "serum-bilirubin",
+   "price": 300,
+   "sourceName": "Bilirubin (Total)"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "serum-bilirubin",
+   "price": 300,
+   "sourceName": "Bilirubin (Total)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "serum-bilirubin",
+   "price": 300,
+   "sourceName": "Bilirubin (Total)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "serum-bilirubin",
+   "price": 300,
+   "sourceName": "Serum Total Bilirubin"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "serum-bilirubin",
+   "price": 500,
+   "sourceName": "Serum Bilirubin (Total)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Serum Urea"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "blood-urea",
+   "price": 500,
+   "sourceName": "Urea"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "t3",
+   "price": 1000,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "t3",
+   "price": 800,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "t3",
+   "price": 800,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "t3",
+   "price": 1000,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "t3",
+   "price": 800,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "t3",
+   "price": 800,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "t3",
+   "price": 800,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "t3",
+   "price": 900,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "t3",
+   "price": 1000,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "t3",
+   "price": 800,
+   "sourceName": "T3"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "t4",
+   "price": 1000,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "t4",
+   "price": 800,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "t4",
+   "price": 800,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "t4",
+   "price": 1000,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "t4",
+   "price": 800,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "t4",
+   "price": 800,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "t4",
+   "price": 800,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "t4",
+   "price": 900,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "t4",
+   "price": 1000,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "t4",
+   "price": 800,
+   "sourceName": "T4"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "ft3",
+   "price": 1500,
+   "sourceName": "Free T3"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "ft3",
+   "price": 1500,
+   "sourceName": "Free T3"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "ft3",
+   "price": 1500,
+   "sourceName": "Free T3"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "ft3",
+   "price": 1500,
+   "sourceName": "Free T3"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "ft3",
+   "price": 1500,
+   "sourceName": "Free T3"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "ft3",
+   "price": 1500,
+   "sourceName": "Free T3"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "ft3",
+   "price": 1500,
+   "sourceName": "Free T3"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "ft3",
+   "price": 1400,
+   "sourceName": "Free T3"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "ft3",
+   "price": 1200,
+   "sourceName": "FT3"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "ft3",
+   "price": 1200,
+   "sourceName": "FT3 (Free T3)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "fsh",
+   "price": 1500,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "fsh",
+   "price": 1500,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "fsh",
+   "price": 1500,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "fsh",
+   "price": 1500,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "fsh",
+   "price": 1500,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "fsh",
+   "price": 1500,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "fsh",
+   "price": 1500,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "fsh",
+   "price": 1400,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "fsh",
+   "price": 1200,
+   "sourceName": "FSH"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "lh",
+   "price": 1500,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "lh",
+   "price": 1500,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "lh",
+   "price": 1500,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "lh",
+   "price": 1500,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "lh",
+   "price": 1500,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "lh",
+   "price": 1500,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "lh",
+   "price": 1500,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "lh",
+   "price": 1400,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "lh",
+   "price": 1200,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "lh",
+   "price": 1200,
+   "sourceName": "LH"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "testosterone",
+   "price": 1500,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "testosterone",
+   "price": 1500,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "testosterone",
+   "price": 1500,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "testosterone",
+   "price": 1500,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "testosterone",
+   "price": 1500,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "testosterone",
+   "price": 1500,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "testosterone",
+   "price": 1500,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "testosterone",
+   "price": 1400,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "testosterone",
+   "price": 1200,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "testosterone",
+   "price": 1000,
+   "sourceName": "Testosterone"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "anti-hcv",
+   "price": 1500,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "anti-hcv",
+   "price": 1500,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "anti-hcv",
+   "price": 1500,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "anti-hcv",
+   "price": 1500,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "anti-hcv",
+   "price": 1500,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "anti-hcv",
+   "price": 1500,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "anti-hcv",
+   "price": 1500,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "anti-hcv",
+   "price": 1400,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "anti-hcv",
+   "price": 1200,
+   "sourceName": "Anti HCV"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "hiv",
+   "price": 1500,
+   "sourceName": "HIV - 1&2"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "hiv",
+   "price": 1500,
+   "sourceName": "HIV - 1&2"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "hiv",
+   "price": 1500,
+   "sourceName": "HIV - 1&2"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "hiv",
+   "price": 1500,
+   "sourceName": "HIV - 1&2"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "hiv",
+   "price": 1500,
+   "sourceName": "HIV - 1&2"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "hiv",
+   "price": 1500,
+   "sourceName": "HIV - 1&2"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "hiv",
+   "price": 1500,
+   "sourceName": "HIV - 1&2"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "hiv",
+   "price": 1400,
+   "sourceName": "HIV - 1&2"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "hiv",
+   "price": 1000,
+   "sourceName": "HIV Ab 1/2 (ICT)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "aso-titre",
+   "price": 800,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "aso-titre",
+   "price": 600,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "aso-titre",
+   "price": 600,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "aso-titre",
+   "price": 600,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "aso-titre",
+   "price": 600,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "aso-titre",
+   "price": 600,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "aso-titre",
+   "price": 600,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "aso-titre",
+   "price": 800,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "aso-titre",
+   "price": 800,
+   "sourceName": "ASO Titre"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "aso-titre",
+   "price": 600,
+   "sourceName": "ASO Titea"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "troponin-i",
+   "price": 1400,
+   "sourceName": "Cardiac Troponin I (ES)"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "troponin-i",
+   "price": 1400,
+   "sourceName": "Cardiac Troponin I (ES)"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "troponin-i",
+   "price": 1400,
+   "sourceName": "Cardiac Troponin I (ES)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "troponin-i",
+   "price": 1400,
+   "sourceName": "Cardiac Troponin I (ES)"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "troponin-i",
+   "price": 1500,
+   "sourceName": "Cardiac Troponin I (ES)"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "troponin-i",
+   "price": 1400,
+   "sourceName": "Cardiac Troponin I (ES)"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "troponin-i",
+   "price": 1400,
+   "sourceName": "Cardiac Troponin I (ES)"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "troponin-i",
+   "price": 1200,
+   "sourceName": "Cardiac Troponin I (ES)"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "troponin-i",
+   "price": 1200,
+   "sourceName": "Troponin-I"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "malaria-parasite",
+   "price": 300,
+   "sourceName": "Malarial Parasite"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "malaria-parasite",
+   "price": 300,
+   "sourceName": "Malarial Parasite"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "malaria-parasite",
+   "price": 300,
+   "sourceName": "Malarial Parasite"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "malaria-parasite",
+   "price": 300,
+   "sourceName": "Malarial Parasite"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "malaria-parasite",
+   "price": 300,
+   "sourceName": "Malarial Parasite"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "malaria-parasite",
+   "price": 300,
+   "sourceName": "Malarial Parasite"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "malaria-parasite",
+   "price": 300,
+   "sourceName": "Malarial Parasite"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "malaria-parasite",
+   "price": 300,
+   "sourceName": "Malarial Parasite"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "malaria-parasite",
+   "price": 200,
+   "sourceName": "Malaria Parasite ( MP )"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "malaria-parasite",
+   "price": 200,
+   "sourceName": "Malaria Parasitic (MP)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "total-ige",
+   "price": 1500,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "total-ige",
+   "price": 1500,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "total-ige",
+   "price": 1500,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "total-ige",
+   "price": 1500,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "total-ige",
+   "price": 1500,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "total-ige",
+   "price": 1500,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "total-ige",
+   "price": 1500,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "total-ige",
+   "price": 1400,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "total-ige",
+   "price": 1200,
+   "sourceName": "Total IgE"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "semen-analysis",
+   "price": 1500,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "semen-analysis",
+   "price": 1000,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "semen-analysis",
+   "price": 1000,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "semen-analysis",
+   "price": 1500,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "semen-analysis",
+   "price": 1500,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "semen-analysis",
+   "price": 1500,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "semen-analysis",
+   "price": 1000,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "semen-analysis",
+   "price": 1000,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "semen-analysis",
+   "price": 1100,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "semen-analysis",
+   "price": 1200,
+   "sourceName": "Semen Analysis"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "ca-125",
+   "price": 1500,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "ca-125",
+   "price": 1500,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "ca-125",
+   "price": 1500,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "ca-125",
+   "price": 1500,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "ca-125",
+   "price": 1500,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "ca-125",
+   "price": 1500,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "ca-125",
+   "price": 1500,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "ca-125",
+   "price": 1400,
+   "sourceName": "CA 125"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "ca-125",
+   "price": 1200,
+   "sourceName": "CA-125"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "cea",
+   "price": 1500,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "cea",
+   "price": 1500,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "cea",
+   "price": 1500,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "cea",
+   "price": 1500,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "cea",
+   "price": 1500,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "cea",
+   "price": 1500,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "cea",
+   "price": 1500,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "cea",
+   "price": 1400,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "cea",
+   "price": 1300,
+   "sourceName": "CEA"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "afp",
+   "price": 1500,
+   "sourceName": "Alpha Feto Protein"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "afp",
+   "price": 1500,
+   "sourceName": "Alpha Feto Protein"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "afp",
+   "price": 1500,
+   "sourceName": "Alpha Feto Protein"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "afp",
+   "price": 1800,
+   "sourceName": "Alpha Feto Protein"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "afp",
+   "price": 1500,
+   "sourceName": "Alpha Feto Protein"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "afp",
+   "price": 1500,
+   "sourceName": "Alpha Feto Protein"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "afp",
+   "price": 1500,
+   "sourceName": "Alpha Feto Protein"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "afp",
+   "price": 1400,
+   "sourceName": "Alpha Feto Protein"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "afp",
+   "price": 1300,
+   "sourceName": "AFP (Alpha Feto Protein)"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "serum-calcium",
+   "price": 600,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "serum-calcium",
+   "price": 600,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "serum-calcium",
+   "price": 600,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "serum-calcium",
+   "price": 600,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "serum-calcium",
+   "price": 600,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "serum-calcium",
+   "price": 600,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "serum-calcium",
+   "price": 600,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "serum-calcium",
+   "price": 600,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "serum-calcium",
+   "price": 500,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "serum-calcium",
+   "price": 700,
+   "sourceName": "Serum Calcium"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "serum-albumin",
+   "price": 600,
+   "sourceName": "Serum Albumin"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "urine-pregnancy-test",
+   "price": 400,
+   "sourceName": "Urine for Pregnancy Test"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "urine-pregnancy-test",
+   "price": 300,
+   "sourceName": "Urine Pregnancy Test"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Plasma glucose 2 hrs ABF"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Plasma glucose 2 hrs ABF"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Plasma glucose 2 hrs ABF"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Plasma glucose 2 hrs ABF"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Plasma glucose 2 hrs ABF"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Plasma glucose 2 hrs ABF"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Plasma glucose 2 hrs ABF"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Plasma glucose 2 hrs ABF"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "blood-sugar-2h-abf",
+   "price": 300,
+   "sourceName": "Glucose 2 hours ABF"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "blood-sugar-2h-abf",
+   "price": 200,
+   "sourceName": "Blood Sugar 2 Hour ABF"
+  },
+  {
+   "lab": "popular-diagnostic-dhanmondi",
+   "test": "usg-lower-abdomen",
+   "price": 2000,
+   "sourceName": "Ultrasonogram of Lower Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-english-road",
+   "test": "usg-lower-abdomen",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Lower Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-shantinagar",
+   "test": "usg-lower-abdomen",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Lower Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-4",
+   "test": "usg-lower-abdomen",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Lower Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-shyamoli",
+   "test": "usg-lower-abdomen",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Lower Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-mirpur",
+   "test": "usg-lower-abdomen",
+   "price": 1600,
+   "sourceName": "Ultrasonogram of Lower Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-badda",
+   "test": "usg-lower-abdomen",
+   "price": 1800,
+   "sourceName": "Ultrasonogram of Lower Abdomen"
+  },
+  {
+   "lab": "popular-diagnostic-uttara-sector-13",
+   "test": "usg-lower-abdomen",
+   "price": 1500,
+   "sourceName": "Ultrasonogram of Lower Abdomen"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "usg-lower-abdomen",
+   "price": 1500,
+   "sourceName": "Lower Abdomen"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "kidney-function-test",
+   "price": 4210,
+   "sourceName": "RFT/KFT"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "thyroid-profile",
+   "price": 3000,
+   "sourceName": "T3, T4, TSH"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "thyroid-profile",
+   "price": 2400,
+   "sourceName": "T3, T4, TSH"
+  },
+  {
+   "lab": "healthcare-diagnostics-center-shyamoli",
+   "test": "platelet-count",
+   "price": 300,
+   "sourceName": "PC (Platelet Count)"
+  },
+  {
+   "lab": "monowara-hospital-kamalapur",
+   "test": "platelet-count",
+   "price": 300,
+   "sourceName": "Platelet Count (PC)"
+  }
+ ]
+}

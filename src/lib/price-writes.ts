@@ -18,7 +18,8 @@ export async function upsertPrices(writes: PriceWrite[], userId: string) {
   await db.$transaction(async (tx) => {
     for (const w of writes) {
       const before = byKey.get(`${w.labId}:${w.testId}`);
-      const data = { ...w.data, verifiedById: userId };
+      // A hand save means a person confirmed this price: it is no longer bulk-imported web data.
+      const data = { ...w.data, verifiedById: userId, importBatch: null };
       if (!before) {
         await tx.labTestPrice.create({ data: { labId: w.labId, testId: w.testId, ...data } });
         created++;
@@ -61,7 +62,7 @@ export async function verifyPrices(labId: number, testIds: number[], userId: str
   if (!testIds.length) return 0;
   const r = await db.labTestPrice.updateMany({
     where: { labId, testId: { in: testIds } },
-    data: { verifiedAt: new Date(), verifiedById: userId, ...(source && { source }) },
+    data: { verifiedAt: new Date(), verifiedById: userId, importBatch: null, ...(source && { source }) },
   });
   await revalidatePrices(labId, testIds);
   return r.count;

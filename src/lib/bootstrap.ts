@@ -27,6 +27,7 @@ export const AREAS: Array<[slug: string, en: string, bn: string, aliases: string
   ["shyamoli", "Shyamoli", "শ্যামলী", []],
   ["wari", "Wari", "ওয়ারী", []],
   ["lalbagh", "Lalbagh", "লালবাগ", []],
+  ["puran-dhaka", "Puran Dhaka", "পুরান ঢাকা", ["old dhaka", "english road", "nawabpur", "ইংলিশ রোড"]],
 ];
 
 export const NEIGHBORS: Array<[string, string]> = [
@@ -36,6 +37,7 @@ export const NEIGHBORS: Array<[string, string]> = [
   ["bashundhara", "uttara"], ["rampura", "malibagh"], ["rampura", "khilgaon"], ["malibagh", "shantinagar"],
   ["malibagh", "khilgaon"], ["shantinagar", "motijheel"], ["motijheel", "wari"], ["wari", "jatrabari"],
   ["wari", "lalbagh"], ["khilgaon", "jatrabari"], ["farmgate", "shantinagar"],
+  ["puran-dhaka", "wari"], ["puran-dhaka", "lalbagh"], ["puran-dhaka", "motijheel"],
 ];
 
 export type TestSeed = { slug: string; en: string; bn: string; short?: string; cat: TestCategory; sample?: string; aliases: string[]; popular?: number };
@@ -83,6 +85,31 @@ export const TESTS: TestSeed[] = [
   { slug: "usg-pregnancy", en: "Ultrasonography Pregnancy Profile", bn: "আল্ট্রাসনোগ্রাম (প্রেগন্যান্সি)", cat: "IMAGING", aliases: ["pregnancy ultrasound", "usg pregnancy", "প্রেগন্যান্সি আলট্রাসনো"] },
   { slug: "ct-scan-brain", en: "CT Scan Brain", bn: "সিটি স্ক্যান (ব্রেইন)", cat: "IMAGING", aliases: ["ct brain", "ct scan head", "সিটি স্ক্যান"] },
   { slug: "mri-brain", en: "MRI Brain", bn: "এমআরআই (ব্রেইন)", cat: "IMAGING", aliases: ["mri brain", "mri head", "এমআরআই"] },
+  // Added 2026-11-10 with the web-collected prices (names and search aliases only).
+  { slug: "serum-bilirubin", en: "Serum Bilirubin (Total)", bn: "সিরাম বিলিরুবিন", cat: "BIOCHEMISTRY", sample: "Blood", aliases: ["bilirubin", "s bilirubin", "bilirubin total", "বিলিরুবিন", "জন্ডিস টেস্ট"] },
+  { slug: "blood-urea", en: "Blood Urea", bn: "ব্লাড ইউরিয়া", cat: "BIOCHEMISTRY", sample: "Blood", aliases: ["urea", "serum urea", "ইউরিয়া"] },
+  { slug: "t3", en: "Triiodothyronine (T3)", bn: "টি৩", short: "T3", cat: "HORMONE", sample: "Blood", aliases: ["t3", "total t3", "টি থ্রি"] },
+  { slug: "t4", en: "Thyroxine (T4)", bn: "টি৪", short: "T4", cat: "HORMONE", sample: "Blood", aliases: ["total t4", "thyroxine", "টি ফোর"] },
+  { slug: "ft3", en: "Free T3", bn: "ফ্রি টি৩", short: "FT3", cat: "HORMONE", sample: "Blood", aliases: ["ft3", "free t3"] },
+  { slug: "fsh", en: "Follicle Stimulating Hormone", bn: "এফএসএইচ", short: "FSH", cat: "HORMONE", sample: "Blood", aliases: ["fsh", "s fsh"] },
+  { slug: "lh", en: "Luteinizing Hormone", bn: "এলএইচ", short: "LH", cat: "HORMONE", sample: "Blood", aliases: ["lh", "s lh"] },
+  { slug: "testosterone", en: "Serum Testosterone", bn: "টেস্টোস্টেরন", cat: "HORMONE", sample: "Blood", aliases: ["testosterone", "total testosterone"] },
+  { slug: "anti-hcv", en: "Anti HCV", bn: "অ্যান্টি এইচসিভি", cat: "SEROLOGY", sample: "Blood", aliases: ["hcv", "anti hcv", "hepatitis c test", "হেপাটাইটিস সি টেস্ট"] },
+  { slug: "hiv", en: "HIV 1 & 2 Antibody", bn: "এইচআইভি টেস্ট", cat: "SEROLOGY", sample: "Blood", aliases: ["hiv", "hiv test", "hiv 1 2", "aids test"] },
+  { slug: "aso-titre", en: "ASO Titre", bn: "এএসও টাইটার", cat: "SEROLOGY", sample: "Blood", aliases: ["aso", "aso titer", "aso titre"] },
+  { slug: "troponin-i", en: "Troponin I", bn: "ট্রপোনিন আই", cat: "CARDIAC", sample: "Blood", aliases: ["troponin", "trop i", "troponin i", "ট্রপোনিন"] },
+  { slug: "malaria-parasite", en: "Malarial Parasite (MP)", bn: "ম্যালেরিয়া টেস্ট", short: "MP", cat: "BLOOD", sample: "Blood", aliases: ["mp", "malaria", "malaria test", "ম্যালেরিয়া"] },
+  { slug: "platelet-count", en: "Platelet Count", bn: "প্লাটিলেট কাউন্ট", cat: "BLOOD", sample: "Blood", aliases: ["platelet", "platelet count", "pc", "প্লাটিলেট"] },
+  { slug: "total-ige", en: "Total IgE", bn: "টোটাল আইজিই", cat: "SEROLOGY", sample: "Blood", aliases: ["ige", "serum ige", "total ige"] },
+  { slug: "semen-analysis", en: "Semen Analysis", bn: "সিমেন অ্যানালাইসিস", cat: "OTHER", sample: "Semen", aliases: ["semen", "semen test", "semen analysis"] },
+  { slug: "ca-125", en: "CA 125", bn: "সিএ ১২৫", short: "CA 125", cat: "OTHER", sample: "Blood", aliases: ["ca125", "ca 125"] },
+  { slug: "cea", en: "Carcinoembryonic Antigen", bn: "সিইএ", short: "CEA", cat: "OTHER", sample: "Blood", aliases: ["cea"] },
+  { slug: "afp", en: "Alpha Feto Protein", bn: "আলফা ফিটো প্রোটিন", short: "AFP", cat: "OTHER", sample: "Blood", aliases: ["afp", "alpha fetoprotein"] },
+  { slug: "serum-calcium", en: "Serum Calcium", bn: "সিরাম ক্যালসিয়াম", cat: "BIOCHEMISTRY", sample: "Blood", aliases: ["calcium", "s calcium", "ক্যালসিয়াম"] },
+  { slug: "serum-albumin", en: "Serum Albumin", bn: "সিরাম অ্যালবুমিন", cat: "BIOCHEMISTRY", sample: "Blood", aliases: ["albumin", "s albumin"] },
+  { slug: "urine-pregnancy-test", en: "Urine Pregnancy Test", bn: "প্রেগন্যান্সি টেস্ট (প্রস্রাব)", cat: "URINE", sample: "Urine", aliases: ["pregnancy test", "upt", "urine for pregnancy", "প্রেগন্যান্সি টেস্ট"] },
+  { slug: "blood-sugar-2h-abf", en: "Blood Sugar 2 Hours After Breakfast", bn: "নাস্তার ২ ঘণ্টা পর ব্লাড সুগার", short: "2HABF", cat: "BIOCHEMISTRY", sample: "Blood", aliases: ["2 hrs abf", "2habf", "sugar after breakfast", "খাওয়ার পরে সুগার"] },
+  { slug: "usg-lower-abdomen", en: "Ultrasonography Lower Abdomen", bn: "আল্ট্রাসনোগ্রাম (লোয়ার অ্যাবডোমেন)", cat: "IMAGING", aliases: ["usg lower abdomen", "lower abdomen ultrasound", "ultrasound lower abdomen"] },
 ];
 
 

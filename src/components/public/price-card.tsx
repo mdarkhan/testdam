@@ -46,10 +46,13 @@ export function PriceCard({ row, testName, labHref, showArea = true }: { row: Ro
 
       <ul className="mt-3 space-y-1 text-sm">
         {report && <li>{bn.report}: <strong>{report}</strong></li>}
-        <li>
-          {row.homeCollection ? bn.homeCollectionYes : bn.homeCollectionNo}
-          {row.homeCollection && fee != null && <> ({fee === 0 ? bn.homeCollectionFree : bn.homeCollectionFee(taka(fee))})</>}
-        </li>
+        {/* Web-imported prices carry no home-collection info: say nothing rather than "no". */}
+        {(row.homeCollection || !row.importBatch) && (
+          <li>
+            {row.homeCollection ? bn.homeCollectionYes : bn.homeCollectionNo}
+            {row.homeCollection && fee != null && <> ({fee === 0 ? bn.homeCollectionFree : bn.homeCollectionFee(taka(fee))})</>}
+          </li>
+        )}
         <li className={row.fresh ? "text-muted" : "font-semibold"}>
           {bn.verified(bnDate(row.verifiedAt))} · {bn.sources[row.source] ?? row.source}
         </li>

@@ -92,6 +92,7 @@ In GTM create Data Layer Variables for the parameters, a Custom Event trigger pe
 - **On-demand updates:** every save in the admin refreshes the affected public pages immediately.
 - **Fonts:** the Bangla font (Hind Siliguri) is downloaded from Google Fonts during the build, so the build needs internet access (normal on FlyNode).
 - **Medical text:** test descriptions and preparation notes show on the public site only after an ADMIN marks them "Reviewed".
+- **Web-collected prices** (admin → *Web prices*, ADMIN only): 586 prices for 64 tests at 10 Dhaka labs, read on 2026-11-10 from the labs' own websites (`src/lib/web-import/data.json`). *Import* adds them tagged with `importBatch`; *Remove imported data* (type REMOVE) deletes every price still tagged, its history and the imported labs. A price anyone saves or verifies by hand loses the tag and is never removed or overwritten; labs with such prices or with bookings are kept. Source is shown as "lab website" and the verified date is the reading date, so they go stale on their own.
 
 ## Project layout
 

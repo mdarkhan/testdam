@@ -164,6 +164,8 @@ Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run t
 
 Phase 0: see [docs/PLAN.md §9](docs/PLAN.md).
 
+**Web-collected prices (2026-11-10, owner asked):** the owner asked for real prices collected online, removable in one go before entering verified data. Sources are only labs' **own** websites with a public price list: Popular Diagnostic Centre (8 Dhaka branches; prices differ by branch), Healthcare Diagnostics Center (Shyamoli), Monowara Orthopedic & General Hospital (Kamalapur). Aggregator sites (medtestbd, hospitalbangla, arogga, sasthyaseba…) were not used: their figures conflict and it is their collected data. Ibn Sina, Labaid, Praava, Square, Evercare, United and others publish no per-test price list on their own sites. One price skipped as a likely typo on the source (Monowara creatinine ৳4,000 vs ৳400 elsewhere). 24 common tests and the area "Puran Dhaka" were added to the catalogue (names and search aliases only). Schema: nullable `importBatch` on Lab, LabTestPrice and PriceHistory (migration `web_import_batch`, additive). Imported prices hide the home-collection line on public cards (unknown, not "no"). The download/matching script stayed out of the repo (one-off, not a scraping feature).
+
 **Rename (2026-11-10, owner):** the product is **Test Mate**. The public site shows "Test Mate" (`bn.siteName`, used in every title, header and Open Graph tag); Bangla sentences spell it "টেস্ট মেট". Internal names left as `testdam` on purpose: the local dev database/user (renaming would orphan `.pgdata`), the GitHub repo and the FlyNode app (owner can rename those; the deploy keeps working either way). Changing the public domain later only needs `SITE_URL`.
 
 Phase 1 additions:

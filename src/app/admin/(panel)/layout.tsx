@@ -27,6 +27,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
             <Link href="/admin/bookings" className="rounded px-2 py-2 hover:bg-slate-100">
               Bookings{newBookings > 0 && <span className="ml-1 rounded-full bg-amber-500 px-1.5 text-xs font-semibold text-white" aria-label={`${newBookings} new`}>{newBookings}</span>}
             </Link>
+            {user.role === "ADMIN" && <Link href="/admin/web-data" className="rounded px-2 py-2 hover:bg-slate-100">Web prices</Link>}
             {user.role === "ADMIN" && <Link href="/admin/users" className="rounded px-2 py-2 hover:bg-slate-100">Users</Link>}
           </nav>
           <form action={signOut} className="ml-auto flex items-center gap-2 text-sm text-muted">

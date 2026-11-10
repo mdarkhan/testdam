@@ -143,6 +143,10 @@ model Lab {
   isFeatured Boolean @default(false) // badge only — NEVER affects sort order
   isActive   Boolean @default(true)  // inactive labs are hidden everywhere public
 
+  // Set when the lab came from a bulk web import (e.g. "web-2026-11"); "Remove imported data" deletes it
+  // only if no hand-entered price or booking is left on it.
+  importBatch String?
+
   prices    LabTestPrice[]
   bookings  BookingRequest[]
   createdAt DateTime @default(now())
@@ -172,6 +176,9 @@ model LabTestPrice {
   sourcePhotoUrl String?
 
   verifiedAt   DateTime // drives freshness (config FRESH_DAYS, default 90)
+  // Non-null = collected from a public website by a bulk import, not confirmed by us. Any hand save or
+  // "verify" clears it (the price becomes ours); "Remove imported data" deletes rows still tagged.
+  importBatch  String?
   verifiedById String?
   verifiedBy   User?    @relation("PriceVerifiedBy", fields: [verifiedById], references: [id], onDelete: SetNull)
 
@@ -179,6 +186,7 @@ model LabTestPrice {
   updatedAt DateTime @updatedAt
 
   @@unique([labId, testId])
+  @@index([importBatch])
   @@index([testId, verifiedAt])
   @@index([verifiedAt])
 }
@@ -197,6 +205,7 @@ model PriceHistory {
   changedAt         DateTime    @default(now())
   changedById       String?
   changedBy         User?       @relation(fields: [changedById], references: [id], onDelete: SetNull)
+  importBatch       String? // rows written by a bulk web import; removed together with that import
 
   @@index([labId, testId, changedAt])
 }
