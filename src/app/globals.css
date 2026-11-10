@@ -14,7 +14,7 @@
   --color-ink: #0f172a;
   --color-muted: #475569;
   --color-line: #e2e8f0;
-  --font-sans: var(--font-bangla), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-bn-digits), var(--font-bangla),ui-sans-serif, system-ui, sans-serif;
 }
 
 html { -webkit-text-size-adjust: 100%; }
