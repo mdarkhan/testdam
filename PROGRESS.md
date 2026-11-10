@@ -11,9 +11,11 @@ Read this first in a new session, then [docs/BRIEF.md](docs/BRIEF.md) (requireme
 | 2 — Public pages | Done (2026-11-10) | See "Phase 2 report" below |
 | 3 — Technical SEO | Done (2026-11-10) | See "Phase 3 report" below |
 | 4 — Booking and tracking | Done (2026-11-10) | See "Phase 4 report" below |
-| 5 — Ops and deploy | **Done, waiting for owner review** (2026-11-10) — not yet deployed | See "Phase 5 report" below |
+| 5 — Ops and deploy | **Done, deployed** (2026-11-10) — live on FlyNode, waiting for owner review | See "Phase 5 report" below |
 
-**Next step (needs the owner):** a GitHub repo URL + OK to push, then deploy on FlyNode following [README.md](README.md#deploy-to-flynode-docker). After deploy: Lighthouse and Google Rich Results Test against the live URL, GTM Preview with the real container.
+**Live:** https://dh4cqjc1w1ip6lyydphgqrkz.flynode.io (FlyNode app `testdam`, builds `main` of github.com/mdarkhan/testdam from the Dockerfile).
+
+**Next steps (owner):** sign in at `/admin/login`, then delete `SEED_ADMIN_PASSWORD` from the FlyNode variables. Enter real labs and prices (pages appear once the thin-content rule is met). Turn on FlyNode database backups. Set the production domain + `SITE_URL` when ready. Once pages exist: Lighthouse and Google Rich Results Test against the live URL, GTM Preview with the real container.
 
 ## How to run locally (Windows, no Docker needed)
 
@@ -44,10 +46,15 @@ Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run t
 - Lighthouse 13.6 mobile on the standalone build: `/` 100/100/100/100 (LCP 0.7 s, server 20 ms — now rendered per request), `/test/cbc` 100/100/100/100.
 - Clicked through: call list, filtered grid, price history (CBC 130 → 110 shows ▼ 20 with user and time).
 
+**Deployed (2026-11-10)**
+- Pushed to github.com/mdarkhan/testdam (`main`). FlyNode app `testdam` with a FlyNode PostgreSQL database wired as `DATABASE_URL`.
+- First build failed: FlyNode injects app variables (`NODE_ENV=production`) into build steps, so `npm ci` skipped devDependencies (`@tailwindcss/postcss`). Fixed with `npm ci --include=dev` (ff447c2).
+- Runtime log: migration applied (`pg_trgm` created), `[bootstrap] Loaded 20 areas and 41 tests.`, then after the owner set the variables via FlyNode's secure form: `Created ADMIN user`. Docker `HEALTHCHECK` passes.
+- Live smoke test: `/api/health` `{"ok":true}`; `/`, `/admin/login`, robots.txt, sitemap.xml 200; canonical, `og:url`, robots `Sitemap:` and sitemap `<loc>` all use the live URL; admin sends `X-Robots-Tag: noindex`; `/test/cbc` and `/area/mirpur` 404 as expected (no prices yet). No demo data in production.
+
 **Not done / not verified**
-- **The Docker image itself was not built** — Docker isn't installed on this machine. The steps it runs were each verified locally (above); the first real build will happen on FlyNode.
-- Not deployed: pushing to GitHub needs your repo URL and OK.
-- FlyNode database variable name: confirm it is (or is mapped to) `DATABASE_URL`.
+- Admin sign-in on the live site not tried by me (I don't have the password) — owner to confirm.
+- Lighthouse / Rich Results / GTM Preview on the live URL: wait until real prices make test pages exist.
 - Backups: not configured (FlyNode side) — README says what to do.
 
 ## Phase 4 report
