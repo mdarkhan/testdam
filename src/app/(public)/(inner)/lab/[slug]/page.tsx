@@ -9,6 +9,7 @@ import { db } from "@/lib/db";
 import { getCatalogIndex, testDisplayName } from "@/lib/catalog";
 import { effectivePrice, isFresh, testAreaKey } from "@/lib/pricing";
 import { Breadcrumbs } from "@/components/public/price-section";
+import { PartnerBadge, PartnerDiscount } from "@/components/public/partner-badge";
 import { PriceInteractions } from "@/components/public/price-interactions";
 
 export const revalidate = 86400;
@@ -76,6 +77,13 @@ export default async function LabPage({ params }: Props) {
       <Breadcrumbs path={`/lab/${lab.slug}`} items={[{ name: bn.home, href: "/" }, { name: lab.area.nameBn, href: index.areas.has(lab.areaId) ? `/area/${lab.area.slug}` : undefined }, { name }]} />
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{name}</h1>
       <p className="text-muted">{[lab.nameBn ? lab.name : null, lab.branchName].filter(Boolean).join(" · ")}</p>
+      {lab.isPartner && (
+        <div className="mt-2">
+          <p className="flex flex-wrap items-center gap-2 text-sm font-semibold"><PartnerBadge lab={lab} /></p>
+          <PartnerDiscount lab={lab} className="mt-1" />
+          <p className="mt-1 text-sm text-muted">{bn.partnerNote}</p>
+        </div>
+      )}
       {lastUpdated && <p className="mt-1 text-sm text-muted">{bn.lastUpdated(bnDate(lastUpdated))}</p>}
 
       <dl className="mt-4 grid gap-3 rounded-xl border border-line p-4 text-sm sm:grid-cols-2">

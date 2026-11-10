@@ -65,6 +65,22 @@ enum BookingStatus {
   CANCELLED
 }
 
+/// Money a partner lab owes Test Mate for one completed booking.
+enum CommissionStatus {
+  PENDING // bill recorded, not yet invoiced
+  INVOICED // included in a statement sent to the lab
+  PAID
+  WAIVED // agreed not to charge (goodwill, dispute…)
+}
+
+enum CorporateStatus {
+  NEW
+  CONTACTED
+  QUOTED
+  WON
+  LOST
+}
+
 // ───────────────────────────── Catalogue ─────────────────────────────
 
 model Test {
@@ -143,6 +159,12 @@ model Lab {
 
   isFeatured Boolean @default(false) // badge only — NEVER affects sort order
   isActive   Boolean @default(true) // inactive labs are hidden everywhere public
+
+  // Partner lab: pays Test Mate a commission on referred patients and gives them a discount when
+  // they show their booking code. Shown as a clearly labelled badge — NEVER affects sort order.
+  isPartner          Boolean @default(false)
+  partnerDiscountPct Int? // % off the bill for patients with a Test Mate code (null = none)
+  commissionBps      Int? // agreed commission in basis points of the bill (1000 = 10%)
 
   // Set when the lab came from a bulk web import (e.g. "web-2026-11"); "Remove imported data" deletes it
   // only if no hand-entered price or booking is left on it.
@@ -233,6 +255,47 @@ model BookingRequest {
 
   status BookingStatus @default(NEW)
   notes  String? // admin notes
+
+  // Shown to the patient after booking ("TM-7K3P9"); they show it at the lab for the partner
+  // discount, and it ties the visit to us for the commission. Older rows got "TM-<id>".
+  code               String? @unique
+  partnerDiscountPct Int? // discount promised when the request was made (snapshot)
+
+  // Commission (ADMIN only), filled in after the lab confirms the visit.
+  testedOn         DateTime?         @db.Date // the day the test was done → statement month
+  billAmount       Int? // what the patient actually paid the lab (BDT)
+  commissionBps    Int? // rate used (basis points), copied from the lab, editable
+  commissionAmount Int? // round(billAmount × rate)
+  commissionStatus CommissionStatus?
+  commissionPaidAt DateTime?
+
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmTerm     String?
+  utmContent  String?
+  referrer    String?
+  landingPath String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, createdAt])
+  @@index([labId, testedOn])
+}
+
+/// "Health check-up for your office" requests from companies (public form /corporate).
+model CorporateRequest {
+  id          Int             @id @default(autoincrement())
+  companyName String
+  contactName String
+  phone       String // normalised 01XXXXXXXXX
+  email       String?
+  employees   Int
+  area        String? // where the office is, as typed
+  needs       String // tests or package they want, as typed
+  status      CorporateStatus @default(NEW)
+  notes       String? // admin notes
 
   utmSource   String?
   utmMedium   String?

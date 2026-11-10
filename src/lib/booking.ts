@@ -49,3 +49,20 @@ export function cleanAttribution(a: BookingInput["attribution"]) {
 }
 
 export const BOOKING_STATUSES = ["NEW", "FORWARDED_TO_LAB", "CONFIRMED", "COMPLETED", "CANCELLED"] as const;
+export const COMMISSION_STATUSES = ["PENDING", "INVOICED", "PAID", "WAIVED"] as const;
+
+// Booking codes: "TM-" + 5 characters without look-alikes (no 0/O, 1/I/L), easy to read out on
+// the phone. 31^5 ≈ 28.6 million codes; the database's unique index catches the rare repeat.
+const CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
+
+export function generateBookingCode(random: (n: number) => Uint32Array = (n) => crypto.getRandomValues(new Uint32Array(n))): string {
+  return `TM-${[...random(5)].map((v) => CODE_ALPHABET[v % CODE_ALPHABET.length]).join("")}`;
+}
+
+/** Codes as people may type them back: "tm 7k3p9", "TM7K3P9" → "TM-7K3P9". */
+export function normalizeBookingCode(input: string): string | null {
+  const s = input.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const m = /^TM([A-Z0-9]{1,8})$/.exec(s);
+  return m ? `TM-${m[1]}` : null;
+}
+export const COMMISSION_LABEL: Record<(typeof COMMISSION_STATUSES)[number], string> = { PENDING: "Pending", INVOICED: "Invoiced", PAID: "Paid", WAIVED: "Waived" };

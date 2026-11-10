@@ -71,7 +71,7 @@ export function JsonLd({ data }: { data: object | object[] }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }
 
-export type SitemapEntry = { url: string; lastModified: Date; changeFrequency: "daily" | "weekly"; priority: number };
+export type SitemapEntry = { url: string; lastModified: Date; changeFrequency: "daily" | "weekly" | "monthly"; priority: number };
 
 /**
  * Sitemap = exactly the pages the thin-content rule publishes (same index the pages use to decide 404).
@@ -87,6 +87,7 @@ export function buildSitemap(
     { url: absoluteUrl("/"), lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: absoluteUrl("/tests"), lastModified: now, changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/labs"), lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    { url: absoluteUrl("/corporate"), lastModified: now, changeFrequency: "monthly", priority: 0.5 },
   ];
   for (const [id, r] of index.tests) {
     const s = slugs.tests.get(id);

@@ -20,7 +20,8 @@ export function BookingForm({ title, lines, homeAvailable, submit, onClose }: {
 }) {
   const [errors, setErrors] = useState<Errors>({});
   const [message, setMessage] = useState<string | null>(null);
-  const [done, setDone] = useState<number | null>(null);
+  const [done, setDone] = useState<{ code: string | null; discountPct: number | null } | null>(null);
+  const [copied, setCopied] = useState(false);
   const [pending, setPending] = useState(false);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -33,7 +34,7 @@ export function BookingForm({ title, lines, homeAvailable, submit, onClose }: {
         name: String(f.get("name") ?? ""), phone: String(f.get("phone") ?? ""), preferredDate: String(f.get("preferredDate") ?? ""),
         homeCollection: f.get("homeCollection") === "on", website: String(f.get("website") ?? ""),
       });
-      if (res.ok) setDone(res.id ?? 0);
+      if (res.ok) setDone({ code: res.code, discountPct: res.discountPct });
       else { setErrors(res.fieldErrors ?? {}); setMessage(res.message); }
     } catch {
       setMessage(bn.bookingErrors.server);
@@ -53,7 +54,22 @@ export function BookingForm({ title, lines, homeAvailable, submit, onClose }: {
       {done !== null ? (
         <div role="status" className="mt-4">
           <p className="text-lg font-semibold text-cheapest">{bn.bookingDone}</p>
-          <p className="mt-1">{bn.bookingDoneBody(bnDigits(done))}</p>
+          {done.code && (
+            <div className="mt-3 rounded-xl border-2 border-dashed border-primary bg-primary-soft p-4 text-center">
+              <p className="text-sm text-muted">{bn.bookingCodeLabel}</p>
+              <p className="mt-1 font-mono text-3xl font-semibold tracking-wider text-primary" lang="en" data-booking-code>{done.code}</p>
+              {done.discountPct ? <p className="mt-2 font-semibold text-cheapest">{bn.bookingCodeDiscount(bnDigits(done.discountPct))}</p> : null}
+              <p className="mt-1 text-sm">{bn.bookingCodeHint}</p>
+              <button
+                type="button"
+                onClick={() => { navigator.clipboard?.writeText(done.code!).then(() => setCopied(true), () => {}); }}
+                className="mt-3 inline-flex min-h-12 cursor-pointer items-center rounded-lg border-2 border-primary px-4 font-semibold text-primary hover:bg-white"
+              >
+                {copied ? bn.bookingCodeCopied : bn.bookingCopyCode}
+              </button>
+            </div>
+          )}
+          <p className="mt-3">{bn.bookingDoneBody}</p>
           <button type="button" onClick={onClose} className="mt-4 flex min-h-12 w-full items-center justify-center rounded-lg bg-primary font-semibold text-white">{bn.bookingClose}</button>
         </div>
       ) : (

@@ -81,6 +81,7 @@ The site pushes these events to `dataLayer` (no personal data):
 | `booking_form_open` | `test_slug`, `lab_slug`, `area_slug`, `price` |
 | `generate_lead` | `test_slug`, `lab_slug`, `area_slug`, `price`, `booking_id` (fires only after the server saved the booking) |
 | `whatsapp_click` / `call_click` | `test_slug`, `lab_slug`, `area_slug` |
+| `corporate_lead` | `lead_id`, `employee_count` (company check-up form saved; no company or person data) |
 
 Bookings from the test basket (`/basket`) send the same events with `test_slug` as a comma-separated list (`cbc,lipid-profile`) and `price` as the total.
 
@@ -94,6 +95,8 @@ In GTM create Data Layer Variables for the parameters, a Custom Event trigger pe
 - **On-demand updates:** every save in the admin refreshes the affected public pages immediately.
 - **Fonts:** the Bangla font (Hind Siliguri) is downloaded from Google Fonts during the build, so the build needs internet access (normal on FlyNode).
 - **Medical text:** test descriptions and preparation notes show on the public site only after an ADMIN marks them "Reviewed".
+- **Partner labs and commissions** (ADMIN): on a lab, tick *Partner lab* and set the patient discount % and the agreed commission %. Partners get a labelled badge and a discount line; they never move up the price order. Every booking gets a code (`TM-7K3P9`) the patient shows at the lab. After the visit, find the booking by code in *Bookings*, open *Commission*, enter the test date and the bill: the commission is calculated (blank rate = the lab's rate) and the booking is marked Completed. *Commissions* shows each month by lab; a lab's *Statement* page prints (or saves as PDF) and downloads as CSV, and can mark the month invoiced or paid.
+- **Company check-ups:** `/corporate` collects requests from offices (company, contact, staff count, tests). They arrive in admin → *Company requests* with a status (New → Contacted → Quote sent → Won/Lost) and notes.
 - **Web-collected prices** (admin → *Web prices*, ADMIN only): 768 prices for 65 tests at 13 Dhaka labs, read on 2026-11-10 from the labs' own websites (`src/lib/web-import/data.json`). *Import* adds them tagged with `importBatch`; *Remove imported data* (type REMOVE) deletes every price still tagged, its history and the imported labs. A price anyone saves or verifies by hand loses the tag and is never removed or overwritten; labs with such prices or with bookings are kept. Source is shown as "lab website" and the verified date is the reading date, so they go stale on their own.
 
 ## Project layout

@@ -4,6 +4,7 @@ import { bn } from "@/i18n/bn";
 import { config } from "@/lib/config";
 import { bnDate, reportTime, taka } from "@/lib/format";
 import type { Ranked } from "@/lib/pricing";
+import { PartnerBadge, PartnerDiscount } from "./partner-badge";
 import type { TestPriceRow } from "@/lib/catalog";
 
 type Row = Ranked<TestPriceRow & { labName: string }>;
@@ -22,10 +23,11 @@ export function PriceCard({ row, testName, labHref, showArea = true }: { row: Ro
       data-lab={lab.slug} data-lab-name={lab.nameBn ?? lab.name} data-price={row.effective}
       className={`rounded-xl border bg-white p-4 ${row.cheapest ? "border-2 border-cheapest" : "border-line"} ${row.fresh ? "" : "text-stale"}`}
     >
-      {(row.cheapest || lab.isFeatured) && (
+      {(row.cheapest || lab.isFeatured || lab.isPartner) && (
         <p className="mb-2 flex flex-wrap gap-2 text-sm font-semibold">
           {row.cheapest && <span className="rounded-full bg-cheapest px-3 py-0.5 text-white">{bn.cheapest}</span>}
           {lab.isFeatured && <span className="rounded-full border border-primary px-3 py-0.5 text-primary" title={bn.featuredNote}>{bn.featured}</span>}
+          <PartnerBadge lab={lab} />
         </p>
       )}
       <div className="flex items-start justify-between gap-3">
@@ -36,6 +38,7 @@ export function PriceCard({ row, testName, labHref, showArea = true }: { row: Ro
           <p className="text-sm text-muted">
             {[lab.branchName, showArea ? lab.area.nameBn : null].filter(Boolean).join(" · ")}
           </p>
+          <PartnerDiscount lab={lab} className="mt-1" />
         </div>
         <div className="shrink-0 text-right">
           <p className={`tabular text-2xl font-semibold ${row.cheapest ? "text-cheapest" : row.fresh ? "text-ink" : "text-stale"}`}>{taka(row.effective)}</p>

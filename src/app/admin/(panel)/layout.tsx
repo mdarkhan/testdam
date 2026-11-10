@@ -14,10 +14,13 @@ const NAV = [
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   const user = await requireUser();
-  const newBookings = await db.bookingRequest.count({ where: { status: "NEW" } });
+  const [newBookings, newCorporate] = await Promise.all([
+    db.bookingRequest.count({ where: { status: "NEW" } }),
+    db.corporateRequest.count({ where: { status: "NEW" } }),
+  ]);
   return (
     <div className="min-h-dvh bg-slate-50">
-      <header className="border-b border-line bg-white">
+      <header className="border-b border-line bg-white print:hidden">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2">
           <Link href="/admin" className="mr-2 font-semibold text-primary">Test Mate admin</Link>
           <nav aria-label="Admin" className="flex flex-wrap gap-1 text-sm">
@@ -27,6 +30,10 @@ export default async function PanelLayout({ children }: { children: React.ReactN
             <Link href="/admin/bookings" className="rounded px-2 py-2 hover:bg-slate-100">
               Bookings{newBookings > 0 && <span className="ml-1 rounded-full bg-amber-500 px-1.5 text-xs font-semibold text-white" aria-label={`${newBookings} new`}>{newBookings}</span>}
             </Link>
+            <Link href="/admin/corporate" className="rounded px-2 py-2 hover:bg-slate-100">
+              Company requests{newCorporate > 0 && <span className="ml-1 rounded-full bg-amber-500 px-1.5 text-xs font-semibold text-white" aria-label={`${newCorporate} new`}>{newCorporate}</span>}
+            </Link>
+            {user.role === "ADMIN" && <Link href="/admin/commissions" className="rounded px-2 py-2 hover:bg-slate-100">Commissions</Link>}
             {user.role === "ADMIN" && <Link href="/admin/web-data" className="rounded px-2 py-2 hover:bg-slate-100">Web prices</Link>}
             {user.role === "ADMIN" && <Link href="/admin/users" className="rounded px-2 py-2 hover:bg-slate-100">Users</Link>}
           </nav>
@@ -36,7 +43,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           </form>
         </div>
       </header>
-      <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
+      <main className="mx-auto max-w-7xl px-4 py-6 print:max-w-none print:p-0">{children}</main>
     </div>
   );
 }

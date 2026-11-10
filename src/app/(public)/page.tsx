@@ -149,6 +149,14 @@ export default async function Home() {
             </section>
           )}
 
+          <section className="mt-12 flex flex-col gap-4 rounded-2xl border border-line p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <div>
+              <h2 className="text-xl font-semibold">{bn.corpHomeTitle}</h2>
+              <p className="mt-1 text-muted">{bn.corpHomeBody}</p>
+            </div>
+            <Link href="/corporate" className="flex min-h-12 shrink-0 items-center justify-center rounded-lg border-2 border-primary px-5 font-semibold text-primary hover:bg-primary-soft">{bn.corpHomeCta}</Link>
+          </section>
+
           {areas.length > 0 && (
             <section className="mt-12">
               <h2 className="text-2xl font-semibold">{bn.areasHeading}</h2>

@@ -24,7 +24,7 @@ describe("buildSitemap", () => {
   const urls = buildSitemap(index, slugs, now).map((e) => e.url.replace(/^https?:\/\/[^/]+/, ""));
 
   it("lists exactly the published pages (thin-content rule)", () => {
-    expect(urls.slice(0, 3)).toEqual(["/", "/tests", "/labs"]);
+    expect(urls.slice(0, 4)).toEqual(["/", "/tests", "/labs", "/corporate"]);
     expect(urls).toContain("/test/t1");
     expect(urls).toContain("/test/t1/mirpur");
     expect(urls).not.toContain("/test/t2");

@@ -36,7 +36,7 @@ export const getTestBySlug = cache((slug: string) => db.test.findUnique({ where:
 export const getAreaBySlug = cache((slug: string) => db.area.findUnique({ where: { slug }, include: { neighbors: { orderBy: { nameEn: "asc" } } } }));
 
 const labSelect = {
-  id: true, slug: true, name: true, nameBn: true, branchName: true, phone: true, whatsapp: true, homeCollectionFee: true, isFeatured: true,
+  id: true, slug: true, name: true, nameBn: true, branchName: true, phone: true, whatsapp: true, homeCollectionFee: true, isFeatured: true, isPartner: true, partnerDiscountPct: true,
   area: { select: { id: true, slug: true, nameBn: true, nameEn: true } },
 } as const;
 

@@ -38,6 +38,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
               <ul className="mt-1">
                 <li><Link href="/tests" className="flex min-h-12 items-center hover:text-primary">{bn.allTestsTitle}</Link></li>
                 <li><Link href="/labs" className="flex min-h-12 items-center hover:text-primary">{bn.allLabsTitle}</Link></li>
+                <li><Link href="/basket" className="flex min-h-12 items-center hover:text-primary">{bn.basketTitle}</Link></li>
+                <li><Link href="/corporate" className="flex min-h-12 items-center hover:text-primary">{bn.corpTitle}</Link></li>
               </ul>
             </nav>
           </div>

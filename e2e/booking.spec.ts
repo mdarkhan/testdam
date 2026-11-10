@@ -64,6 +64,11 @@ test("search in Bangla → test page → booking request", async ({ page }) => {
   expect(saved!.test.slug).toBe("cbc");
   expect(saved!.lab.slug).toBe(lead.lab_slug);
   expect(saved!.priceAtRequest).toBe(lead.price);
+
+  // 8. The patient sees a booking code (no look-alike characters), and it is the stored one.
+  const shown = await dialog.locator("[data-booking-code]").innerText();
+  expect(shown).toMatch(/^TM-[2-9A-HJKMNP-Z]{5}$/);
+  expect(saved!.code).toBe(shown);
 });
 
 test("call and WhatsApp taps are tracked", async ({ page }) => {
@@ -106,24 +111,66 @@ test("test basket: add from test pages, totals per lab on /basket", async ({ pag
   expect(nums).toEqual([...nums].sort((a, b) => a - b));
   await expect(page.locator("main ol article").first()).toContainText("সবচেয়ে কম মোট খরচ");
 
-  // Book both tests at the cheapest lab in one request: one booking, one item per test, total = sum.
-  const phone = `018${String(Date.now()).slice(-8)}`;
-  await page.locator("main ol article").first().getByRole("button", { name: "বুক করুন" }).click();
+  // Make the DEAREST lab a partner: it gets the badge and discount line but stays last (no ranking boost).
+  const cards = page.locator("main ol article");
+  const dearest = cards.last();
+  const partnerSlug = (await dearest.getAttribute("data-lab"))!;
+  await db.lab.update({ where: { slug: partnerSlug }, data: { isPartner: true, partnerDiscountPct: 10, commissionBps: 1000 } });
+  try {
+    await page.reload();
+    expect((await cards.locator(".tabular.text-2xl").allInnerTexts()).map(asNumber)).toEqual(nums);
+    await expect(cards.last()).toHaveAttribute("data-lab", partnerSlug);
+    await expect(cards.last()).toContainText("পার্টনার ল্যাব");
+    await expect(cards.last()).toContainText("বুকিং কোডে ১০% ছাড়");
+    await expect(cards.first()).not.toContainText("পার্টনার ল্যাব");
+
+    // Book both tests at the partner lab in one request: one booking, one item per test, total = sum,
+    // a booking code and the promised discount.
+    const phone = `018${String(Date.now()).slice(-8)}`;
+    await cards.last().getByRole("button", { name: "বুক করুন" }).click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toContainText("২টি টেস্ট");
   await dialog.getByLabel("আপনার নাম").fill("E2E Basket Patient");
   await dialog.getByLabel("মোবাইল নম্বর").fill(phone);
   await dialog.getByRole("button", { name: "অনুরোধ পাঠান" }).click();
   await expect(dialog.getByText("অনুরোধ পাঠানো হয়েছে")).toBeVisible();
+  await expect(dialog).toContainText("বিলে ১০% ছাড় পাবেন");
   const lead = (await events(page)).find((e) => e.event === "generate_lead")!;
-  expect(lead).toMatchObject({ test_slug: "cbc,lipid-profile", price: nums[0] });
+  expect(lead).toMatchObject({ test_slug: "cbc,lipid-profile", price: nums[nums.length - 1], lab_slug: partnerSlug });
   const saved = await db.bookingRequest.findUnique({ where: { id: lead.booking_id as number }, include: { items: { include: { test: true }, orderBy: { id: "asc" } } } });
   expect(saved!.items.map((i) => i.test.slug)).toEqual(["cbc", "lipid-profile"]);
   expect(saved!.priceAtRequest).toBe(saved!.items.reduce((s, i) => s + i.priceAtRequest, 0));
-  expect(saved!.priceAtRequest).toBe(nums[0]);
+  expect(saved!.priceAtRequest).toBe(nums[nums.length - 1]);
+  expect(saved!.partnerDiscountPct).toBe(10);
+  expect(saved!.code).toBe(await dialog.locator("[data-booking-code]").innerText());
   await dialog.getByRole("button", { name: "বন্ধ করুন" }).click();
+  } finally {
+    await db.lab.update({ where: { slug: partnerSlug }, data: { isPartner: false, partnerDiscountPct: null, commissionBps: null } });
+  }
 
   // Removing a test updates the URL and the stored list.
   await page.getByRole("button", { name: /লিপিড প্রোফাইল.*লিস্ট থেকে সরান/ }).click();
   await expect(page).toHaveURL(/\/basket\?t=cbc$/);
+});
+
+test("company check-up request: errors by the fields, then saved without personal data in analytics", async ({ page }) => {
+  await page.goto("/corporate");
+  await page.getByRole("button", { name: "অনুরোধ পাঠান" }).click();
+  await expect(page.getByText("প্রতিষ্ঠানের নাম লিখুন")).toBeVisible();
+  await expect(page.getByLabel("প্রতিষ্ঠানের নাম")).toBeFocused();
+
+  const phone = `019${String(Date.now()).slice(-8)}`;
+  await page.getByLabel("প্রতিষ্ঠানের নাম").fill("E2E Garments Ltd");
+  await page.getByLabel("আপনার নাম").fill("E2E HR");
+  await page.getByLabel("মোবাইল নম্বর").fill(phone);
+  await page.getByLabel("কতজন কর্মী").fill("১২০");
+  await page.getByLabel("কোন টেস্ট বা কী ধরনের চেকআপ চান").fill("CBC, FBS");
+  await page.getByRole("button", { name: "অনুরোধ পাঠান" }).click();
+  await expect(page.getByText("অনুরোধ পেয়েছি")).toBeVisible();
+
+  const ev = (await events(page)).find((e) => e.event === "corporate_lead")!;
+  expect(ev).toMatchObject({ employee_count: 120 });
+  expect(JSON.stringify(ev)).not.toContain("E2E Garments");
+  const saved = await db.corporateRequest.findUnique({ where: { id: ev.lead_id as number } });
+  expect(saved).toMatchObject({ companyName: "E2E Garments Ltd", phone, employees: 120, status: "NEW" });
 });

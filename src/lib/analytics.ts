@@ -11,9 +11,10 @@ export type AnalyticsEvents = {
   generate_lead: Ctx & { price: number; booking_id: number };
   whatsapp_click: Ctx;
   call_click: Ctx;
+  corporate_lead: { lead_id: number; employee_count: number }; // /corporate form saved (no company or person data)
 };
 
-const ALLOWED = new Set(["search_term", "results_count", "test_slug", "area_slug", "lab_slug", "lab_count", "min_price", "price", "booking_id"]);
+const ALLOWED = new Set(["search_term", "results_count", "test_slug", "area_slug", "lab_slug", "lab_count", "min_price", "price", "booking_id", "lead_id", "employee_count"]);
 
 declare global {
   interface Window { dataLayer?: Record<string, unknown>[] }

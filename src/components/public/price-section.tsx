@@ -44,6 +44,7 @@ export function PriceSection({ rows, testName, index, areaFilter, path, testSlug
         {fresh.map((r) => <PriceCard key={r.id} row={r} testName={testName} labHref={labHref(r)} showArea={areaFilter} />)}
       </div>
 
+      {fresh.some((r) => r.lab.isPartner) && <p className="mt-3 text-sm text-muted">{bn.partnerNote}</p>}
       <p className="mt-4 rounded-lg border-l-4 border-amber-500 bg-warn-soft px-3 py-2 text-sm">{bn.disclaimer}</p>
 
       {stale.length > 0 && (

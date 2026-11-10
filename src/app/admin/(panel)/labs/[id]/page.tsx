@@ -5,6 +5,7 @@ import { requireUser } from "@/lib/auth";
 import { ActionForm, Checkbox, ConfirmButton, Field, Select, SubmitButton } from "@/components/admin/form";
 import { btn } from "@/components/admin/styles";
 import { deleteLab, saveLab } from "../actions";
+import { bpsToPercent } from "@/lib/commission";
 
 export const metadata = { title: "Edit lab" };
 
@@ -48,6 +49,16 @@ export default async function LabEdit({ params }: { params: Promise<{ id: string
             <Checkbox label="Featured (badge only — never changes price order)" name="isFeatured" defaultChecked={lab?.isFeatured ?? false} />
           ) : lab?.isFeatured ? <span className="flex min-h-11 items-center text-sm">Featured (set by an ADMIN)</span> : null}
         </div>
+        {user.role === "ADMIN" ? (
+          <fieldset className="rounded-md border border-line p-3">
+            <legend className="px-1 text-sm font-semibold">Partner terms (ADMIN only)</legend>
+            <Checkbox label="Partner lab (badge + discount line only — never changes price order)" name="isPartner" defaultChecked={lab?.isPartner ?? false} />
+            <div className="mt-2 grid gap-4 sm:grid-cols-2">
+              <Field label="Patient discount (%)" name="partnerDiscountPct" type="number" min={0} max={50} defaultValue={lab?.partnerDiscountPct ?? ""} hint="Off the bill when the patient shows a Test Mate booking code. Blank = no discount." />
+              <Field label="Commission (%)" name="commissionPct" inputMode="decimal" defaultValue={lab?.commissionBps != null ? bpsToPercent(lab.commissionBps) : ""} hint="Agreed share of the bill we invoice, e.g. 10 or 12.5. Prefills each booking's commission." />
+            </div>
+          </fieldset>
+        ) : lab?.isPartner ? <p className="text-sm">Partner lab (terms set by an ADMIN)</p> : null}
         <div className="flex gap-2">
           <SubmitButton>Save lab</SubmitButton>
           <Link href="/admin/labs" className={btn("plain")}>Cancel</Link>
