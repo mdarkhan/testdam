@@ -2,7 +2,8 @@
 // and first-start bootstrap for an empty production database. The demo labs/prices live only in prisma/seed.ts.
 import { db } from "./db";
 import { aliasRows } from "./normalize";
-import { createUser } from "./users";
+import { verifyPassword } from "better-auth/crypto";
+import { createUser, setPassword } from "./users";
 import type { TestCategory } from "@/generated/prisma/client";
 
 export const AREAS: Array<[slug: string, en: string, bn: string, aliases: string[]]> = [
@@ -127,6 +128,33 @@ export async function ensureFirstAdmin() {
 }
 
 /**
+ * Lock-out recovery: when ADMIN_RESET_PASSWORD is set, sets that password on the ADMIN whose email is
+ * SEED_ADMIN_EMAIL. Skips when the password already matches, so leaving the variable set for one extra
+ * restart does not sign anyone out again. Remove the variable after signing in.
+ */
+export async function resetAdminPassword() {
+  const password = process.env.ADMIN_RESET_PASSWORD;
+  if (!password) return;
+  const email = process.env.SEED_ADMIN_EMAIL?.trim().toLowerCase();
+  if (!email || password.length < 10) {
+    console.warn("[admin-reset] Needs SEED_ADMIN_EMAIL and an ADMIN_RESET_PASSWORD of 10+ characters — nothing changed.");
+    return;
+  }
+  const user = await db.user.findUnique({ where: { email }, include: { accounts: { where: { providerId: "credential" } } } });
+  if (!user || user.role !== "ADMIN") {
+    console.warn("[admin-reset] No ADMIN user has the email in SEED_ADMIN_EMAIL — nothing changed.");
+    return;
+  }
+  const hash = user.accounts[0]?.password;
+  if (hash && (await verifyPassword({ hash, password }))) {
+    console.log("[admin-reset] Password already matches ADMIN_RESET_PASSWORD — remove the variable.");
+    return;
+  }
+  await setPassword(user.id, password);
+  console.log(`[admin-reset] Password reset for the admin (${password.length} characters received). Sign in, then remove ADMIN_RESET_PASSWORD.`);
+}
+
+/**
  * Runs once per server start (src/instrumentation.ts). On an EMPTY database it loads the catalogue;
  * it creates the first admin if there is none. Safe to run every start.
  */
@@ -136,4 +164,5 @@ export async function bootstrap() {
     console.log(`[bootstrap] Loaded ${AREAS.length} areas and ${TESTS.length} tests.`);
   }
   await ensureFirstAdmin();
+  await resetAdminPassword();
 }

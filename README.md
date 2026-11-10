@@ -43,6 +43,7 @@ npm run dev                   # http://localhost:3000 — admin at /admin
 | `SITE_URL` | yes | `https://testdam.example` | Public origin, no trailing slash. Used for canonical URLs, sitemap, Open Graph and admin login. |
 | `SEED_ADMIN_EMAIL` | first start | `you@example.com` | Creates the first ADMIN **only when no user exists**. |
 | `SEED_ADMIN_PASSWORD` | first start | 10+ characters | Remove it after the first login (it is ignored once a user exists). |
+| `ADMIN_RESET_PASSWORD` | no | 10+ characters | Locked out? Sets this password on the ADMIN with `SEED_ADMIN_EMAIL` at the next start. Remove it after signing in. Avoid `$` in values on FlyNode (it is treated as a variable reference). |
 | `NEXT_PUBLIC_GTM_ID` | no | `GTM-XXXXXXX` | Empty = no GTM. Read at runtime — no rebuild needed. |
 | `FRESH_DAYS` | no | `90` | Days a price stays "fresh". |
 | `WHATSAPP_CENTRAL_NUMBER` | no | `01XXXXXXXXX` | Empty = each lab's own WhatsApp number. |
