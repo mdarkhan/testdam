@@ -7,7 +7,9 @@ import { getCatalogIndex, getTestsByIds, testDisplayName } from "@/lib/catalog";
 import { SearchBox } from "@/components/public/search-box";
 import { pageMetadata } from "@/lib/seo";
 
-export const revalidate = 86400; // plus on-demand revalidation on every admin price change
+// Rendered per request (cheap: it reads the in-memory catalogue index) so `next build` needs no
+// database — the Docker build on FlyNode has none. Test/area/lab pages stay ISR.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = pageMetadata({ title: `${bn.siteName} — ${bn.tagline}`, description: bn.homeIntro, path: "/" });
 

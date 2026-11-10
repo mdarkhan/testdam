@@ -21,6 +21,15 @@ export function isFresh(p: Pick<PriceLike, "verifiedAt">, now = new Date(), fres
   return p.verifiedAt.getTime() >= staleCutoff(now, freshDays).getTime();
 }
 
+/** Days before going stale when a price counts as "due" on the admin call list. */
+export const DUE_SOON_DAYS = 14;
+
+/** fresh → due (stale within DUE_SOON_DAYS) → stale. Admin call list only; public pages use isFresh. */
+export function freshness(p: Pick<PriceLike, "verifiedAt">, now = new Date(), freshDays = config.freshDays): "fresh" | "due" | "stale" {
+  if (!isFresh(p, now, freshDays)) return "stale";
+  return isFresh(p, now, freshDays - DUE_SOON_DAYS) ? "fresh" : "due";
+}
+
 export function hasActiveDiscount(p: PriceLike, now = new Date()): boolean {
   return p.discountPrice != null && p.discountPrice < p.regularPrice && (p.discountExpiresAt == null || p.discountExpiresAt >= now);
 }

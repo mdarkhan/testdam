@@ -1,0 +1,14 @@
+node_modules
+.next
+.next-e2e
+.pgdata
+.git
+.env
+.env.*
+!.env.example
+src/generated
+.playwright-mcp
+playwright-report
+test-results
+coverage
+*.log

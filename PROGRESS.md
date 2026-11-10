@@ -10,8 +10,10 @@ Read this first in a new session, then [docs/BRIEF.md](docs/BRIEF.md) (requireme
 | 1 — Data and admin | Done (2026-11-10) | See "Phase 1 report" below |
 | 2 — Public pages | Done (2026-11-10) | See "Phase 2 report" below |
 | 3 — Technical SEO | Done (2026-11-10) | See "Phase 3 report" below |
-| 4 — Booking and tracking | **Done, waiting for owner review** (2026-11-10) | See "Phase 4 report" below |
-| 5 — Ops and deploy | Not started | |
+| 4 — Booking and tracking | Done (2026-11-10) | See "Phase 4 report" below |
+| 5 — Ops and deploy | **Done, waiting for owner review** (2026-11-10) — not yet deployed | See "Phase 5 report" below |
+
+**Next step (needs the owner):** a GitHub repo URL + OK to push, then deploy on FlyNode following [README.md](README.md#deploy-to-flynode-docker). After deploy: Lighthouse and Google Rich Results Test against the live URL, GTM Preview with the real container.
 
 ## How to run locally (Windows, no Docker needed)
 
@@ -24,6 +26,29 @@ npm run db:seed
 npm run dev               # http://localhost:3000/admin — sign in with SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD
 ```
 Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run test:db` (search against the separate `testdam_test` database — migrates and seeds it first; needs `npm run db:start`), `npm run test:e2e` (Playwright: seeds `testdam_test`, builds into `.next-e2e`, serves on :3200, uses the installed Chrome; needs `npm run db:start`), `npx next build`.
+
+## Phase 5 report
+
+**Built**
+- **Call list** `/admin/stale`: labs ordered by stale prices, then "due" (stale within 14 days), then oldest check; tap-to-call phone; offers ending within 7 days; "Open grid" opens the price grid filtered to stale/due rows. `freshness()` (fresh/due/stale) lives in `pricing.ts` with a test.
+- **Price history** `/admin/labs/[id]/history` (button in the grid): the append-only log, newest first, filter by test, effective price and ▲/▼ change vs. the previous entry, who and when.
+- **Build without a database:** home and `sitemap.xml` render per request from the in-memory catalogue index (test/test × area/lab/area pages stay ISR). Verified: `next build` succeeds with `DATABASE_URL` pointing at a closed port.
+- **First-start bootstrap** (`src/instrumentation.ts` → `src/lib/bootstrap.ts`): on an empty database loads the 20 areas + neighbours and 41 tests + aliases (no labs, no prices, no medical text) and creates the first ADMIN from `SEED_ADMIN_EMAIL`/`SEED_ADMIN_PASSWORD`; no-op afterwards. The demo seed now reuses the same catalogue data.
+- **Dockerfile** (multi-stage, node:22-bookworm-slim, standalone output, non-root user, `HEALTHCHECK`), `.dockerignore`; start command = `prisma migrate deploy` (small Prisma CLI in `/migrator`) then `node server.js`. `GET /api/health` checks the database.
+- `NEXT_PUBLIC_GTM_ID` is read at **runtime** (Next inlined it at build time, even through a constant string concatenation — found by inspecting the compiled output; now read via a dynamic key and verified).
+- **README.md** (local setup, scripts, env table, FlyNode deploy steps, GTM event table, operations) and **docs/DATA-ENTRY-GUIDE.md** (daily call routine, grid, CSV, bookings, rules, quick answers).
+
+**Verified (2026-11-10)**
+- `tsc` clean, ESLint clean, Vitest 66/66, `npm run test:db` 19/19, Playwright e2e 3/3.
+- Simulated container start on this machine (no Docker here): build with no database → `prisma migrate deploy` on a brand-new empty database → standalone `node server.js` with env vars only: log shows `[bootstrap] Loaded 20 areas and 41 tests.` and `Created ADMIN user …`; `/api/health` `{"ok":true}`; robots/sitemap/home 200; test and area pages 404 (no prices yet — thin-content rule); GTM snippet present from the runtime env var; the bootstrapped admin signs in (200 + session cookie) and opens `/admin`. Second start: bootstrap did nothing. Temporary database dropped afterwards.
+- Lighthouse 13.6 mobile on the standalone build: `/` 100/100/100/100 (LCP 0.7 s, server 20 ms — now rendered per request), `/test/cbc` 100/100/100/100.
+- Clicked through: call list, filtered grid, price history (CBC 130 → 110 shows ▼ 20 with user and time).
+
+**Not done / not verified**
+- **The Docker image itself was not built** — Docker isn't installed on this machine. The steps it runs were each verified locally (above); the first real build will happen on FlyNode.
+- Not deployed: pushing to GitHub needs your repo URL and OK.
+- FlyNode database variable name: confirm it is (or is mapped to) `DATABASE_URL`.
+- Backups: not configured (FlyNode side) — README says what to do.
 
 ## Phase 4 report
 
@@ -183,5 +208,7 @@ Phase 4 additions:
 - `next/font` sometimes fails to reach fonts.googleapis.com from this machine in dev (falls back to a system font; the production build did download it). The Docker build on FlyNode needs outbound access to Google Fonts — or we switch to `next/font/local` (self-hosted files) in Phase 3/5.
 - Local DB holds extra demo prices (the seed ran twice before it was made idempotent). Reset with `npm run db:reset` (Prisma asks for confirmation) then `npm run db:seed`.
 - Local QA users `qa@example.test` (ADMIN) and `qa-entry@example.test` (DATA_ENTRY) exist in the local DB only, from click-through testing. The local QA lab "Demo Lab QA" is inactive and holds 28 demo prices from the old seed behaviour.
-- The home page is prerendered at build time, so `next build` currently needs the database. The Docker build on FlyNode has none — to solve in Phase 5 (build-time guard or revalidate-on-start).
+- ~~`next build` needed the database~~ — fixed in Phase 5 (home and sitemap render per request).
+- `next build` downloads the Bangla font from Google Fonts — the build machine needs internet access.
+- `next start` warns that it doesn't fit `output: "standalone"`; production uses `node server.js` (Dockerfile). The e2e test still uses `next start` on its own build — harmless.
 - ESLint 9 is flagged "no longer supported" by npm; move to ESLint 10 once eslint-config-next supports it.

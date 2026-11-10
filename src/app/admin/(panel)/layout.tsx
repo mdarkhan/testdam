@@ -6,6 +6,7 @@ import { signOut } from "../actions";
 const NAV = [
   ["/admin", "Dashboard"],
   ["/admin/labs", "Labs & prices"],
+  ["/admin/stale", "Call list"],
   ["/admin/tests", "Tests"],
   ["/admin/areas", "Areas"],
   ["/admin/import", "CSV import / export"],

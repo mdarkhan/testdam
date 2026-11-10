@@ -4,13 +4,14 @@ import { db } from "@/lib/db";
 import { config } from "@/lib/config";
 import { requireUser } from "@/lib/auth";
 import { dhakaDateString } from "@/lib/dates";
-import { isFresh } from "@/lib/pricing";
+import { freshness } from "@/lib/pricing";
 import { btn } from "@/components/admin/styles";
 import { PriceGrid, type GridRow } from "./price-grid";
 
 export const metadata = { title: "Prices" };
 
-export default async function LabPrices({ params }: { params: Promise<{ id: string }> }) {
+export default async function LabPrices({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ check?: string }> }) {
+  const checkOnly = (await searchParams).check === "1";
   await requireUser();
   const id = Number((await params).id);
   if (!Number.isInteger(id)) notFound();
@@ -42,7 +43,8 @@ export default async function LabPrices({ params }: { params: Promise<{ id: stri
         : null,
       verifiedOn: p ? dhakaDateString(p.verifiedAt) : null,
       verifiedBy: p?.verifiedBy?.email ?? null,
-      stale: p ? !isFresh(p, now) : false,
+      stale: p ? freshness(p, now) === "stale" : false,
+      due: p ? freshness(p, now) === "due" : false,
     };
   });
 
@@ -60,11 +62,12 @@ export default async function LabPrices({ params }: { params: Promise<{ id: stri
         </div>
         <div className="flex gap-2">
           <Link href={`/admin/labs/${lab.id}`} className={btn("plain")}>Lab details</Link>
+          <Link href={`/admin/labs/${lab.id}/history`} className={btn("plain")}>Price history</Link>
           <a href={`/admin/export?lab=${lab.slug}`} className={btn("plain")}>Export CSV</a>
           <Link href={`/admin/import?lab=${lab.slug}`} className={btn("plain")}>Import CSV</Link>
         </div>
       </div>
-      <PriceGrid labId={lab.id} rows={rows} defaultHomeCollection={lab.homeCollection} />
+      <PriceGrid labId={lab.id} rows={rows} defaultHomeCollection={lab.homeCollection} checkOnly={checkOnly} />
     </>
   );
 }

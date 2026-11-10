@@ -3,8 +3,9 @@ import { db } from "@/lib/db";
 import { getCatalogIndex } from "@/lib/catalog";
 import { buildSitemap } from "@/lib/seo";
 
-// Regenerated hourly and on every admin price change (revalidatePath("/sitemap.xml")).
-export const revalidate = 3600;
+// Rendered per request from the cached catalogue index (crawlers fetch it rarely), so `next build`
+// needs no database and the sitemap is never out of date.
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const index = await getCatalogIndex();

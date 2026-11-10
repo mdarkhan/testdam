@@ -105,3 +105,12 @@ describe("buildIndex (thin-content rule)", () => {
     expect(idx.areas.has(20)).toBe(false);
   });
 });
+
+describe("freshness (admin call list)", () => {
+  it("marks prices due 14 days before they go stale", async () => {
+    const { freshness } = await import("@/lib/pricing");
+    expect(freshness({ verifiedAt: daysAgo(10) }, now, 90)).toBe("fresh");
+    expect(freshness({ verifiedAt: daysAgo(80) }, now, 90)).toBe("due");
+    expect(freshness({ verifiedAt: daysAgo(91) }, now, 90)).toBe("stale");
+  });
+});

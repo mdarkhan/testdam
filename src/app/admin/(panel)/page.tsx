@@ -22,7 +22,7 @@ export default async function Dashboard() {
     ["Active labs", labs, "/admin/labs"],
     ["Tests", tests, "/admin/tests"],
     ["Prices", prices, "/admin/labs"],
-    [`Stale prices (> ${config.freshDays} days)`, stale, "/admin/labs?sort=stale"],
+    [`Stale prices (> ${config.freshDays} days)`, stale, "/admin/stale"],
     ["Test texts awaiting review", needsReview, "/admin/tests?filter=review"],
   ];
   return (
@@ -38,7 +38,7 @@ export default async function Dashboard() {
           </li>
         ))}
       </ul>
-      <p className="mt-6 text-sm text-muted">The stale-price call list arrives in Phase 5.</p>
+      
     </>
   );
 }

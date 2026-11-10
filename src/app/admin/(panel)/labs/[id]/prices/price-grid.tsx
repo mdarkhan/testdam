@@ -15,6 +15,7 @@ export type GridRow = {
   verifiedOn: string | null;
   verifiedBy: string | null;
   stale: boolean;
+  due: boolean;
 };
 
 const SOURCES = [
@@ -28,11 +29,12 @@ const SOURCES = [
 type TextCol = "regularPrice" | "discountPrice" | "discountExpires" | "reportHours" | "sourceNote";
 const cell = "w-full rounded border border-slate-300 px-2 py-1.5 text-sm tabular focus:border-primary";
 
-export function PriceGrid({ labId, rows, defaultHomeCollection }: { labId: number; rows: GridRow[]; defaultHomeCollection: boolean }) {
+export function PriceGrid({ labId, rows, defaultHomeCollection, checkOnly = false }: { labId: number; rows: GridRow[]; defaultHomeCollection: boolean; checkOnly?: boolean }) {
   const [edits, setEdits] = useState<Map<number, Values>>(new Map());
   const [selected, setSelected] = useState<Set<number>>(new Set());
   const [filter, setFilter] = useState("");
   const [onlyPriced, setOnlyPriced] = useState(false);
+  const [onlyCheck, setOnlyCheck] = useState(checkOnly);
   const [defaultSource, setDefaultSource] = useState<string>("PHONE_CALL");
   const [verifySource, setVerifySource] = useState("");
   const [result, setResult] = useState<GridSaveResult | null>(null);
@@ -44,8 +46,8 @@ export function PriceGrid({ labId, rows, defaultHomeCollection }: { labId: numbe
 
   const visible = useMemo(() => {
     const q = filter.trim().toLowerCase();
-    return rows.filter((r) => (!onlyPriced || r.saved) && (!q || `${r.label} ${r.labelBn} ${r.slug}`.toLowerCase().includes(q)));
-  }, [rows, filter, onlyPriced]);
+    return rows.filter((r) => (!onlyPriced || r.saved) && (!onlyCheck || r.stale || r.due) && (!q || `${r.label} ${r.labelBn} ${r.slug}`.toLowerCase().includes(q)));
+  }, [rows, filter, onlyPriced, onlyCheck]);
 
   const { toSave, toDelete } = useMemo(() => {
     const toSave: GridRowInput[] = [];
@@ -132,6 +134,9 @@ export function PriceGrid({ labId, rows, defaultHomeCollection }: { labId: numbe
         <label className="flex min-h-11 items-center gap-2 text-sm">
           <input type="checkbox" checked={onlyPriced} onChange={(e) => setOnlyPriced(e.target.checked)} className="size-4 accent-primary" /> Only tests with a price
         </label>
+        <label className="flex min-h-11 items-center gap-2 text-sm">
+          <input type="checkbox" checked={onlyCheck} onChange={(e) => setOnlyCheck(e.target.checked)} className="size-4 accent-primary" /> Only stale / due
+        </label>
         <label className="text-sm font-semibold">Source of today&apos;s edits
           <select value={defaultSource} onChange={(e) => setDefaultSource(e.target.value)} className="mt-1 block min-h-10 rounded-md border border-slate-300 px-2">
             {SOURCES.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
@@ -214,8 +219,8 @@ export function PriceGrid({ labId, rows, defaultHomeCollection }: { labId: numbe
                   <td>{input("sourceNote")}</td>
                   <td className="tabular text-xs">
                     {r.verifiedOn ? (
-                      <span title={r.verifiedBy ? `by ${r.verifiedBy}` : undefined} className={r.stale ? "font-semibold text-danger" : "text-muted"}>
-                        {r.verifiedOn}{r.stale && " · stale"}
+                      <span title={r.verifiedBy ? `by ${r.verifiedBy}` : undefined} className={r.stale ? "font-semibold text-danger" : r.due ? "font-semibold text-amber-800" : "text-muted"}>
+                        {r.verifiedOn}{r.stale && " · stale"}{r.due && " · due"}
                       </span>
                     ) : <span className="text-muted">—</span>}
                     {edited && !deleting && <span className="block text-amber-800">→ today on save</span>}
