@@ -3,8 +3,10 @@ import "server-only";
 // Public pages arrive in Phase 2; revalidating a path that does not exist yet is harmless.
 import { revalidatePath } from "next/cache";
 import { db } from "./db";
+import { invalidateCatalog } from "./catalog";
 
 function revalidateAll(paths: Iterable<string>) {
+  invalidateCatalog();
   for (const p of new Set(paths)) revalidatePath(p);
 }
 
@@ -36,6 +38,7 @@ export async function revalidateLab(labId: number, previousAreaSlug?: string) {
 
 /** After a test's names/aliases/content change: its pages + everything that lists tests. */
 export function revalidateTest(testSlug: string) {
+  invalidateCatalog();
   // The "page" type covers /test/[slug] and /test/[slug]/[area].
   revalidatePath(`/test/${testSlug}`);
   revalidatePath("/test/[slug]/[area]", "page");
@@ -43,6 +46,7 @@ export function revalidateTest(testSlug: string) {
 }
 
 export function revalidateArea(areaSlug: string) {
+  invalidateCatalog();
   revalidatePath(`/area/${areaSlug}`);
   revalidatePath("/test/[slug]/[area]", "page");
   revalidatePath("/");

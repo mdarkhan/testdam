@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { normalizeText, romanize, searchKey, slugify } from "@/lib/normalize";
+import { extractArea, normalizeText, romanize, searchKey, slugify } from "@/lib/normalize";
 
 describe("searchKey", () => {
   it("lines up English spellings of the same test", () => {
@@ -47,5 +47,26 @@ describe("slugify", () => {
     expect(slugify("Lipid Profile")).toBe("lipid-profile");
     expect(slugify("Demo Lab 1 (Mirpur-10)")).toBe("demo-lab-1-mirpur-10");
     expect(slugify("মিরপুর")).toBe(romanize("মিরপুর"));
+  });
+});
+
+describe("extractArea", () => {
+  const areas = [
+    { slug: "mirpur", keys: ["mirpur", "mirpur 10", searchKey("মিরপুর")] },
+    { slug: "uttara", keys: ["uttara", searchKey("উত্তরা")] },
+  ];
+  it.each([
+    ["CBC test price Mirpur", "mirpur", "cbc"],
+    ["cbc mirpur 10", "mirpur", "cbc"],
+    ["মিরপুরে সিবিসি টেস্টের দাম", "mirpur", "sibisi"],
+    ["উত্তরায় লিপিড প্রোফাইল", "uttara", "lipid profail"],
+    ["lipid profile", null, "lipid profile"],
+  ])("%s", (q, area, rest) => {
+    const r = extractArea(searchKey(q), areas);
+    expect(r.area?.slug ?? null).toBe(area);
+    expect(r.rest).toBe(rest);
+  });
+  it("does not match an area name inside another word", () => {
+    expect(extractArea("mirpurian", areas).area).toBeNull();
   });
 });

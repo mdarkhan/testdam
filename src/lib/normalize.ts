@@ -96,3 +96,23 @@ export function aliasRows(names: Array<string | null | undefined>): Array<{ alia
   }
   return [...out].map(([key, alias]) => ({ alias, searchKey: key }));
 }
+
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/**
+ * Finds an area inside a search key ("cbc mirpur" / "মিরপুরে সিবিসি" → mirpur) and returns the rest.
+ * `areas[].keys` are searchKey()s of the area's names and spellings. Longest match wins.
+ * Bangla case endings are allowed after the name: -e/-y (মিরপুরে, উত্তরায়), -er/-r (মিরপুরের).
+ */
+export function extractArea<T extends { keys: string[] }>(key: string, areas: T[]): { area: T | null; rest: string } {
+  let best: { area: T; re: RegExp; len: number } | null = null;
+  for (const area of areas) {
+    for (const k of area.keys) {
+      if (!k || (best && k.length <= best.len)) continue;
+      const re = new RegExp(`(^| )${escapeRe(k)}(e|er|y|ye|r)?(?= |$)`);
+      if (re.test(key)) best = { area, re, len: k.length };
+    }
+  }
+  if (!best) return { area: null, rest: key };
+  return { area: best.area, rest: key.replace(best.re, " ").trim().replace(/\s+/g, " ") };
+}

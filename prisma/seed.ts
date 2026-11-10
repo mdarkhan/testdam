@@ -6,6 +6,7 @@
 import "dotenv/config";
 import { db } from "../src/lib/db";
 import { aliasRows } from "../src/lib/normalize";
+import { bnDigits } from "../src/lib/format";
 import { createUser } from "../src/lib/users";
 import type { PriceSource, TestCategory } from "../src/generated/prisma/client";
 
@@ -130,7 +131,7 @@ async function main() {
       const slug = `demo-lab-${n}-${area.slug}`;
       const data = {
         name: `Demo Lab ${n}`,
-        nameBn: `ডেমো ল্যাব ${n}`,
+        nameBn: `ডেমো ল্যাব ${bnDigits(n)}`,
         branchName: `${area.nameEn} branch`,
         areaId: area.id,
         address: `House ${n}, Demo Road, ${area.nameEn}, Dhaka (demo address)`,
@@ -146,7 +147,8 @@ async function main() {
   }
 
   // Demo prices: each lab offers ~70% of tests; ~20% of prices are stale (91–200 days old)
-  const labs = await db.lab.findMany({ orderBy: { id: "asc" } });
+  // Only the seed's own demo labs ever get fake prices — never labs entered by an admin.
+  const labs = (await db.lab.findMany({ orderBy: { id: "asc" } })).filter((l) => /^Demo Lab \d+$/.test(l.name) && /^demo-lab-\d+-/.test(l.slug));
   const tests = await db.test.findMany({ orderBy: { id: "asc" } });
   const labsWithPrices = new Set((await db.labTestPrice.findMany({ select: { labId: true }, distinct: ["labId"] })).map((p) => p.labId));
   const now = Date.now();

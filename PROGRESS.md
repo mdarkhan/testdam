@@ -7,8 +7,8 @@ Read this first in a new session, then [docs/BRIEF.md](docs/BRIEF.md) (requireme
 | Phase | Status | Notes |
 |---|---|---|
 | 0 — Plan | Done (2026-11-10) | Plan, schema, open questions |
-| 1 — Data and admin | **Done, waiting for owner review** (2026-11-10) | See "Phase 1 report" below |
-| 2 — Public pages | Not started | |
+| 1 — Data and admin | Done (2026-11-10) | See "Phase 1 report" below |
+| 2 — Public pages | **Done, waiting for owner review** (2026-11-10) | See "Phase 2 report" below |
 | 3 — Technical SEO | Not started | |
 | 4 — Booking and tracking | Not started | |
 | 5 — Ops and deploy | Not started | |
@@ -23,7 +23,31 @@ npx prisma migrate deploy # terminal 2
 npm run db:seed
 npm run dev               # http://localhost:3000/admin — sign in with SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD
 ```
-Checks: `npm run typecheck`, `npm run lint`, `npm test`, `npx next build`.
+Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run test:db` (search against the separate `testdam_test` database — migrates and seeds it first; needs `npm run db:start`), `npx next build`.
+
+## Phase 2 report
+
+**Built**
+- `src/lib/pricing.ts` — the only place for the rules: freshness, effective price, `rankPrices` (fresh by effective price → faster report → lab name; stale in a separate group; only the first fresh row is "cheapest"; `isFeatured` never read), `priceRange` (fresh only), `buildIndex` + `THRESHOLDS` (thin-content rule for test, test × area, lab, area pages).
+- `src/lib/catalog.ts` — publishable-page index built from all prices of active labs, cached in-process for 60 s and invalidated on every admin write; page data queries.
+- `src/lib/search.ts` + `GET /api/search` — pg_trgm search on romanised alias keys, area detection ("cbc mirpur", "মিরপুরে সিবিসি"), only tests with a published page, links to the test × area page when it exists.
+- Pages (all ISR: `revalidate = 1 day`, rendered on first request, `generateStaticParams` returns `[]`): `/`, `/test/[slug]`, `/test/[slug]/[area]`, `/lab/[slug]`, `/area/[slug]`; `/search` (dynamic, noindex); Bangla 404.
+- Components: search box (ARIA combobox, works without JS via `/search`), server-rendered price cards (price largest, cheapest in green, featured badge, discount + expiry, report time, home collection + fee, "যাচাই: date · source", stale grey with "পুরনো তথ্য — ল্যাবে ফোন করে নিশ্চিত হোন"), filters (area / report time / home collection; toggles `hidden` on server-rendered cards), plain call and WhatsApp links (tracking and booking come in Phase 4).
+- `src/i18n/bn.ts` (all public strings), `src/lib/format.ts` (Bangla digits, ৳ with South Asian grouping, Dhaka dates, report time).
+- Internal links: test → test × area pages and other tests; test × area → nearby areas, all-Dhaka page, area page; lab ↔ area; area → test × area pages, labs, nearby areas.
+
+**Verified (2026-11-10)**
+- `tsc` clean, ESLint clean, Vitest 50/50 (incl. ranking: featured lab never moves up; stale never cheapest; thresholds), `npm run test:db` 19/19 (CBC via `CBC`, `cbc test er dam`, `সিবিসি`, `সিবিসি টেস্টের দাম`, `complete blood count`, `compleet blod count`, `C.B.C`; lipid via Bangla/Banglish; area detection incl. Bangla case endings), `next build` succeeds with public pages as ISR.
+- Clicked through at 360 px (Playwright): home, suggestions, test page, filters (11 of 24 shown, all matching), lab page, area page.
+- Thin-content rule live: deactivating a lab turned `/test/cbc/mirpur` (1 lab left) and the lab's own page into 404s within the 60 s cache window; unknown slugs 404.
+- Production server: first request MISS, second HIT (`x-nextjs-cache`); thin pages 404.
+- Search page: clear exact hits redirect (`cbc`, `সিবিসি টেস্টের দাম`, `cbc badda` → test × area, `বাড্ডা` → area page); ambiguous queries (`sugar`, `thyroid`) show a list; no results → help text.
+
+**Not done / not verified**
+- Titles/descriptions are basic; canonical, Open Graph, structured data, sitemap, robots and Lighthouse are Phase 3.
+- Booking form, dataLayer events and the Playwright e2e test (search → test page → booking) are Phase 4.
+- JavaScript on a test page: 178 KB gzip in 11 files, of which ~143 KB is React + Next.js runtime; our components are a few KB. Lighthouse in Phase 3 will show whether this needs work.
+- Not checked with a screen reader.
 
 ## Phase 1 report
 
@@ -62,6 +86,17 @@ Phase 0: see [docs/PLAN.md §9](docs/PLAN.md). Phase 1 additions:
 - Seed lab phones are `000-0000-NNNN` placeholders and WhatsApp is empty, so no real person can be called/messaged from demo data.
 - Admin UI is English with English digits.
 
+Phase 2 additions:
+- Stale prices are shown in a collapsed "পুরনো দাম" group below the fresh list, never in ranges, titles, "cheapest" or search prices.
+- Lab and area thresholds use the Phase 0 defaults (lab ≥ 5 fresh prices; area ≥ 2 labs with fresh prices and ≥ 1 published test × area page) — `THRESHOLDS` in `pricing.ts`.
+- Lab page lists all its prices (fresh first, stale greyed) — it is about the lab; it still needs ≥ 5 fresh prices to exist.
+- The publishable-page index is cached in memory for 60 s and cleared on every admin write. A price going stale on its own shows up within a minute in search/links and at the next daily page revalidation.
+- Test display name = Bangla name + (short name or English name), e.g. "কমপ্লিট ব্লাড কাউন্ট (CBC)".
+- `/search` redirects only when one test matches exactly and the next result is clearly weaker; otherwise it lists results.
+- Filters work on the page without reloading (no URL parameters), so test pages stay fully cacheable; area filtering for SEO is covered by the test × area pages.
+- Disclaimer sits under the price list (and in the footer) so the first price card is visible on a 360 × 780 screen.
+- Seed now gives demo prices only to labs named exactly "Demo Lab N" — never to labs entered by an admin (fixed after it priced a QA lab).
+
 ## Open questions (waiting on owner)
 
 1. Confirm: app-only container, Postgres from FlyNode.
@@ -74,5 +109,6 @@ Phase 0: see [docs/PLAN.md §9](docs/PLAN.md). Phase 1 additions:
 
 - `next/font` sometimes fails to reach fonts.googleapis.com from this machine in dev (falls back to a system font; the production build did download it). The Docker build on FlyNode needs outbound access to Google Fonts — or we switch to `next/font/local` (self-hosted files) in Phase 3/5.
 - Local DB holds extra demo prices (the seed ran twice before it was made idempotent). Reset with `npm run db:reset` (Prisma asks for confirmation) then `npm run db:seed`.
-- Local QA users `qa@example.test` (ADMIN) and `qa-entry@example.test` (DATA_ENTRY) exist in the local DB only, from click-through testing.
+- Local QA users `qa@example.test` (ADMIN) and `qa-entry@example.test` (DATA_ENTRY) exist in the local DB only, from click-through testing. The local QA lab "Demo Lab QA" is inactive and holds 28 demo prices from the old seed behaviour.
+- The home page is prerendered at build time, so `next build` currently needs the database. The Docker build on FlyNode has none — to solve in Phase 5 (build-time guard or revalidate-on-start).
 - ESLint 9 is flagged "no longer supported" by npm; move to ESLint 10 once eslint-config-next supports it.
