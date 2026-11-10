@@ -1,4 +1,4 @@
-// TestDam — Prisma schema (Phase 0 proposal; becomes the first migration in Phase 1)
+// Test Mate — Prisma schema (Phase 0 proposal; becomes the first migration in Phase 1)
 //
 // Conventions
 // - All DateTime values are stored in UTC. Display in Asia/Dhaka happens in src/lib/format.ts.

@@ -1,4 +1,4 @@
-# TestDam — one container: Next.js (standalone) + migrations on start. PostgreSQL is external (FlyNode).
+# Test Mate — one container: Next.js (standalone) + migrations on start. PostgreSQL is external (FlyNode).
 # Configuration is environment variables only (see .env.example). The build needs NO database.
 
 FROM node:22-bookworm-slim AS base

@@ -2,7 +2,7 @@
 
 > Copied from the owner's original brief on 2026-11-10. Obvious punctuation lost in the paste (slashes, colons) has been restored; wording is otherwise unchanged. If this file and a later instruction from the owner disagree, the owner's instruction wins — record it under Decisions in `PROGRESS.md`.
 
-Working name: **TestDam** (টেস্টদাম). Rename freely later.
+Working name: **TestDam** (টেস্টদাম). Rename freely later. **Renamed to Test Mate (টেস্ট মেট) by the owner on 2026-11-10** — the rest of this brief keeps the original wording.
 
 ## Your role
 

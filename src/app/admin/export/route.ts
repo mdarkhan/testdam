@@ -22,7 +22,7 @@ export async function GET(req: Request) {
   const csv = template
     ? CSV_COLUMNS.join(",") + "\r\n"
     : toCsv(prices.map((p) => ({ ...p, labSlug: p.lab.slug, testSlug: p.test.slug })));
-  const name = `testdam-${template ? "template" : `prices-${lab ?? "all"}-${dhakaDateString(new Date())}`}.csv`;
+  const name = `testmate-${template ? "template" : `prices-${lab ?? "all"}-${dhakaDateString(new Date())}`}.csv`;
   // BOM so Excel opens Bangla text as UTF-8.
   return new Response("\uFEFF" + csv, {
     headers: {

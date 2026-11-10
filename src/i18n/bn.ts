@@ -2,7 +2,7 @@
 // Numbers passed in are already formatted (Bangla digits) by src/lib/format.ts.
 
 export const bn = {
-  siteName: "টেস্টদাম",
+  siteName: "Test Mate",
   tagline: "ঢাকার ল্যাবগুলোতে টেস্টের দাম তুলনা করুন",
   home: "হোম",
   skipToContent: "মূল অংশে যান",
@@ -126,5 +126,5 @@ export const bn = {
   notFoundBody: "এই পাতায় দেখানোর মতো যথেষ্ট যাচাই করা দাম এখনো নেই, অথবা ঠিকানাটি ভুল।",
   backHome: "হোমে ফিরে যান",
 
-  footerNote: "টেস্টদাম কোনো ল্যাব নয়। দামগুলো আমরা ল্যাব থেকে সংগ্রহ করে যাচাইয়ের তারিখসহ দেখাই।",
+  footerNote: "টেস্ট মেট কোনো ল্যাব নয়। দামগুলো আমরা ল্যাব থেকে সংগ্রহ করে যাচাইয়ের তারিখসহ দেখাই।",
 } as const;

@@ -57,7 +57,7 @@ export default async function BookingsPage({ searchParams }: { searchParams: Pro
           const test = b.test.shortName ?? b.test.nameEn;
           const lab = `${b.lab.name}${b.lab.branchName ? ` · ${b.lab.branchName}` : ""}`;
           const date = d.format(b.preferredDate);
-          const forward = `TestDam booking #${b.id}\nTest: ${b.test.nameEn} (${b.test.nameBn})\nPatient: ${b.patientName}\nPhone: ${b.phone}\nPreferred date: ${date}\nHome collection: ${b.homeCollection ? "Yes" : "No"}\nPrice shown: ৳${b.priceAtRequest}`;
+          const forward = `Test Mate booking #${b.id}\nTest: ${b.test.nameEn} (${b.test.nameBn})\nPatient: ${b.patientName}\nPhone: ${b.phone}\nPreferred date: ${date}\nHome collection: ${b.homeCollection ? "Yes" : "No"}\nPrice shown: ৳${b.priceAtRequest}`;
           return (
             <li key={b.id} className="rounded-lg border border-line bg-white p-4">
               <div className="flex flex-wrap items-center gap-2 text-sm">

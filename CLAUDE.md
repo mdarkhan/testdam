@@ -1,4 +1,4 @@
-# TestDam
+# Test Mate (formerly TestDam)
 
 Start every session by reading `PROGRESS.md` (status, decisions, open questions), then `docs/BRIEF.md` (requirements — source of truth) and `docs/PLAN.md` (agreed design).
 

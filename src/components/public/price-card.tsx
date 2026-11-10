@@ -14,7 +14,7 @@ export function PriceCard({ row, testName, labHref, showArea = true }: { row: Ro
   const report = reportTime(row.reportHours);
   const fee = lab.homeCollectionFee;
   const wa = config.whatsappCentralNumber || lab.whatsapp;
-  const waText = `আসসালামু আলাইকুম। টেস্টদাম থেকে দেখেছি — ${lab.name}${lab.branchName ? ` (${lab.branchName})` : ""}-এ ${testName} টেস্ট করাতে চাই। দাম ও সময়টা জানাবেন?`;
+  const waText = `আসসালামু আলাইকুম। Test Mate থেকে দেখেছি — ${lab.name}${lab.branchName ? ` (${lab.branchName})` : ""}-এ ${testName} টেস্ট করাতে চাই। দাম ও সময়টা জানাবেন?`;
 
   return (
     <article

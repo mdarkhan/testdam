@@ -1,6 +1,6 @@
-# TestDam — guide for data entry
+# Test Mate — guide for data entry
 
-You keep the prices on TestDam correct. People decide where to get a test based on what you enter, so **accuracy beats speed**.
+You keep the prices on Test Mate correct. People decide where to get a test based on what you enter, so **accuracy beats speed**.
 
 Sign in at **`/admin/login`** with the email and password you were given.
 
@@ -48,7 +48,7 @@ Saving a row marks it **verified today** with your name. Only save prices you ac
 2. Tell the lab: **Call lab**, or **Forward on WhatsApp** (opens WhatsApp with the details filled in).
 3. Set the status: *Forwarded to lab* → *Confirmed* → *Completed* (or *Cancelled*). Write anything useful in **Notes** and click **Save**.
 
-Patients pay the lab directly. TestDam never takes payments.
+Patients pay the lab directly. Test Mate never takes payments.
 
 ## Rules — please read
 

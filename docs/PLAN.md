@@ -1,4 +1,4 @@
-# TestDam — Phase 0 Plan
+# Test Mate — Phase 0 Plan
 
 Status: **proposal, waiting for owner OK** (2026-11-10). Brief: [BRIEF.md](BRIEF.md). Schema: [../prisma/schema.prisma](../prisma/schema.prisma) (validated with Prisma 7.10.1).
 
