@@ -138,3 +138,48 @@ export function buildIndex(rows: IndexRow[], now = new Date(), freshDays = confi
   );
   return { tests, testAreas, labs, areas, updated, spreads, totals: { labs: labCounts.size, prices: freshPrices } };
 }
+
+// ── Test basket: the total for several tests at each lab ──
+
+export const BASKET_MAX = 10;
+
+export type BasketRow = PriceLike & { labId: number; testId: number };
+export type BasketLab = {
+  labId: number;
+  total: number; // sum of effective prices of the tests this lab has (fresh only)
+  items: Array<{ testId: number; price: number; verifiedAt: Date }>;
+  missing: number[]; // selected tests this lab has no fresh price for
+  oldest: Date; // oldest verifiedAt among the items: the honest "verified" date for a total
+};
+
+/**
+ * Per-lab totals for the selected tests, fresh prices only (stale ones count as missing).
+ * `complete` = labs with every selected test, cheapest total first. `partial` = labs with some,
+ * most tests first, then cheapest. Sorted by price only: featured labs never change the order.
+ */
+export function basketTotals(rows: BasketRow[], testIds: number[], now = new Date(), freshDays = config.freshDays) {
+  const wanted = new Set(testIds);
+  const byLab = new Map<number, BasketLab>();
+  for (const r of rows) {
+    if (!wanted.has(r.testId) || !isFresh(r, now, freshDays)) continue;
+    const lab = byLab.get(r.labId) ?? { labId: r.labId, total: 0, items: [], missing: [], oldest: r.verifiedAt };
+    if (lab.items.some((i) => i.testId === r.testId)) continue; // one price per lab and test
+    const price = effectivePrice(r, now);
+    lab.items.push({ testId: r.testId, price, verifiedAt: r.verifiedAt });
+    lab.total += price;
+    if (r.verifiedAt < lab.oldest) lab.oldest = r.verifiedAt;
+    byLab.set(r.labId, lab);
+  }
+  const order = new Map(testIds.map((id, i) => [id, i]));
+  for (const lab of byLab.values()) {
+    const have = new Set(lab.items.map((i) => i.testId));
+    lab.missing = testIds.filter((id) => !have.has(id));
+    lab.items.sort((a, b) => order.get(a.testId)! - order.get(b.testId)!);
+  }
+  const labs = [...byLab.values()];
+  const complete = labs.filter((l) => l.missing.length === 0).sort((a, b) => a.total - b.total || a.labId - b.labId);
+  const partial = labs
+    .filter((l) => l.missing.length > 0)
+    .sort((a, b) => b.items.length - a.items.length || a.total - b.total || a.labId - b.labId);
+  return { complete, partial };
+}

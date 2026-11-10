@@ -6,6 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 import { getAreas, getCatalogIndex, getTestBySlug, getTestPrices, getTestsByIds, testDisplayName } from "@/lib/catalog";
 import { testAreaKey } from "@/lib/pricing";
 import { Breadcrumbs, PriceLinks, PriceSection } from "@/components/public/price-section";
+import { BasketButton } from "@/components/public/basket-button";
 import { TestFacts } from "@/components/public/test-facts";
 
 // ISR: rendered on first request (the Docker build has no database), cached, re-rendered daily
@@ -56,6 +57,7 @@ export default async function TestPage({ params }: Props) {
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{bn.testPriceTitle(name)}</h1>
       <p className="text-muted" lang="en">{test.nameEn}</p>
       <TestFacts test={test} />
+      <BasketButton slug={test.slug} />
       <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter path={`/test/${test.slug}`} testSlug={test.slug} /></div>
       <PriceLinks title={bn.byArea} links={areaLinks} />
       <PriceLinks

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildIndex, effectivePrice, isFresh, priceRange, rankPrices, testAreaKey, THRESHOLDS, type IndexRow } from "@/lib/pricing";
+import { basketTotals, buildIndex, effectivePrice, isFresh, priceRange, rankPrices, testAreaKey, THRESHOLDS, type BasketRow, type IndexRow } from "@/lib/pricing";
 import { endOfDhakaDay } from "@/lib/dates";
 
 const now = new Date("2026-11-10T06:00:00Z");
@@ -119,5 +119,34 @@ describe("freshness (admin call list)", () => {
     expect(freshness({ verifiedAt: daysAgo(10) }, now, 90)).toBe("fresh");
     expect(freshness({ verifiedAt: daysAgo(80) }, now, 90)).toBe("due");
     expect(freshness({ verifiedAt: daysAgo(91) }, now, 90)).toBe("stale");
+  });
+});
+
+describe("basketTotals", () => {
+  const b = (labId: number, testId: number, price: number, age = 1, discount: number | null = null): BasketRow => ({
+    labId, testId, regularPrice: price, discountPrice: discount, discountExpiresAt: discount ? new Date(now.getTime() + 86_400_000) : null, verifiedAt: daysAgo(age),
+  });
+
+  it("totals fresh effective prices per lab and ranks complete labs by total", () => {
+    const { complete, partial } = basketTotals(
+      [b(1, 1, 300), b(1, 2, 500), b(2, 1, 400), b(2, 2, 300, 1, 250), b(3, 1, 100), b(3, 2, 900, 120)],
+      [1, 2], now, 90,
+    );
+    expect(complete.map((l) => [l.labId, l.total])).toEqual([[2, 650], [1, 800]]); // lab 2's discount counts
+    expect(partial).toHaveLength(1); // lab 3's test 2 is stale → missing
+    expect(partial[0]).toMatchObject({ labId: 3, total: 100, missing: [2] });
+  });
+
+  it("ignores tests not asked for, keeps the asked order and the oldest verified date", () => {
+    const { complete } = basketTotals([b(1, 2, 200, 5), b(1, 1, 100, 2), b(1, 9, 999)], [1, 2], now, 90);
+    expect(complete[0]!.items.map((i) => i.testId)).toEqual([1, 2]);
+    expect(complete[0]!.total).toBe(300);
+    expect(complete[0]!.oldest).toEqual(daysAgo(5));
+  });
+
+  it("puts labs with more of the tests first among partial ones", () => {
+    const { complete, partial } = basketTotals([b(1, 1, 900), b(1, 2, 900), b(2, 1, 100)], [1, 2, 3], now, 90);
+    expect(complete).toHaveLength(0);
+    expect(partial.map((l) => l.labId)).toEqual([1, 2]);
   });
 });

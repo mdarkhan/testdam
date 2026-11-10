@@ -110,6 +110,14 @@ export default async function Home() {
             </ul>
           </section>
 
+          <section className="mt-10 flex flex-col gap-4 rounded-2xl bg-primary-soft p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+            <div>
+              <h2 className="text-xl font-semibold">{bn.basketHomeCta}</h2>
+              <p className="mt-1 text-muted">{bn.basketHomeCtaBody}</p>
+            </div>
+            <Link href="/basket" className="flex min-h-12 shrink-0 items-center justify-center rounded-lg bg-primary px-5 font-semibold text-white hover:bg-primary-hover">{bn.basketOpen}</Link>
+          </section>
+
           <section className="mt-12">
             <h2 className="text-2xl font-semibold">{bn.howTitle}</h2>
             <ol className="mt-4 grid gap-6 md:grid-cols-3">

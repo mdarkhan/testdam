@@ -6,9 +6,9 @@ import { NavLinks } from "./nav-links";
 /** Logo mark (the ৳ tile, same as the favicon) + wordmark. */
 export function Logo() {
   return (
-    <Link href="/" className="flex min-h-12 shrink-0 items-center gap-2 rounded-lg">
-      <span aria-hidden className="grid size-9 place-items-center rounded-[10px] bg-primary text-xl font-semibold leading-none text-white">৳</span>
-      <span className="text-xl font-semibold text-primary">{bn.siteName}</span>
+    <Link href="/" className="flex min-h-12 shrink-0 items-center gap-1.5 rounded-lg sm:gap-2">
+      <span aria-hidden className="grid size-8 place-items-center rounded-[9px] bg-primary text-lg font-semibold leading-none text-white sm:size-9 sm:rounded-[10px] sm:text-xl">৳</span>
+      <span className="whitespace-nowrap text-lg font-semibold text-primary sm:text-xl">{bn.siteName}</span>
     </Link>
   );
 }
@@ -17,7 +17,7 @@ export function Logo() {
 export function SiteHeader({ search = false }: { search?: boolean }) {
   return (
     <header className="border-b border-line bg-white">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-2 sm:py-3">
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-2 gap-y-2 sm:gap-x-6 px-4 py-2 sm:py-3">
         <Logo />
         {search && <div className="order-last w-full sm:order-none sm:w-auto sm:flex-1"><SearchBox /></div>}
         <NavLinks />

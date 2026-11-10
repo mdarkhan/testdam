@@ -7,6 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 import { getAreaBySlug, getCatalogIndex, getTestBySlug, getTestPrices, testDisplayName } from "@/lib/catalog";
 import { testAreaKey } from "@/lib/pricing";
 import { Breadcrumbs, PriceLinks, PriceSection } from "@/components/public/price-section";
+import { BasketButton } from "@/components/public/basket-button";
 import { TestFacts } from "@/components/public/test-facts";
 
 export const revalidate = 86400;
@@ -63,6 +64,7 @@ export default async function TestAreaPage({ params }: Props) {
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{bn.testPriceInArea(name, area.nameBn)}</h1>
       <p className="text-muted" lang="en">{test.nameEn} · {area.nameEn}</p>
       <TestFacts test={test} />
+      <BasketButton slug={test.slug} />
       <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter={false} path={`/test/${test.slug}/${area.slug}`} testSlug={test.slug} pageAreaSlug={area.slug} /></div>
       <PriceLinks title={bn.nearbyAreas} links={nearby} />
       <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">

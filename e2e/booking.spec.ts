@@ -87,3 +87,26 @@ test("thin pages return 404", async ({ page }) => {
   const res = await page.goto("/test/this-test-does-not-exist");
   expect(res?.status()).toBe(404);
 });
+
+test("test basket: add from test pages, totals per lab on /basket", async ({ page }) => {
+  await page.goto("/test/cbc");
+  await page.getByRole("button", { name: "লিস্টে যোগ করুন" }).click();
+  await expect(page.getByRole("button", { name: "লিস্টে আছে" })).toHaveAttribute("aria-pressed", "true");
+  await page.goto("/test/lipid-profile");
+  await page.getByRole("button", { name: "লিস্টে যোগ করুন" }).click();
+
+  // The header link carries the list; /basket shows labs with both tests, cheapest total first.
+  await page.getByRole("link", { name: /আমার লিস্ট, ২টি টেস্ট/ }).click();
+  await expect(page).toHaveURL(/\/basket\?t=cbc,lipid-profile$/);
+  await expect(page.getByRole("heading", { name: /সবগুলো টেস্ট হয় এমন ল্যাব/ })).toBeVisible();
+  const totals = await page.locator("main ol article .tabular.text-2xl").allInnerTexts();
+  expect(totals.length).toBeGreaterThan(1);
+  const asNumber = (t: string) => Number(t.replace(/[০-৯]/g, (d) => String("০১২৩৪৫৬৭৮৯".indexOf(d))).replace(/[^0-9]/g, ""));
+  const nums = totals.map(asNumber);
+  expect(nums).toEqual([...nums].sort((a, b) => a - b));
+  await expect(page.locator("main ol article").first()).toContainText("সবচেয়ে কম মোট খরচ");
+
+  // Removing a test updates the URL and the stored list.
+  await page.getByRole("button", { name: /লিপিড প্রোফাইল.*লিস্ট থেকে সরান/ }).click();
+  await expect(page).toHaveURL(/\/basket\?t=cbc$/);
+});
