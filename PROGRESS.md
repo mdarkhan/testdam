@@ -53,7 +53,62 @@ Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run t
 - Live smoke test: `/api/health` `{"ok":true}`; `/`, `/admin/login`, robots.txt, sitemap.xml 200; canonical, `og:url`, robots `Sitemap:` and sitemap `<loc>` all use the live URL; admin sends `X-Robots-Tag: noindex`; `/test/cbc` and `/area/mirpur` 404 as expected (no prices yet). No demo data in production.
 
 **Not done / not verified**
-- Admin sign-in on the live site not tried by me (I don't have the password) — owner to confirm.
+- Owner signed in to the live admin (2026-11-10). The first password was mangled by FlyNode (a `# PROGRESS — TestDam
+
+Read this first in a new session, then [docs/BRIEF.md](docs/BRIEF.md) (requirements) and [docs/PLAN.md](docs/PLAN.md) (agreed design).
+
+## Phase status
+
+| Phase | Status | Notes |
+|---|---|---|
+| 0 — Plan | Done (2026-11-10) | Plan, schema, open questions |
+| 1 — Data and admin | Done (2026-11-10) | See "Phase 1 report" below |
+| 2 — Public pages | Done (2026-11-10) | See "Phase 2 report" below |
+| 3 — Technical SEO | Done (2026-11-10) | See "Phase 3 report" below |
+| 4 — Booking and tracking | Done (2026-11-10) | See "Phase 4 report" below |
+| 5 — Ops and deploy | **Done, deployed** (2026-11-10) — live on FlyNode, waiting for owner review | See "Phase 5 report" below |
+
+**Live:** https://dh4cqjc1w1ip6lyydphgqrkz.flynode.io (FlyNode app `testdam`, builds `main` of github.com/mdarkhan/testdam from the Dockerfile).
+
+**Next steps (owner):** sign in at `/admin/login`, then delete `SEED_ADMIN_PASSWORD` from the FlyNode variables. Enter real labs and prices (pages appear once the thin-content rule is met). Turn on FlyNode database backups. Set the production domain + `SITE_URL` when ready. Once pages exist: Lighthouse and Google Rich Results Test against the live URL, GTM Preview with the real container.
+
+## How to run locally (Windows, no Docker needed)
+
+```bash
+npm install
+cp .env.example .env      # then set BETTER_AUTH_SECRET and SEED_ADMIN_PASSWORD (10+ chars)
+npm run db:start          # terminal 1 — PostgreSQL 18 on localhost:54329, data in ./.pgdata; leave running
+npx prisma migrate deploy # terminal 2
+npm run db:seed
+npm run dev               # http://localhost:3000/admin — sign in with SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD
+```
+Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run test:db` (search against the separate `testdam_test` database — migrates and seeds it first; needs `npm run db:start`), `npm run test:e2e` (Playwright: seeds `testdam_test`, builds into `.next-e2e`, serves on :3200, uses the installed Chrome; needs `npm run db:start`), `npx next build`.
+
+## Phase 5 report
+
+**Built**
+- **Call list** `/admin/stale`: labs ordered by stale prices, then "due" (stale within 14 days), then oldest check; tap-to-call phone; offers ending within 7 days; "Open grid" opens the price grid filtered to stale/due rows. `freshness()` (fresh/due/stale) lives in `pricing.ts` with a test.
+- **Price history** `/admin/labs/[id]/history` (button in the grid): the append-only log, newest first, filter by test, effective price and ▲/▼ change vs. the previous entry, who and when.
+- **Build without a database:** home and `sitemap.xml` render per request from the in-memory catalogue index (test/test × area/lab/area pages stay ISR). Verified: `next build` succeeds with `DATABASE_URL` pointing at a closed port.
+- **First-start bootstrap** (`src/instrumentation.ts` → `src/lib/bootstrap.ts`): on an empty database loads the 20 areas + neighbours and 41 tests + aliases (no labs, no prices, no medical text) and creates the first ADMIN from `SEED_ADMIN_EMAIL`/`SEED_ADMIN_PASSWORD`; no-op afterwards. The demo seed now reuses the same catalogue data.
+- **Dockerfile** (multi-stage, node:22-bookworm-slim, standalone output, non-root user, `HEALTHCHECK`), `.dockerignore`; start command = `prisma migrate deploy` (small Prisma CLI in `/migrator`) then `node server.js`. `GET /api/health` checks the database.
+- `NEXT_PUBLIC_GTM_ID` is read at **runtime** (Next inlined it at build time, even through a constant string concatenation — found by inspecting the compiled output; now read via a dynamic key and verified).
+- **README.md** (local setup, scripts, env table, FlyNode deploy steps, GTM event table, operations) and **docs/DATA-ENTRY-GUIDE.md** (daily call routine, grid, CSV, bookings, rules, quick answers).
+
+**Verified (2026-11-10)**
+- `tsc` clean, ESLint clean, Vitest 66/66, `npm run test:db` 19/19, Playwright e2e 3/3.
+- Simulated container start on this machine (no Docker here): build with no database → `prisma migrate deploy` on a brand-new empty database → standalone `node server.js` with env vars only: log shows `[bootstrap] Loaded 20 areas and 41 tests.` and `Created ADMIN user …`; `/api/health` `{"ok":true}`; robots/sitemap/home 200; test and area pages 404 (no prices yet — thin-content rule); GTM snippet present from the runtime env var; the bootstrapped admin signs in (200 + session cookie) and opens `/admin`. Second start: bootstrap did nothing. Temporary database dropped afterwards.
+- Lighthouse 13.6 mobile on the standalone build: `/` 100/100/100/100 (LCP 0.7 s, server 20 ms — now rendered per request), `/test/cbc` 100/100/100/100.
+- Clicked through: call list, filtered grid, price history (CBC 130 → 110 shows ▼ 20 with user and time).
+
+**Deployed (2026-11-10)**
+- Pushed to github.com/mdarkhan/testdam (`main`). FlyNode app `testdam` with a FlyNode PostgreSQL database wired as `DATABASE_URL`.
+- First build failed: FlyNode injects app variables (`NODE_ENV=production`) into build steps, so `npm ci` skipped devDependencies (`@tailwindcss/postcss`). Fixed with `npm ci --include=dev` (ff447c2).
+- Runtime log: migration applied (`pg_trgm` created), `[bootstrap] Loaded 20 areas and 41 tests.`, then after the owner set the variables via FlyNode's secure form: `Created ADMIN user`. Docker `HEALTHCHECK` passes.
+- Live smoke test: `/api/health` `{"ok":true}`; `/`, `/admin/login`, robots.txt, sitemap.xml 200; canonical, `og:url`, robots `Sitemap:` and sitemap `<loc>` all use the live URL; admin sends `X-Robots-Tag: noindex`; `/test/cbc` and `/area/mirpur` 404 as expected (no prices yet). No demo data in production.
+
+**Not done / not verified**
+ in a variable value is treated as a variable reference), so `ADMIN_RESET_PASSWORD` start-up recovery was added (e9ade8e) and used. Owner to remove `ADMIN_RESET_PASSWORD` and `SEED_ADMIN_PASSWORD` from FlyNode.
 - Lighthouse / Rich Results / GTM Preview on the live URL: wait until real prices make test pages exist.
 - Backups: not configured (FlyNode side) — README says what to do.
 
