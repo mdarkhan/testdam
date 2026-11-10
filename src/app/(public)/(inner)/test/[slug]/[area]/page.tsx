@@ -63,7 +63,7 @@ export default async function TestAreaPage({ params }: Props) {
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{bn.testPriceInArea(name, area.nameBn)}</h1>
       <p className="text-muted" lang="en">{test.nameEn} · {area.nameEn}</p>
       <TestFacts test={test} />
-      <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter={false} path={`/test/${test.slug}/${area.slug}`} /></div>
+      <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter={false} path={`/test/${test.slug}/${area.slug}`} testSlug={test.slug} pageAreaSlug={area.slug} /></div>
       <PriceLinks title={bn.nearbyAreas} links={nearby} />
       <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
         {testPublished && (

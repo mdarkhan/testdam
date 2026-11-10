@@ -25,3 +25,9 @@ export function noonDhakaDay(ymd: string): Date | null {
 export function daysBetween(a: Date, b: Date): number {
   return Math.floor((b.getTime() - a.getTime()) / DAY_MS);
 }
+
+/** Adds whole days to a Dhaka "YYYY-MM-DD". */
+export function addDhakaDays(ymd: string, days: number): string {
+  const [y, m, d] = ymd.split("-").map(Number) as [number, number, number];
+  return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
+}

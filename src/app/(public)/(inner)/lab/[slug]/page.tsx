@@ -9,6 +9,7 @@ import { db } from "@/lib/db";
 import { getCatalogIndex, testDisplayName } from "@/lib/catalog";
 import { effectivePrice, isFresh, testAreaKey } from "@/lib/pricing";
 import { Breadcrumbs } from "@/components/public/price-section";
+import { PriceInteractions } from "@/components/public/price-interactions";
 
 export const revalidate = 86400;
 export const dynamicParams = true;
@@ -70,6 +71,7 @@ export default async function LabPage({ params }: Props) {
 
   return (
     <>
+      <PriceInteractions />
       <JsonLd data={labLd({ ...lab, areaNameEn: lab.area.nameEn, path: `/lab/${lab.slug}` })} />
       <Breadcrumbs path={`/lab/${lab.slug}`} items={[{ name: bn.home, href: "/" }, { name: lab.area.nameBn, href: index.areas.has(lab.areaId) ? `/area/${lab.area.slug}` : undefined }, { name }]} />
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{name}</h1>
@@ -86,7 +88,7 @@ export default async function LabPage({ params }: Props) {
         </div>
       </dl>
       <div className="mt-3 grid grid-cols-2 gap-2">
-        <a href={`tel:${lab.phone.replace(/[^\d+]/g, "")}`} className={`${lab.mapUrl ? "" : "col-span-2 "}flex min-h-12 items-center justify-center rounded-lg bg-primary font-semibold text-white hover:bg-primary-hover`}>{bn.call}</a>
+        <a href={`tel:${lab.phone.replace(/[^\d+]/g, "")}`} className={`${lab.mapUrl ? "" : "col-span-2 "}flex min-h-12 items-center justify-center rounded-lg bg-primary font-semibold text-white hover:bg-primary-hover`} data-action="call" data-lab={lab.slug} data-area={lab.area.slug}>{bn.call}</a>
         {lab.mapUrl && <a href={lab.mapUrl} target="_blank" rel="noopener" className="flex min-h-12 items-center justify-center rounded-lg border-2 border-primary font-semibold text-primary">{bn.directions}</a>}
       </div>
       <p className="mt-3 rounded-lg border-l-4 border-amber-500 bg-warn-soft px-3 py-2 text-sm">{bn.disclaimer}</p>

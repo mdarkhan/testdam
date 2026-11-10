@@ -9,14 +9,16 @@ export const metadata = { title: "Dashboard" };
 export default async function Dashboard() {
   await requireUser();
   const staleBefore = staleCutoff();
-  const [labs, tests, prices, stale, needsReview] = await Promise.all([
+  const [labs, tests, prices, stale, needsReview, newBookings] = await Promise.all([
     db.lab.count({ where: { isActive: true } }),
     db.test.count(),
     db.labTestPrice.count(),
     db.labTestPrice.count({ where: { verifiedAt: { lt: staleBefore } } }),
     db.test.count({ where: { contentStatus: "DRAFT_NEEDS_REVIEW", OR: [{ description: { not: null } }, { preparationNote: { not: null } }] } }),
+    db.bookingRequest.count({ where: { status: "NEW" } }),
   ]);
   const cards: Array<[string, number, string]> = [
+    ["New booking requests", newBookings, "/admin/bookings?status=NEW"],
     ["Active labs", labs, "/admin/labs"],
     ["Tests", tests, "/admin/tests"],
     ["Prices", prices, "/admin/labs"],
@@ -26,7 +28,7 @@ export default async function Dashboard() {
   return (
     <>
       <h1 className="text-xl font-semibold">Dashboard</h1>
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map(([label, n, href]) => (
           <li key={label}>
             <Link href={href} className="block rounded-lg border border-line bg-white p-4 hover:border-primary">
@@ -36,7 +38,7 @@ export default async function Dashboard() {
           </li>
         ))}
       </ul>
-      <p className="mt-6 text-sm text-muted">Stale-price call list and booking inbox arrive in later phases.</p>
+      <p className="mt-6 text-sm text-muted">The stale-price call list arrives in Phase 5.</p>
     </>
   );
 }

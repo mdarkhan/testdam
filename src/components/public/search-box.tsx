@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { bn } from "@/i18n/bn";
 import { taka } from "@/lib/format";
 import type { SearchResponse } from "@/lib/search";
+import { track } from "@/lib/analytics";
 
 export function SearchBox({ size = "sm", initial = "" }: { size?: "sm" | "lg"; initial?: string }) {
   const router = useRouter();
@@ -41,19 +42,31 @@ export function SearchBox({ size = "sm", initial = "" }: { size?: "sm" | "lg"; i
     return () => document.removeEventListener("click", close);
   }, []);
 
+  // `search` event: a suggestion chosen or the form submitted.
+  const trackSearch = () => track("search", { search_term: q.trim().slice(0, 100), results_count: data?.results.length ?? 0 });
+
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (!open || !items.length) return;
     if (e.key === "ArrowDown") { e.preventDefault(); setActive((a) => (a + 1) % items.length); }
     else if (e.key === "ArrowUp") { e.preventDefault(); setActive((a) => (a <= 0 ? items.length - 1 : a - 1)); }
     else if (e.key === "Escape") setOpen(false);
-    else if (e.key === "Enter" && active >= 0) { e.preventDefault(); router.push(items[active]!.href); setOpen(false); }
+    else if (e.key === "Enter" && active >= 0) { e.preventDefault(); trackSearch(); router.push(items[active]!.href); setOpen(false); }
   }
 
   const lg = size === "lg";
   const listId = `${id}-list`;
   return (
     <div ref={boxRef} className="relative w-full">
-      <form action="/search" role="search" className="flex gap-2">
+      <form action="/search" role="search" className="flex gap-2" onSubmit={(e) => {
+        // Client-side navigation keeps the page (and dataLayer) alive so GTM can send the event.
+        // Without JavaScript the form still GETs /search.
+        const term = q.trim();
+        if (!term) return;
+        e.preventDefault();
+        trackSearch();
+        setOpen(false);
+        router.push(`/search?q=${encodeURIComponent(term)}`);
+      }}>
         <label htmlFor={`${id}-q`} className="sr-only">{bn.searchLabel}</label>
         <input
           id={`${id}-q`} name="q" type="search" value={q} autoComplete="off" enterKeyHint="search"
@@ -69,7 +82,7 @@ export function SearchBox({ size = "sm", initial = "" }: { size?: "sm" | "lg"; i
         <ul id={listId} role="listbox" className="absolute inset-x-0 top-full z-20 mt-1 overflow-hidden rounded-lg border border-line bg-white shadow-lg">
           {items.map((it, i) => (
             <li key={it.href} id={`${listId}-${i}`} role="option" aria-selected={i === active}>
-              <a href={it.href} onClick={() => setOpen(false)}
+              <a href={it.href} onClick={(e) => { e.preventDefault(); trackSearch(); setOpen(false); router.push(it.href); }}
                 className={`flex min-h-12 items-center justify-between gap-3 px-3 py-2 ${i === active ? "bg-primary-soft" : "hover:bg-slate-50"}`}>
                 <span className="font-semibold">{it.label}</span>
                 <span className="shrink-0 text-sm text-muted">{it.sub}</span>

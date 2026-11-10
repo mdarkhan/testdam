@@ -56,7 +56,7 @@ export default async function TestPage({ params }: Props) {
       <h1 className="mt-2 text-2xl font-semibold leading-tight">{bn.testPriceTitle(name)}</h1>
       <p className="text-muted" lang="en">{test.nameEn}</p>
       <TestFacts test={test} />
-      <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter path={`/test/${test.slug}`} /></div>
+      <div className="mt-4"><PriceSection rows={rows} testName={name} index={index} areaFilter path={`/test/${test.slug}`} testSlug={test.slug} /></div>
       <PriceLinks title={bn.byArea} links={areaLinks} />
       <PriceLinks
         title={bn.otherTests}

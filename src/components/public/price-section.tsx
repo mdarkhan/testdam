@@ -6,9 +6,12 @@ import { priceRange, rankPrices, type CatalogIndex } from "@/lib/pricing";
 import type { TestPriceRow } from "@/lib/catalog";
 import { PriceCard } from "./price-card";
 import { PriceFilters } from "./price-filters";
+import { PriceInteractions } from "./price-interactions";
 
 /** Ranks prices (fresh by price, stale apart) and renders summary, filters, cards and the stale group. */
-export function PriceSection({ rows, testName, index, areaFilter, path }: { rows: TestPriceRow[]; testName: string; index: CatalogIndex; areaFilter: boolean; path: string }) {
+export function PriceSection({ rows, testName, index, areaFilter, path, testSlug, pageAreaSlug }: {
+  rows: TestPriceRow[]; testName: string; index: CatalogIndex; areaFilter: boolean; path: string; testSlug: string; pageAreaSlug?: string;
+}) {
   const { fresh, stale } = rankPrices(rows.map((r) => ({ ...r, labName: r.lab.name })));
   const range = priceRange(fresh);
   const labHref = (r: TestPriceRow) => (index.labs.has(r.lab.id) ? `/lab/${r.lab.slug}` : null);
@@ -19,6 +22,7 @@ export function PriceSection({ rows, testName, index, areaFilter, path }: { rows
   return (
     <>
       <JsonLd data={priceListLd(bn.testPriceTitle(testName), path, fresh.map((r) => ({ name: r.lab.nameBn ?? r.lab.name, price: taka(r.effective), path: labHref(r) })))} />
+      <PriceInteractions testSlug={testSlug} testName={testName} pageAreaSlug={pageAreaSlug} view={range ? { labCount: range.labs, minPrice: range.min } : undefined} />
       {range && (
         <div className="rounded-xl bg-primary-soft px-4 py-3">
           <p className="text-sm font-semibold text-primary">{bn.priceRange}</p>

@@ -9,8 +9,8 @@ Read this first in a new session, then [docs/BRIEF.md](docs/BRIEF.md) (requireme
 | 0 — Plan | Done (2026-11-10) | Plan, schema, open questions |
 | 1 — Data and admin | Done (2026-11-10) | See "Phase 1 report" below |
 | 2 — Public pages | Done (2026-11-10) | See "Phase 2 report" below |
-| 3 — Technical SEO | **Done, waiting for owner review** (2026-11-10) | See "Phase 3 report" below |
-| 4 — Booking and tracking | Not started | |
+| 3 — Technical SEO | Done (2026-11-10) | See "Phase 3 report" below |
+| 4 — Booking and tracking | **Done, waiting for owner review** (2026-11-10) | See "Phase 4 report" below |
 | 5 — Ops and deploy | Not started | |
 
 ## How to run locally (Windows, no Docker needed)
@@ -23,7 +23,31 @@ npx prisma migrate deploy # terminal 2
 npm run db:seed
 npm run dev               # http://localhost:3000/admin — sign in with SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD
 ```
-Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run test:db` (search against the separate `testdam_test` database — migrates and seeds it first; needs `npm run db:start`), `npx next build`.
+Checks: `npm run typecheck`, `npm run lint`, `npm test` (pure logic), `npm run test:db` (search against the separate `testdam_test` database — migrates and seeds it first; needs `npm run db:start`), `npm run test:e2e` (Playwright: seeds `testdam_test`, builds into `.next-e2e`, serves on :3200, uses the installed Chrome; needs `npm run db:start`), `npx next build`.
+
+## Phase 4 report
+
+**Built**
+- Booking: every price card has a large "বুক করুন" button → bottom-sheet dialog (name, mobile, preferred date [default tomorrow, today…+60 days, Dhaka], home collection when the lab offers it for this test). Server action `createBooking` re-reads the price from the database (never trusts the browser), stores `BookingRequest` (status NEW, price snapshot, area, UTM + referrer + landing path), and returns the id. Confirmation shows the request number.
+- Validation (`src/lib/booking.ts`): BD mobile (with/without +880, Bangla digits OK), name 2–80 chars, date window; Bangla error messages shown next to each field.
+- Spam protection (no CAPTCHA): hidden honeypot field (bot submissions get a fake success and nothing is stored), in-memory rate limits 5 requests / 10 min per IP and 3 / day per phone.
+- Call (`tel:`) and WhatsApp (pre-filled Bangla message naming the test and lab; `WHATSAPP_CENTRAL_NUMBER` overrides each lab's number) — tracked.
+- dataLayer (`src/lib/analytics.ts`): `search`, `view_test_prices`, `booking_form_open`, `generate_lead` (only after the server confirms, with `booking_id`), `whatsapp_click`, `call_click` — snake_case, typed, and filtered through an allow-list so name/phone can never be pushed. One listener per page handles all cards (cards stay server components).
+- GTM: loaded on public pages only when `NEXT_PUBLIC_GTM_ID` is set (format-checked `GTM-XXXX`), `afterInteractive`, plus the `<noscript>` iframe. No GA4 tags in code.
+- UTM capture: a tiny inline script stores `utm_*`, external referrer and landing path in sessionStorage on the landing page (first touch per session); sent with the booking.
+- Admin inbox `/admin/bookings`: open / per-status tabs with counts, patient name + tap-to-call phone, test, lab (call lab, "Forward on WhatsApp" with the booking details pre-filled, link to lab prices), preferred date, home collection, price shown, attribution; status + notes form. "Bookings" nav badge and dashboard card show NEW count.
+
+**Verified (2026-11-10)**
+- `tsc` clean, ESLint clean, Vitest 65/65 (new: booking validation incl. Dhaka "today" and Bangla digits, attribution cleaning, dataLayer allow-list drops name/phone, rate limiter), `npm run test:db` 19/19, `next build` OK.
+- **Playwright e2e 3/3 at 360 px** (production build, test DB): Bangla search → suggestion → CBC page → cards (no tables, cheapest marked) → booking form → empty submit shows field errors → valid submit → confirmation; dataLayer contains `search` (term সিবিসি), `view_test_prices`, `booking_form_open`, `generate_lead` (numeric booking id, lab and area) in order, and no name/phone anywhere; the stored booking has status NEW, server price = event price, and the landing UTM (`e2e/test/phase4`). Call and WhatsApp taps push `call_click` / `whatsapp_click`. Unknown test → 404.
+- Manually at 360 px: card buttons, booking sheet, a real booking on the dev DB (dataLayer shown above in the session: 3 events, no personal data), admin inbox, status change to "Forwarded to lab" (badge cleared, counts updated), console clean.
+- GTM: with a dummy ID the public HTML contains `gtm.js?id=…` and the noscript iframe; admin pages contain no GTM.
+
+**Not done / not verified**
+- GTM/GA4 not tested with your real container (no ID yet) — once set, check events in GTM Preview.
+- Rate limits are per container process (reset on restart; not shared across several containers).
+- No SMS/email notification for new bookings — check the inbox (badge). Out of scope per the brief.
+- The booking needs JavaScript; without JS visitors can still call.
 
 ## Phase 3 report
 
@@ -136,6 +160,15 @@ Phase 3 additions:
 - `/search` is disallowed in robots and `noindex` — search result pages are thin by nature.
 - Sitemap `lastModified` = newest fresh verification behind the page (honest dates, not "now").
 - Canonical/OG URLs depend on `SITE_URL`; until the domain is set they point at localhost.
+
+Phase 4 additions:
+- Booking allowed on stale prices too (the visitor may still want that lab); such bookings get an admin note "Price was stale … confirm with the lab".
+- `area_slug` in events/bookings = the page's area on test × area pages, otherwise the lab's area.
+- `generate_lead.price` and the stored `priceAtRequest` come from the server, not the card.
+- Attribution is first-touch per browser session (sessionStorage), so a later click with other UTMs in the same session doesn't overwrite it.
+- Search suggestions and the search form navigate client-side, so the `search` event isn't lost to a full page load (found by the e2e test).
+- e2e runs against a production build in `.next-e2e` (dev-mode recompiles reloaded the page mid-test).
+- e2e uses a placeholder central WhatsApp number (01300000000) only inside its own build so WhatsApp buttons exist; the test blocks the link.
 
 ## Open questions (waiting on owner)
 

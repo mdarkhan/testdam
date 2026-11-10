@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  distDir: process.env.NEXT_DIST_DIR || ".next", // e2e builds go to .next-e2e
   poweredByHeader: false,
   // Belt and braces: admin and API responses are never indexed, even if a link leaks.
   async headers() {

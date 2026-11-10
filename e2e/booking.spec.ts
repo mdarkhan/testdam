@@ -1,0 +1,89 @@
+// End-to-end (brief): search → test page → booking, at 360 px, checking the dataLayer at each step.
+import { expect, test, type Page } from "@playwright/test";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../src/generated/prisma/client";
+
+const db = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
+test.afterAll(() => db.$disconnect());
+
+const events = (page: Page) =>
+  page.evaluate(() => (window.dataLayer ?? []).filter((e) => typeof e.event === "string" && !String(e.event).startsWith("gtm.")));
+
+test("search in Bangla → test page → booking request", async ({ page }) => {
+  const phone = `017${String(Date.now()).slice(-8)}`; // unique per run so the per-phone limit never trips
+
+  // Land with UTM parameters: they must end up on the booking.
+  await page.goto("/?utm_source=e2e&utm_medium=test&utm_campaign=phase4");
+
+  // 1. Search in Bangla, choose the suggestion.
+  await page.getByRole("combobox").fill("সিবিসি");
+  const option = page.getByRole("option").first();
+  await expect(option).toContainText("CBC");
+  await option.locator("a").click();
+  await expect(page).toHaveURL(/\/test\/cbc$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("CBC");
+
+  // 2. Cards, not tables, and the cheapest is marked.
+  await expect(page.locator("table")).toHaveCount(0);
+  await expect(page.locator("#price-list article").first()).toContainText("সবচেয়ে কম দাম");
+
+  // 3. Open the booking form on the cheapest lab.
+  await page.locator("#price-list article").first().getByRole("button", { name: "বুক করুন" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+
+  // 4. Empty submit → errors next to the fields, nothing saved.
+  await dialog.getByRole("button", { name: "অনুরোধ পাঠান" }).click();
+  await expect(dialog.getByText("নাম লিখুন")).toBeVisible();
+  await expect(dialog.getByText("সঠিক মোবাইল নম্বর দিন")).toBeVisible();
+
+  // 5. Fill and send.
+  await dialog.getByLabel("আপনার নাম").fill("E2E Test Patient");
+  await dialog.getByLabel("মোবাইল নম্বর").fill(phone);
+  await dialog.getByRole("button", { name: "অনুরোধ পাঠান" }).click();
+  await expect(dialog.getByText("অনুরোধ পাঠানো হয়েছে")).toBeVisible();
+
+  // 6. dataLayer: the right events, in order, with the right parameters and no personal data.
+  const ev = await events(page);
+  const names = ev.map((e) => e.event);
+  expect(names).toEqual(expect.arrayContaining(["search", "view_test_prices", "booking_form_open", "generate_lead"]));
+  expect(names.indexOf("booking_form_open")).toBeLessThan(names.indexOf("generate_lead"));
+  expect(ev.find((e) => e.event === "search")).toMatchObject({ search_term: "সিবিসি" });
+  expect(ev.find((e) => e.event === "view_test_prices")).toMatchObject({ test_slug: "cbc" });
+  const lead = ev.find((e) => e.event === "generate_lead")!;
+  expect(lead).toMatchObject({ test_slug: "cbc" });
+  expect(typeof lead.booking_id).toBe("number");
+  expect(lead.lab_slug).toBeTruthy();
+  expect(lead.area_slug).toBeTruthy();
+  expect(JSON.stringify(ev)).not.toContain(phone.slice(-8));
+  expect(JSON.stringify(ev)).not.toContain("E2E Test Patient");
+
+  // 7. The booking is stored with status NEW, the server-side price, and the UTM data.
+  const saved = await db.bookingRequest.findUnique({ where: { id: lead.booking_id as number }, include: { test: true, lab: true } });
+  expect(saved).toMatchObject({ status: "NEW", phone, patientName: "E2E Test Patient", utmSource: "e2e", utmMedium: "test", utmCampaign: "phase4", landingPath: "/" });
+  expect(saved!.test.slug).toBe("cbc");
+  expect(saved!.lab.slug).toBe(lead.lab_slug);
+  expect(saved!.priceAtRequest).toBe(lead.price);
+});
+
+test("call and WhatsApp taps are tracked", async ({ page }) => {
+  await page.goto("/test/cbc");
+  const card = page.locator("#price-list article").first();
+  // Don't actually follow tel: — just check the tap is tracked.
+  await page.evaluate(() => document.addEventListener("click", (e) => { if ((e.target as HTMLElement).closest("a[href^='tel:'],a[href*='wa.me']")) e.preventDefault(); }));
+  await card.getByRole("link", { name: "কল করুন" }).click();
+  const ev = await events(page);
+  expect(ev.find((e) => e.event === "call_click")).toMatchObject({ test_slug: "cbc" });
+  expect(ev.find((e) => e.event === "call_click")!.lab_slug).toBeTruthy();
+
+  const wa = card.getByRole("link", { name: "হোয়াটসঅ্যাপ" });
+  await expect(wa).toHaveAttribute("href", /^https:\/\/wa\.me\/8801300000000\?text=/);
+  await wa.click();
+  const after = await events(page);
+  expect(after.find((e) => e.event === "whatsapp_click")).toMatchObject({ test_slug: "cbc" });
+});
+
+test("thin pages return 404", async ({ page }) => {
+  const res = await page.goto("/test/this-test-does-not-exist");
+  expect(res?.status()).toBe(404);
+});

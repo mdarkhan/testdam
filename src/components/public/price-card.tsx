@@ -19,6 +19,7 @@ export function PriceCard({ row, testName, labHref, showArea = true }: { row: Ro
   return (
     <article
       data-price-row data-area={lab.area.slug} data-home={row.homeCollection ? "1" : "0"} data-report={row.reportHours ?? 9999}
+      data-lab={lab.slug} data-lab-name={lab.nameBn ?? lab.name} data-price={row.effective}
       className={`rounded-xl border bg-white p-4 ${row.cheapest ? "border-2 border-cheapest" : "border-line"} ${row.fresh ? "" : "text-stale"}`}
     >
       {(row.cheapest || lab.isFeatured) && (
@@ -55,13 +56,18 @@ export function PriceCard({ row, testName, labHref, showArea = true }: { row: Ro
         {!row.fresh && <li className="font-semibold">{bn.stale}</li>}
       </ul>
 
+      {/* Clicks are handled (and tracked) by <PriceInteractions> on the page — one listener for all cards. */}
       <div className="mt-3 grid grid-cols-2 gap-2">
-        <a href={`tel:${lab.phone.replace(/[^\d+]/g, "")}`}
-          className={`${wa ? "" : "col-span-2 "}flex min-h-12 items-center justify-center rounded-lg bg-primary px-3 font-semibold text-white hover:bg-primary-hover`}>
+        <button type="button" data-action="book"
+          className="col-span-2 flex min-h-12 cursor-pointer items-center justify-center rounded-lg bg-primary px-3 text-lg font-semibold text-white hover:bg-primary-hover">
+          {bn.book}
+        </button>
+        <a href={`tel:${lab.phone.replace(/[^\d+]/g, "")}`} data-action="call"
+          className={`${wa ? "" : "col-span-2 "}flex min-h-12 items-center justify-center rounded-lg border-2 border-primary px-3 font-semibold text-primary hover:bg-primary-soft`}>
           {bn.call}
         </a>
         {wa ? (
-          <a href={`https://wa.me/88${wa}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener"
+          <a href={`https://wa.me/88${wa}?text=${encodeURIComponent(waText)}`} target="_blank" rel="noopener" data-action="whatsapp"
             className="flex min-h-12 items-center justify-center rounded-lg border-2 border-primary px-3 font-semibold text-primary hover:bg-primary-soft">
             {bn.whatsapp}
           </a>

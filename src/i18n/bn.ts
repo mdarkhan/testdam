@@ -61,6 +61,32 @@ export const bn = {
     VISIT: "সরাসরি গিয়ে দেখা",
   } as Record<string, string>,
 
+  // Booking
+  book: "বুক করুন",
+  bookingTitle: (test: string, lab: string) => `${test} — ${lab}`,
+  bookingIntro: "নাম ও ফোন নম্বর দিন। আমরা ল্যাবের সাথে কথা বলে আপনাকে ফোন করে নিশ্চিত করব।",
+  bookingName: "আপনার নাম",
+  bookingPhone: "মোবাইল নম্বর",
+  bookingPhoneHint: "যেমন: ০১৭১২৩৪৫৬৭৮",
+  bookingDate: "কোন দিন টেস্ট করাতে চান",
+  bookingHome: "বাসা থেকে নমুনা নিতে চাই",
+  bookingSubmit: "অনুরোধ পাঠান",
+  bookingSending: "পাঠানো হচ্ছে…",
+  bookingCancel: "বাতিল",
+  bookingClose: "বন্ধ করুন",
+  bookingPrice: (p: string) => `দাম: ${p} (ল্যাবে নিশ্চিত করুন)`,
+  bookingDone: "অনুরোধ পাঠানো হয়েছে!",
+  bookingDoneBody: (id: string) => `আপনার অনুরোধ নম্বর #${id}। আমরা শিগগিরই ফোন করে সময় নিশ্চিত করব। টাকা ল্যাবে গিয়ে দেবেন।`,
+  bookingFix: "নিচের তথ্যগুলো ঠিক করুন।",
+  bookingErrors: {
+    name: "নাম লিখুন (কমপক্ষে ২ অক্ষর)।",
+    phone: "সঠিক মোবাইল নম্বর দিন (০১XXXXXXXXX)।",
+    date: "আজ থেকে ৬০ দিনের মধ্যে একটি তারিখ বেছে নিন।",
+    unavailable: "এই ল্যাবে এই টেস্টের দাম আর পাওয়া যাচ্ছে না। পাতাটি রিফ্রেশ করুন।",
+    rateLimited: "অল্প সময়ে অনেকগুলো অনুরোধ এসেছে। কিছুক্ষণ পরে আবার চেষ্টা করুন, অথবা ল্যাবে সরাসরি ফোন করুন।",
+    server: "কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করুন, অথবা ল্যাবে সরাসরি ফোন করুন।",
+  },
+
   // Filters
   filters: "ফিল্টার",
   labPricesHeading: "ল্যাব অনুযায়ী দাম (কম থেকে বেশি)",

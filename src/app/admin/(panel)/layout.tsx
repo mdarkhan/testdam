@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/auth";
+import { db } from "@/lib/db";
 import { signOut } from "../actions";
 
 const NAV = [
@@ -12,6 +13,7 @@ const NAV = [
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   const user = await requireUser();
+  const newBookings = await db.bookingRequest.count({ where: { status: "NEW" } });
   return (
     <div className="min-h-dvh bg-slate-50">
       <header className="border-b border-line bg-white">
@@ -21,6 +23,9 @@ export default async function PanelLayout({ children }: { children: React.ReactN
             {NAV.map(([href, label]) => (
               <Link key={href} href={href} className="rounded px-2 py-2 hover:bg-slate-100">{label}</Link>
             ))}
+            <Link href="/admin/bookings" className="rounded px-2 py-2 hover:bg-slate-100">
+              Bookings{newBookings > 0 && <span className="ml-1 rounded-full bg-amber-500 px-1.5 text-xs font-semibold text-white" aria-label={`${newBookings} new`}>{newBookings}</span>}
+            </Link>
             {user.role === "ADMIN" && <Link href="/admin/users" className="rounded px-2 py-2 hover:bg-slate-100">Users</Link>}
           </nav>
           <form action={signOut} className="ml-auto flex items-center gap-2 text-sm text-muted">
