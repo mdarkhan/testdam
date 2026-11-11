@@ -174,3 +174,29 @@ test("company check-up request: errors by the fields, then saved without persona
   const saved = await db.corporateRequest.findUnique({ where: { id: ev.lead_id as number } });
   expect(saved).toMatchObject({ companyName: "E2E Garments Ltd", phone, employees: 120, status: "NEW" });
 });
+
+test("lab page: find a test, open its row, book it there", async ({ page }) => {
+  // A lab with a published page (thin-content rule), from the same index the site uses.
+  const lab = await db.lab.findFirst({ where: { isActive: true, prices: { some: { test: { slug: "cbc" } } } }, orderBy: { id: "asc" }, select: { slug: true } });
+  await page.goto(`/lab/${lab!.slug}`);
+  const filter = page.getByLabel("এই ল্যাবে টেস্ট খুঁজুন");
+  if (await filter.count()) await filter.fill("cbc");
+  const row = page.locator("[data-price-row][data-test='cbc']");
+  await row.locator("summary").click();
+  await row.getByRole("button", { name: "বুক করুন" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toContainText("CBC");
+  await dialog.getByLabel("আপনার নাম").fill("E2E Lab Page");
+  await dialog.getByLabel("মোবাইল নম্বর").fill(`016${String(Date.now()).slice(-8)}`);
+  await dialog.getByRole("button", { name: "অনুরোধ পাঠান" }).click();
+  await expect(dialog.getByText("অনুরোধ পাঠানো হয়েছে")).toBeVisible();
+  const lead = (await events(page)).find((e) => e.event === "generate_lead")!;
+  expect(lead).toMatchObject({ test_slug: "cbc", lab_slug: lab!.slug });
+});
+
+test("search with no results suggests popular tests and keeps the query", async ({ page }) => {
+  await page.goto("/search?q=zzzqqq");
+  await expect(page.getByRole("combobox")).toHaveValue("zzzqqq");
+  await expect(page.getByRole("heading", { name: "জনপ্রিয় টেস্ট" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "সব টেস্ট দেখুন" })).toBeVisible();
+});

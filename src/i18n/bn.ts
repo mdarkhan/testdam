@@ -197,6 +197,13 @@ export const bn = {
 
   // Lab page
   labTests: "এই ল্যাবের টেস্টের দাম",
+  labFilterLabel: "এই ল্যাবে টেস্ট খুঁজুন",
+  labFilterPlaceholder: "যেমন: CBC, সুগার, থাইরয়েড",
+  labFilterCount: (shown: string, total: string) => `${total}টির মধ্যে ${shown}টি টেস্ট`,
+  labFilterNone: "এই নামে এই ল্যাবে কোনো টেস্ট নেই। অন্য বানানে বা ইংরেজি নামে চেষ্টা করুন।",
+  labAllVerified: (d: string, source: string) => `সব দাম যাচাই: ${d} (${source})`,
+  labCompare: "সব ল্যাবের দাম দেখুন",
+  labRowHint: "টেস্টে চাপ দিলে বুকিং আর লিস্টে যোগ করার অপশন আসবে।",
   address: "ঠিকানা",
   phone: "ফোন",
   openingHours: "খোলার সময়",

@@ -6,14 +6,21 @@ import { config } from "./config";
 
 export const absoluteUrl = (path: string) => `${config.siteUrl}${path}`;
 
-/** Unique title + Bangla description + canonical + Open Graph for one public page. */
-export function pageMetadata({ title, description, path }: { title: string; description: string; path: string }): Metadata {
+const DEFAULT_SHARE_IMAGE = { url: "/opengraph-image", width: 1200, height: 630, alt: "Test Mate" };
+
+/**
+ * Unique title + Bangla description + canonical + Open Graph for one public page.
+ * A page's openGraph replaces the inherited one, so pages name the default share image
+ * (app/opengraph-image) — except routes with their own opengraph-image file (test, test×area,
+ * lab: ownImage), whose image Next adds and which an explicit `images` here would override.
+ */
+export function pageMetadata({ title, description, path, ownImage = false }: { title: string; description: string; path: string; ownImage?: boolean }): Metadata {
   return {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { type: "website", locale: "bn_BD", siteName: bn.siteName, title, description, url: path },
-    twitter: { card: "summary", title, description },
+    openGraph: { type: "website", locale: "bn_BD", siteName: bn.siteName, title, description, url: path, ...(!ownImage && { images: [DEFAULT_SHARE_IMAGE] }) },
+    twitter: { card: "summary_large_image", title, description, ...(!ownImage && { images: [DEFAULT_SHARE_IMAGE.url] }) },
   };
 }
 

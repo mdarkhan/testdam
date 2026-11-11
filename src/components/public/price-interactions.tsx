@@ -8,7 +8,7 @@ import { readAttribution, track } from "@/lib/analytics";
 import { createBooking } from "@/app/(public)/actions";
 import { BookingForm } from "./booking-form";
 
-type Target = { key: number; labSlug: string; labName: string; areaSlug: string; price: number; homeAvailable: boolean };
+type Target = { key: number; testSlug: string; testName: string; labSlug: string; labName: string; areaSlug: string; price: number; homeAvailable: boolean };
 
 export function PriceInteractions({ testSlug, testName, pageAreaSlug, view }: {
   testSlug?: string; testName?: string; pageAreaSlug?: string;
@@ -30,13 +30,15 @@ export function PriceInteractions({ testSlug, testName, pageAreaSlug, view }: {
       const el = (e.target as HTMLElement).closest<HTMLElement>("[data-action]");
       if (!el) return;
       const card = el.closest<HTMLElement>("[data-price-row]") ?? el;
-      const ctx = { test_slug: testSlug, lab_slug: card.dataset.lab, area_slug: pageAreaSlug ?? card.dataset.area };
+      // Test pages pass the test; a lab page lists many tests, so each row names its own (data-test).
+      const rowTest = testSlug ?? card.dataset.test;
+      const ctx = { test_slug: rowTest, lab_slug: card.dataset.lab, area_slug: pageAreaSlug ?? card.dataset.area };
       const action = el.dataset.action;
       if (action === "call") track("call_click", ctx);
       else if (action === "whatsapp") track("whatsapp_click", ctx);
-      else if (action === "book" && testSlug) {
+      else if (action === "book" && rowTest) {
         const t: Target = {
-          key: Date.now(), labSlug: card.dataset.lab ?? "", labName: card.dataset.labName ?? "", areaSlug: ctx.area_slug ?? "",
+          key: Date.now(), testSlug: rowTest, testName: testName ?? card.dataset.testName ?? "", labSlug: card.dataset.lab ?? "", labName: card.dataset.labName ?? "", areaSlug: ctx.area_slug ?? "",
           price: Number(card.dataset.price), homeAvailable: card.dataset.home === "1",
         };
         setTarget(t);
@@ -46,22 +48,22 @@ export function PriceInteractions({ testSlug, testName, pageAreaSlug, view }: {
     }
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);
-  }, [testSlug, pageAreaSlug]);
+  }, [testSlug, testName, pageAreaSlug]);
 
   return (
     <dialog ref={dialogRef} aria-labelledby="booking-title"
       className="m-0 mt-auto w-full max-w-none rounded-t-2xl p-0 backdrop:bg-black/50 sm:m-auto sm:max-w-md sm:rounded-2xl">
-      {target && testSlug && (
+      {target && (
         <BookingForm
           key={target.key}
-          title={bn.bookingTitle(testName ?? "", target.labName)}
+          title={bn.bookingTitle(target.testName, target.labName)}
           lines={[bn.bookingPrice(taka(target.price))]}
           homeAvailable={target.homeAvailable}
           onClose={() => dialogRef.current?.close()}
           submit={async (v) => {
-            const res = await createBooking({ testSlug, labSlug: target.labSlug, areaSlug: target.areaSlug, ...v, attribution: readAttribution() });
+            const res = await createBooking({ testSlug: target.testSlug, labSlug: target.labSlug, areaSlug: target.areaSlug, ...v, attribution: readAttribution() });
             // Only after the server confirmed the saved booking. No name/phone in the event.
-            if (res.ok && res.id) track("generate_lead", { test_slug: testSlug, lab_slug: target.labSlug, area_slug: target.areaSlug, price: res.price, booking_id: res.id });
+            if (res.ok && res.id) track("generate_lead", { test_slug: target.testSlug, lab_slug: target.labSlug, area_slug: target.areaSlug, price: res.price, booking_id: res.id });
             return res;
           }}
         />

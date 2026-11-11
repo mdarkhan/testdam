@@ -34,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${bn.testPriceInArea(name, data.area.nameBn)} ${range} | ${bn.siteName}`,
     description: `${data.area.nameBn} (${data.area.nameEn}) এলাকার ${bnDigits(data.range.labs)}টি ল্যাবে ${name} টেস্টের দাম ${range}। যাচাইয়ের তারিখ ও হোম কালেকশন মিলিয়ে কাছের ল্যাব বেছে নিন।`,
     path: `/test/${data.test.slug}/${data.area.slug}`,
+    ownImage: true,
   });
 }
 

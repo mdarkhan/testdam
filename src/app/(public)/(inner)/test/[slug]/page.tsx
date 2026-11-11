@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${bn.testPriceTitle(name)} ঢাকায় ${range} | ${bn.siteName}`,
     description: `ঢাকার ${bnDigits(data.range.labs)}টি ল্যাবে ${name} টেস্টের দাম ${range}। যাচাইয়ের তারিখ, রিপোর্টের সময় ও হোম কালেকশন মিলিয়ে সবচেয়ে কম দামের ল্যাব খুঁজুন।`,
     path: `/test/${data.test.slug}`,
+    ownImage: true,
   });
 }
 

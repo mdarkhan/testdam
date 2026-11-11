@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { bn } from "@/i18n/bn";
-import { SearchBox } from "./search-box";
+import { HeaderSearch } from "./header-search";
 import { NavLinks } from "./nav-links";
 
 /** Logo mark (the ৳ tile, same as the favicon) + wordmark. */
@@ -19,7 +19,7 @@ export function SiteHeader({ search = false }: { search?: boolean }) {
     <header className="border-b border-line bg-white">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-2 gap-y-2 sm:gap-x-6 px-4 py-2 sm:py-3">
         <Logo />
-        {search && <div className="order-last w-full sm:order-none sm:w-auto sm:flex-1"><SearchBox /></div>}
+        {search && <HeaderSearch />}
         <NavLinks />
       </div>
     </header>

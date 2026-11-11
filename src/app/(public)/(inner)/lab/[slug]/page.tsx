@@ -6,7 +6,9 @@ import { bn } from "@/i18n/bn";
 import { bnDate, bnDigits, priceRangeText, reportTime, taka } from "@/lib/format";
 import { JsonLd, labLd, pageMetadata } from "@/lib/seo";
 import { db } from "@/lib/db";
-import { getCatalogIndex, testDisplayName } from "@/lib/catalog";
+import { CATEGORY_ORDER, getCatalogIndex, testDisplayName } from "@/lib/catalog";
+import { searchKey } from "@/lib/normalize";
+import { LabTestList } from "@/components/public/lab-test-list";
 import { effectivePrice, isFresh, testAreaKey } from "@/lib/pricing";
 import { Breadcrumbs } from "@/components/public/price-section";
 import { PartnerBadge, PartnerDiscount } from "@/components/public/partner-badge";
@@ -23,7 +25,7 @@ const getLab = cache((slug: string) =>
     where: { slug },
     include: {
       area: true,
-      prices: { include: { test: { select: { id: true, slug: true, nameEn: true, nameBn: true, shortName: true, popularRank: true } } } },
+      prices: { include: { test: { select: { id: true, slug: true, nameEn: true, nameBn: true, shortName: true, popularRank: true, category: true } } } },
     },
   }),
 );
@@ -46,6 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${name}, ${lab.area.nameBn} — ${bnDigits(prices.length)}টি টেস্টের দাম | ${bn.siteName}`,
     description: `${name}-এ ${bnDigits(prices.length)}টি টেস্টের যাচাই করা দাম (${range}), ঠিকানা, ফোন ও হোম কালেকশনের তথ্য।`,
     path: `/lab/${lab.slug}`,
+    ownImage: true,
   });
 }
 
@@ -58,6 +61,9 @@ export default async function LabPage({ params }: Props) {
   const rows = lab.prices
     .map((p) => ({ ...p, effective: effectivePrice(p, now), fresh: isFresh(p, now) }))
     .sort((a, b) => Number(b.fresh) - Number(a.fresh) || (a.test.popularRank ?? 9999) - (b.test.popularRank ?? 9999) || a.test.nameEn.localeCompare(b.test.nameEn));
+  // Imported or bulk-verified labs often share one date and source: say it once, not on 60 rows.
+  const stamps = new Set(rows.map((r) => `${bnDate(r.verifiedAt)}|${r.source}`));
+  const commonVerified = rows.length > 1 && stamps.size === 1 ? bn.labAllVerified(bnDate(rows[0]!.verifiedAt), bn.sources[rows[0]!.source] ?? "") : null;
   const lastUpdated = rows.reduce<Date | null>((m, r) => (!m || r.verifiedAt > m ? r.verifiedAt : m), null);
   const testHref = (testId: number, slug: string) =>
     index.testAreas.has(testAreaKey(testId, lab.areaId)) ? `/test/${slug}/${lab.area.slug}` : index.tests.has(testId) ? `/test/${slug}` : null;
@@ -106,27 +112,29 @@ export default async function LabPage({ params }: Props) {
 
       <section className="mt-6">
         <h2 className="text-lg font-semibold">{bn.labTests}</h2>
-        <ul className="mt-2 divide-y divide-line rounded-xl border border-line">
-          {rows.map((r) => {
-            const href = testHref(r.testId, r.test.slug);
-            const label = testDisplayName(r.test);
-            return (
-              <li key={r.id} className={`flex items-start justify-between gap-3 px-3 py-3 ${r.fresh ? "" : "text-stale"}`}>
-                <div className="min-w-0">
-                  <p className="font-semibold">{href ? <Link href={href} className="underline decoration-slate-300 underline-offset-4 hover:decoration-primary">{label}</Link> : label}</p>
-                  <p className="text-xs">
-                    {[reportTime(r.reportHours) && `${bn.report}: ${reportTime(r.reportHours)}`, bn.verified(bnDate(r.verifiedAt)), bn.sources[r.source]].filter(Boolean).join(" · ")}
-                  </p>
-                  {!r.fresh && <p className="text-xs font-semibold">{bn.stale}</p>}
-                </div>
-                <div className="shrink-0 text-right">
-                  <p className="tabular text-lg font-semibold">{taka(r.effective)}</p>
-                  {r.effective < r.regularPrice && <p className="tabular text-xs text-muted"><s>{taka(r.regularPrice)}</s></p>}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <LabTestList
+          lab={{ slug: lab.slug, name, areaSlug: lab.area.slug }}
+          categories={CATEGORY_ORDER.map((c) => ({ key: c, label: bn.categories[c] ?? c }))}
+          commonVerified={commonVerified}
+          rows={rows.map((r) => ({
+            id: r.id,
+            slug: r.test.slug,
+            name: testDisplayName(r.test),
+            category: r.test.category,
+            keys: [r.test.nameBn, r.test.nameEn, r.test.shortName ?? "", r.test.slug.replace(/-/g, " ")].map(searchKey).filter(Boolean),
+            price: r.effective,
+            regular: r.regularPrice,
+            fresh: r.fresh,
+            home: r.homeCollection,
+            meta: [
+              reportTime(r.reportHours) && `${bn.report}: ${reportTime(r.reportHours)}`,
+              !commonVerified && bn.verified(bnDate(r.verifiedAt)),
+              !commonVerified && bn.sources[r.source],
+            ].filter(Boolean).join(" · ") || null,
+            href: testHref(r.testId, r.test.slug),
+            basketable: index.tests.has(r.testId),
+          }))}
+        />
       </section>
 
       {otherLabs.length > 0 && (
